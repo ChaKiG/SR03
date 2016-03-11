@@ -1,0 +1,15 @@
+body {
+	background: #F3F0FF;
+}
+
+
+.myCont {
+	padding-top: 50px;
+	margin: auto;
+}
+
+.divPers {
+    margin: 0;
+    padding: 0;
+    border: 2px solid #ccc;
+}
