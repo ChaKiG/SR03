@@ -33,25 +33,8 @@ public class DataHandler {
 			}
 		}
 	}
-	
-	public String getHtml() {
-		String html = "";
-		if (lPersonnes != null) {
-			for (Personne p : lPersonnes) {
-				html += "<div class=\"col-sm-4 divPers\">"
-						+ "<div class=\"row\">"
-						+ "<div class=\"col-xs-6\">";
-				if (p.getAutorisation().equals("O"))
-					html += "<img alt=\"Photo\" src=\"" + p.getPhoto() + "\" width=\"96px\" height=\"120px\"/>";
-				else
-					html += "<img alt=\"Photo\" src=\"img/no_image.jpg\" width=\"96px\" height=\"120px\"/>";
-				html += "</div><div class=\"col-xs-6\"><p>"
-						+ p.getNom() + "<br />"
-						+ p.getPoste() + "<br />"
-						+ p.getLogin() + "</div>"
-						+ "</p></div></div>";
-			}
-		}
-		return html;
+	public Personne[] getPersonnes() {
+		return lPersonnes;
 	}
+	
 }

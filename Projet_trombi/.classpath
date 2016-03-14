@@ -13,17 +13,17 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/thomas/Documents/Cours/SR03/Projet_trombi/jackson-core-2.7.0.jar">
+	<classpathentry kind="lib" path="C:/Users/thomas/Documents/Cours/SR03/Projet_trombi/lib/jackson-core-2.7.0.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="C:/Users/thomas/Documents/Cours/SR03/Projet_trombi/jackson-databind-2.7.0.jar">
+	<classpathentry kind="lib" path="C:/Users/thomas/Documents/Cours/SR03/Projet_trombi/lib/jackson-databind-2.7.0.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="C:/Users/thomas/Documents/Cours/SR03/Projet_trombi/jackson-annotations-2.7.0.jar">
+	<classpathentry kind="lib" path="C:/Users/thomas/Documents/Cours/SR03/Projet_trombi/lib/jackson-annotations-2.7.0.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
