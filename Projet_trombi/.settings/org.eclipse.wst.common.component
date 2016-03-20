@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="Projet_trombi">
+    <wb-module deploy-name="trombi">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="Projet_trombi"/>
-        <property name="java-output-path" value="/Projet_trombi/build/classes"/>
+        <property name="context-root" value="trombi"/>
+        <property name="java-output-path" value="/trombi/build/classes"/>
     </wb-module>
 </project-modules>

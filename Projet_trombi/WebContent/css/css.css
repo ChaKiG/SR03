@@ -1,19 +1,55 @@
 body {
 	background: #F3F0FF;
-}
-
-
-.myCont {
-	padding-top: 50px;
-	margin: auto;
+	width:100%;
 }
 
 .divPers {
     margin: 0;
-    padding: 0;
-    border: 2px solid #ccc;
+    padding: 2px;
+}
+
+.divPers > div{
+	margin: 0;
+	padding: 0;
+	border: 1px solid grey;
+    background-color: white;
+    border-radius: 0px;
 }
 
 .boxPers {
 	min-height: 120px;
+}
+
+.showPers{
+	display:block;
+	width:100%;
+	height:20px;
+}
+
+.modalButton{
+	position:absolute;
+	bottom: 2px;
+	right: 2px;
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border: 1px solid grey;
+}
+
+.category{
+	font-weight: bold;
+}
+
+header{
+	background-color: white;
+	border-bottom: 1px solid gray;
+	margin-bottom: 20px;
+}
+
+.header{
+	padding: 10px 10px 10px 10px;
+}
+
+.searchCont{
+	padding-left: 10px;
 }

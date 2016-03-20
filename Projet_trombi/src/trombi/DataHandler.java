@@ -37,4 +37,45 @@ public class DataHandler {
 		return lPersonnes;
 	}
 	
+	public Structure[] getStructures() {
+		Structure str[] = null;
+		Scanner s = null;
+		try {
+			URL url = new URL("https://webapplis.utc.fr/Trombi_ws/mytrombi/structpere");
+			s = new Scanner(url.openStream(), "UTF-8");
+			s.useDelimiter("\\A");
+			String json = s.next();
+			
+			str = new ObjectMapper().readValue(json, TypeFactory.defaultInstance().constructArrayType(Structure.class));	
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		finally {
+			if (s != null)
+				s.close();
+		}
+		return str;	
+	}
+	
+	public Structure[] getSousStructures(int lid) {
+		Structure str[] = null;
+		Scanner s = null;
+		try {
+			URL url = new URL("https://webapplis.utc.fr/Trombi_ws/mytrombi/structfils?lid=" + String.valueOf(lid));
+			s = new Scanner(url.openStream(), "UTF-8");
+			s.useDelimiter("\\A");
+			String json = s.next();
+			
+			str = new ObjectMapper().readValue(json, TypeFactory.defaultInstance().constructArrayType(Structure.class));	
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		finally {
+			if (s != null)
+				s.close();
+		}
+		return str;	
+	}
 }
