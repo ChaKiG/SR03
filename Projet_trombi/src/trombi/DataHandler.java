@@ -34,15 +34,33 @@ public class DataHandler {
 		}
 	}
 	
-	public DataHandler(){
-		lPersonnes = null;
+	public DataHandler(int pere, int fils){
+		if (pere != 0 || fils != 0) {
+			URL url = null;
+			Scanner s = null;
+			try {
+				url = new URL("https://webapplis.utc.fr/Trombi_ws/mytrombi/resultstruct?pere=" + pere + "&fils=" + fils);
+				s = new Scanner(url.openStream(), "UTF-8");
+				s.useDelimiter("\\A");
+				String json = s.next();
+				lPersonnes = new ObjectMapper().readValue(json, TypeFactory.defaultInstance().constructArrayType(Personne.class));
+				s.close();				
+				for (Personne p : lPersonnes) {
+					if (p.getAutorisation().equals("O")) {
+						p.setPhoto("https://demeter.utc.fr/portal/pls/portal30/portal30.get_photo_utilisateur_mini?username=" + p.getLogin());
+					}
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 	
 	public Personne[] getPersonnes() {
 		return lPersonnes;
 	}
 	
-	public Structure[] getStructures() {
+	public static Structure[] getStructures() {
 		Structure str[] = null;
 		Scanner s = null;
 		try {
@@ -63,7 +81,7 @@ public class DataHandler {
 		return str;	
 	}
 	
-	public Structure[] getSousStructures(int lid) {
+	public static Structure[] getSousStructures(int lid) {
 		Structure str[] = null;
 		Scanner s = null;
 		try {

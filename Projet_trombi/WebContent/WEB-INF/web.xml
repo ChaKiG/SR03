@@ -16,4 +16,20 @@
     <servlet-name>SousStructureServlet</servlet-name>
     <url-pattern>/SousStructureServlet/*</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>PersonneServlet</servlet-name>
+    <servlet-class>trombi.PersonneServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PersonneServlet</servlet-name>
+    <url-pattern>/PersonneServlet/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>StructureServlet</servlet-name>
+    <servlet-class>trombi.StructureServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StructureServlet</servlet-name>
+    <url-pattern>/StructureServlet/*</url-pattern>
+  </servlet-mapping>
 </web-app>

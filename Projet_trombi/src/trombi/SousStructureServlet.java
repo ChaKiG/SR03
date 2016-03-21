@@ -23,7 +23,7 @@ public class SousStructureServlet extends HttpServlet {
 		String text = "";
 		if (lid != 0) {
 			ObjectMapper map = new ObjectMapper();
-			Structure[] sousStructure = new DataHandler().getSousStructures(lid);
+			Structure[] sousStructure = DataHandler.getSousStructures(lid);
 			text =  map.writeValueAsString(sousStructure);
 		}
 		response.setContentType("application/json");

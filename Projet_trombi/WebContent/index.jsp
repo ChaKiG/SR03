@@ -28,7 +28,7 @@
 	<header>
 		<div class="header">
 			<div class="col-sm-2">
-				<img src="https://www.utc.fr/fileadmin/user-upload/SITE-UTC/images/Home/Logotheque/logosUTC-SU.jpg" height="75px">
+				<img src="https://www.utc.fr/cru-1455812804/typo3conf/ext/site/Resources/Public/Frontend/vendor/html/images/utc-site-logo.png" height="75px">
 			</div>
 			<div class="col-sm-6">
 				<h1>Trombinoscope</h1>
@@ -66,7 +66,7 @@
 <%-- 					<input type="text" class="form-control" id="nom" name="nom" placeholder="Nom" value="<%= nom %>"/><br /> --%>
 					<select class="form-control" id="structure">
 						<%
-							Structure[] structures = new DataHandler().getStructures();
+							Structure[] structures = DataHandler.getStructures();
 							for (Structure s : structures) {
 								%>
 									<%-- <option value="<%= s.getStructure().getStructId() %>"><%= s.getStructureLibelle() %></option> --%>
