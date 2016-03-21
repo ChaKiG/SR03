@@ -21,6 +21,10 @@ header{
 	margin: 10px;
 }
 
+select option {
+	word-wrap: break-word;
+	white-space: normal;
+}
 
 .divPers {
     margin: 0;
