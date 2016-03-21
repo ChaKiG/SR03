@@ -50,9 +50,8 @@
 	<div class="row">
 		<div class="col-md-2 searchCont">
 			<div class="panel panel-default">
- 				<div class="panel-heading">Recherche</div>
-				<div class="panel_body">
-				<div class="row">
+ 				<div class="panel-heading">Recherche par Nom</div>
+				<div class="panel-body container">
 					<form role="form" method="get" class="divForm">
 					<label for="nom">Nom :</label>
 					<input type="text" class="form-control" id="nom" name="nom" placeholder="Nom" value="<%= nom %>"/><br />
@@ -61,7 +60,10 @@
 					<input type="submit" class="btn btn-default" value="Rechercher"/>
 					</form>
 				</div>
-				<div class="row">
+			</div>
+			<div class="panel panel-default">
+ 				<div class="panel-heading">Recherche par Structure</div>
+				<div class="panel-body container">
 					<form role="form" method="get" class="divForm">
 					<label for="nom">Structure :</label>
 <%-- 					<input type="text" class="form-control" id="nom" name="nom" placeholder="Nom" value="<%= nom %>"/><br /> --%>
@@ -80,8 +82,7 @@
 					<select class="form_control" id="sousStructure">
 					</select>
 					<input type="submit" class="btn btn-default" value="Rechercher"/>
-					</form>
-				</div>
+					</form>		
 				</div>
 			</div>
 		</div>
