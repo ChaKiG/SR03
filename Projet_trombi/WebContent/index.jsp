@@ -31,12 +31,12 @@
 			<div class="panel panel-default">
  				<div class="panel-heading">Recherche par Nom</div>
 				<div class="panel-body">
-					<form role="form" method="get" class="divForm">
+					<form id="searchName" role="form" class="divForm" action="">
 					<label for="nom">Nom :</label>
 					<input type="text" class="form-control" id="nom" name="nom" placeholder="Nom"/><br />
 					<label for="prenom">Prénom :</label>
 					<input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom"/><br />
-					<input id="searchName" type="submit" class="btn btn-default" value="Rechercher"/>
+					<input type="submit" class="btn btn-default" value="Rechercher"/>
 					</form>
 				</div>
 			</div>
@@ -72,5 +72,6 @@
 	</section>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/js.js"></script>
 </body>
 </html>
