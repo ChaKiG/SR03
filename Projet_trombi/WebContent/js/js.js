@@ -62,6 +62,7 @@ $(document).ready(function() {
 		var IdStructure = $('#structure').val();
 		$.get('SousStructureServlet',{structure:IdStructure},function(responseText) {
 			$('#sousStructure').find('option').remove();
+			$('#sousStructure').append('<option value="0">--</option>');
 			$.each( responseText, function( key, value) {
 				$('#sousStructure').append('<option value=' + value.structure.structId + '>' + value.structureLibelle + '</option>');
 			});
@@ -96,10 +97,16 @@ $(document).ready(function() {
 	$('#searchStructure').submit(function(event) {
 		var structId = $('#structure').val();
 		var sousStructId = $('#sousStructure').val();
+		
+		if( structId == 0 && sousStructId == 0) {
+			alert("Vous n'avez pas choisi de structure");
+			return false;
+		}
+		
 		$.get('StructureServlet',{structId:structId,sousStructId:sousStructId},function(responseText) {
 			
 			var pers ="";
-			if (responseText.length >= 0) {
+			if (responseText.length <= 0) {
 				pers = '<p>Aucun Résultat</p>';
 			} else {
 				$.each( responseText, function( key, value) {
