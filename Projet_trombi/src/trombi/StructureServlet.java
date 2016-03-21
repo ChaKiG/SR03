@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
  * Servlet implementation class StructureServlet
  */
@@ -26,8 +28,18 @@ public class StructureServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int structId, sousStructId;
+		structId = Integer.parseInt( request.getParameter("structId"));
+		sousStructId = Integer.parseInt( request.getParameter("sousStructId"));
+		
+		String text = "";
+		ObjectMapper map = new ObjectMapper();
+		Personne[] lPersonnes = new DataHandler(structId , sousStructId).getPersonnes();
+		text =  map.writeValueAsString(lPersonnes);
+			
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(text);
 	}
 
 	/**
