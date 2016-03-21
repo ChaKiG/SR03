@@ -53,3 +53,7 @@ header{
 .searchCont{
 	padding-left: 10px;
 }
+
+.panel_body{
+	padding: 5px;
+}

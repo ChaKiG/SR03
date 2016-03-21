@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="trombi.DataHandler" %>
 <%@ page import="trombi.Personne" %>
+<%@ page import="trombi.Structure" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,6 +9,23 @@
 	<title>Trombi UTC</title>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="css/css.css" rel="stylesheet" type="text/css" />
+	<script src="https://code.jquery.com/jquery-1.12.2.min.js" integrity="sha256-lZFHibXzMHo3GGeehn1hudTAP3Sc0uKXBXAzHX1sjtk=" crossorigin="anonymous"></script>
+	<script>
+		$(document).ready(function() {
+			$('#structure').change( function() {
+				var IdStructure = $('#structure').val();
+				console.log("Je suis avant le get");
+				$.get('SousStructureServlet',{structure:IdStructure},function(responseText) {
+					console.log("Je suis dans la servlet");
+					var resultat = JSON.parse( responseText);
+					console.log(resultat);
+					$.each(resultat.sousStructures, function( key, value) {
+						$('#sousStructure').append('<option value=' + key + '>' + value + '</option>');
+					});
+				});
+			});
+		});
+	</script>
 </head>
 <body>
 	<header>
@@ -31,28 +49,41 @@
 	<section class="global container-fluid">
 	<div class="row">
 		<div class="col-md-2 searchCont">
-			<form role="form" method="get" class="divForm">
-			<label for="nom">Nom :</label>
-			<input type="text" class="form-control" id="nom" name="nom" placeholder="Nom" value="<%= nom %>"/><br />
-			<label for="prenom">Prénom :</label>
-			<input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom" value="<%= prenom %>"/><br />
-			
-			<label for="struct">Structure : </label>
-			<select class="form-control" id="struct">
-			<!-- faire boucle sur structures -->
-			<option>Structure</option>
-			<!--  -->
-			</select><br />
-			
-			<label for="sStruct">Sous-Structure : </label>
-			<select class="form-control" id="sStruct">
-			<!-- faire boucle sur sous-structure pour la structure -->
-			<option>Sous-Structure</option>
-			<!--  -->
-			</select><br />
-
-			<input type="submit" class="btn btn-default" value="Rechercher"/>			
-			</form>
+			<div class="panel panel-default">
+ 				<div class="panel-heading">Recherche</div>
+				<div class="panel_body">
+				<div class="row">
+					<form role="form" method="get" class="divForm">
+					<label for="nom">Nom :</label>
+					<input type="text" class="form-control" id="nom" name="nom" placeholder="Nom" value="<%= nom %>"/><br />
+					<label for="prenom">Prénom :</label>
+					<input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom" value="<%= prenom %>"/><br />
+					<input type="submit" class="btn btn-default" value="Rechercher"/>
+					</form>
+				</div>
+				<div class="row">
+					<form role="form" method="get" class="divForm">
+					<label for="nom">Structure :</label>
+<%-- 					<input type="text" class="form-control" id="nom" name="nom" placeholder="Nom" value="<%= nom %>"/><br /> --%>
+					<select class="form_control" id="structure">
+						<%
+							Structure[] structures = new DataHandler().getStructures();
+							for (Structure s : structures) {
+								%>
+									<%-- <option value="<%= s.getStructure().getStructId() %>"><%= s.getStructureLibelle() %></option> --%>
+									<option value="<%= s.getStructureId() %>"><%= s.getStructureLibelle() %></option>
+							<%
+							}
+							%>
+					</select>
+					<label for="prenom">Sous-Structure :</label>
+					<select class="form_control" id="sousStructure">
+					</select>
+					<input type="submit" class="btn btn-default" value="Rechercher"/>
+					</form>
+				</div>
+				</div>
+			</div>
 		</div>
 	<div class="col-md-10">
 	<%
@@ -99,31 +130,15 @@
 								<p class="category">Contact</p>
 								<p>
 									Mail: <%= p.getMail() %><br />
-									<% 
-									String tel1 = p.getTel();
-									String tel2 = p.getTel2();
-									if (tel1 != null && !tel1.equals("")) {
-										out.print("Tel.: " + tel1);
-										if (tel2 !=null && !tel2.equals("")) {
-											out.print(" OU " + p.getTel2());
-										}
-										out.print("<br />");
-									}
-									%>
+									Tel.:<%= p.getTel() %><br />
+									Tel2.:<%= p.getTel2() %><br />
 								</p>
 								<p class="category">Travail</p>
-									<p>
-								<%
-								String str = p.getStructure();
-								String sstr = p.getSousStructure();
-								String bur = p.getBureau();
-								out.print("Structure: " + str + "<br />");
-								if (sstr != null && !sstr.equals("")) 
-									out.print("Sous-structure: " + sstr + "<br />");
-								if (bur != null && !bur.equals(""))
-									out.print("Bureau: " + bur + "<br />");
-								%>
-									</p>
+								<p>
+									Structure: <%= p.getStructure() %><br />
+									Sous-structure: <%= p.getSousStructure() %><br />
+									Bureau: <%= p.getBureau() %><br />
+								</p>
 							</div>
 						</div>
 				      </div>

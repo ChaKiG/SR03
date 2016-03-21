@@ -41,6 +41,7 @@ public class Structure {
 	
 	public structure getStructure() {return structure;}
 	public void setStructure(structure structure) {this.structure = structure;}
+	public int getStructureId() {return structure.getStructId();}
 
 
 

@@ -33,6 +33,11 @@ public class DataHandler {
 			}
 		}
 	}
+	
+	public DataHandler(){
+		lPersonnes = null;
+	}
+	
 	public Personne[] getPersonnes() {
 		return lPersonnes;
 	}
