@@ -43,21 +43,19 @@
 			<div class="panel panel-default">
  				<div class="panel-heading">Recherche par Structure</div>
 				<div class="panel-body">
-					<form role="form" method="get" class="divForm">
-					<label for="nom">Structure :</label>
-<%-- 					<input type="text" class="form-control" id="nom" name="nom" placeholder="Nom" value="<%= nom %>"/><br /> --%>
+					<form id="searchStructure" role="form" class="divForm" action="">
+					<label for="structure">Structure :</label>
 					<select class="form-control" id="structure">
 						<%
 							Structure[] structures = DataHandler.getStructures();
 							for (Structure s : structures) {
-								%>
-									<%-- <option value="<%= s.getStructure().getStructId() %>"><%= s.getStructureLibelle() %></option> --%>
+							%>
 									<option value="<%= s.getStructureId() %>"><%= s.getStructureLibelle() %></option>
 							<%
 							}
 							%>
 					</select>
-					<label for="prenom">Sous-Structure :</label>
+					<label for="sousStructure">Sous-Structure :</label>
 					<select class="form-control" id="sousStructure">
 					</select>
 					<input type="submit" class="btn btn-default" value="Rechercher"/>
@@ -65,7 +63,7 @@
 				</div>
 			</div>
 		</div>
-	<div class="col-md-10 divPers">
+	<div id="divPers" class="col-md-10">
 	</div>
 	
 	</div>
