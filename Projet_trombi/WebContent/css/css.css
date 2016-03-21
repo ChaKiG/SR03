@@ -3,6 +3,29 @@ body {
 	width:100%;
 }
 
+header{
+	background-color: white;
+	border-bottom: 1px solid gray;
+	margin-bottom: 20px;
+}
+
+.header{
+	padding: 10px 10px 10px 10px;
+}
+
+.searchCont{
+	padding-left: 10px;
+}
+
+.divForm {
+	margin: 10px;
+}
+
+select option {
+	word-wrap: break-word;
+	white-space: normal;
+}
+
 .divPers {
     margin: 0;
     padding: 2px;
@@ -38,22 +61,4 @@ body {
 
 .category{
 	font-weight: bold;
-}
-
-header{
-	background-color: white;
-	border-bottom: 1px solid gray;
-	margin-bottom: 20px;
-}
-
-.header{
-	padding: 10px 10px 10px 10px;
-}
-
-.searchCont{
-	padding-left: 10px;
-}
-
-.panel_body{
-	padding: 5px;
 }

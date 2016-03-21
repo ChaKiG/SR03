@@ -28,7 +28,7 @@
 	<header>
 		<div class="header">
 			<div class="col-sm-2">
-				<img src="https://www.utc.fr/fileadmin/user_upload/SITE-UTC/images/Home/Logotheque/logosUTC_SU.jpg" height="75px">
+				<img src="https://www.utc.fr/fileadmin/user-upload/SITE-UTC/images/Home/Logotheque/logosUTC-SU.jpg" height="75px">
 			</div>
 			<div class="col-sm-6">
 				<h1>Trombinoscope</h1>
@@ -47,9 +47,8 @@
 	<div class="row">
 		<div class="col-md-2 searchCont">
 			<div class="panel panel-default">
- 				<div class="panel-heading">Recherche</div>
-				<div class="panel_body">
-				<div class="row">
+ 				<div class="panel-heading">Recherche par Nom</div>
+				<div class="panel-body">
 					<form role="form" method="get" class="divForm">
 					<label for="nom">Nom :</label>
 					<input type="text" class="form-control" id="nom" name="nom" placeholder="Nom" value="<%= nom %>"/><br />
@@ -58,11 +57,14 @@
 					<input type="submit" class="btn btn-default" value="Rechercher"/>
 					</form>
 				</div>
-				<div class="row">
+			</div>
+			<div class="panel panel-default">
+ 				<div class="panel-heading">Recherche par Structure</div>
+				<div class="panel-body">
 					<form role="form" method="get" class="divForm">
 					<label for="nom">Structure :</label>
 <%-- 					<input type="text" class="form-control" id="nom" name="nom" placeholder="Nom" value="<%= nom %>"/><br /> --%>
-					<select class="form_control" id="structure">
+					<select class="form-control" id="structure">
 						<%
 							Structure[] structures = new DataHandler().getStructures();
 							for (Structure s : structures) {
@@ -74,11 +76,10 @@
 							%>
 					</select>
 					<label for="prenom">Sous-Structure :</label>
-					<select class="form_control" id="sousStructure">
+					<select class="form-control" id="sousStructure">
 					</select>
 					<input type="submit" class="btn btn-default" value="Rechercher"/>
-					</form>
-				</div>
+					</form>		
 				</div>
 			</div>
 		</div>
