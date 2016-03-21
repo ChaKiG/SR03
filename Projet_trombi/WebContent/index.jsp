@@ -14,13 +14,10 @@
 		$(document).ready(function() {
 			$('#structure').change( function() {
 				var IdStructure = $('#structure').val();
-				console.log("Je suis avant le get");
 				$.get('SousStructureServlet',{structure:IdStructure},function(responseText) {
-					console.log("Je suis dans la servlet");
-					var resultat = JSON.parse( responseText);
-					console.log(resultat);
-					$.each(resultat.sousStructures, function( key, value) {
-						$('#sousStructure').append('<option value=' + key + '>' + value + '</option>');
+					$('#sousStructure').find('option').remove();
+					$.each( responseText, function( key, value) {
+						$('#sousStructure').append('<option value=' + value.structure.structId + '>' + value.structureLibelle + '</option>');
 					});
 				});
 			});
