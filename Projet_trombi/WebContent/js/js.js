@@ -25,7 +25,7 @@ function getHtml(personne) {
 						'<div class="modal-body">' +
 							'<div class="row">' +
 								'<div class="col-md-3">' +
-									'<img alt="Photo non disponible" src="' + personne.photo + '" width="96px" height="120px"/>' +
+									'<img alt="Photo non disponible" src="' + personne.photo + '" class="persPhoto" />' +
 								'</div>' +
 								'<div class="col-md-9">';
 	text += 						'<p class="category">Informations</p>' +
@@ -36,16 +36,27 @@ function getHtml(personne) {
 									'</p>' +
 									'<p class="category">Contact</p>' +
 									'<p>' +
-										'Mail : ' + personne.mail + '<br />' +
-										'Tel. : ' + personne.tel + '<br />' +
-										'Tel2. : ' + personne.tel2 + '<br />' +
+										'Mail : ' + personne.mail + '<br />';
+	if (personne.tel !== null && personne.tel !== "") {
+		text +=							'Tel. : ' + personne.tel;
+		if (personne.tel2 !== null && personne.tel2 !== "") {
+			text +=						' ou ' + personne.tel2;
+		}
+		text += 						'<br />';
+	}
 									'</p>' +
 									'<p class="category">Travail</p>' +
-										'<p>' +
-											'Structure : ' + personne.structure + '<br />' +
-											'Sous-structure : ' + personne.sousStructure + '<br />' +
-											'Bureau : ' + personne.bureau + '<br />' +
-										'</p>' +
+										'<p>';
+	if (personne.structure !== null && personne.structure !== "") {
+		text +=							'Structure : ' + personne.structure + '<br />';
+	}
+	if (personne.sousStructure !== null && personne.sousStructure !== "") {
+		text +=							'Sous-structure : ' + personne.sousStructure + '<br />';
+	}
+	if (personne.bureau !== null && personne.bureau !== "") {
+		text +=							'Bureau : ' + personne.bureau + '<br />';
+	}
+	text +=							'</p>' +
 								'</div>' +
 							'</div>' +
 						'</div>' +

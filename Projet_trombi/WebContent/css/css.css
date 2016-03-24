@@ -43,6 +43,12 @@ select option {
 	min-height: 120px;
 }
 
+.persPhoto {
+	width:96px;
+	height:120px;
+	word-wrap: normal;
+}
+
 .showPers{
 	display:block;
 	width:100%;
