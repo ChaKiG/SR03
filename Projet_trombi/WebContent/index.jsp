@@ -46,6 +46,7 @@
 					<form id="searchStructure" role="form" class="divForm" action="">
 					<label for="structure">Structure :</label>
 					<select class="form-control" id="structure">
+						<option value="0" selected>--</option>
 						<%
 							Structure[] structures = DataHandler.getStructures();
 							for (Structure s : structures) {
@@ -57,6 +58,7 @@
 					</select>
 					<label for="sousStructure">Sous-Structure :</label>
 					<select class="form-control" id="sousStructure">
+						<option value="0">--</option>
 					</select>
 					<input type="submit" class="btn btn-default" value="Rechercher"/>
 					</form>		
