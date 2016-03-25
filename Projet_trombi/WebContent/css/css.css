@@ -76,3 +76,12 @@ select option {
 	font-size: 16px;
 	font-weight: bold;	
 }
+
+.panel-default > .panel-heading {
+	border-color: transparent;
+}
+
+.panel-heading{
+	padding: 10px 15px 0px 10px;
+	border-bottom: 0px;
+}
