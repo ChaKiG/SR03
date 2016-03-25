@@ -76,6 +76,12 @@ $(document).ready(function() {
 			$('#sousStructure').append('<option value="0">--</option>');
 			$.each( responseText, function( key, value) {
 				$('#sousStructure').append('<option value=' + value.structure.structId + '>' + value.structureLibelle + '</option>');
+			}).fail(function(){
+				if (($('#alertNetwork').length)) {
+					$('#alertNetwork').remove();
+				}
+				$("#divPers").empty();
+				$('<div id="alertNetwork" class="alert alert-danger" role="alert">Erreur réseau, impossible de se connecter au serveur. Veuillez réessayer plus tard</div>').appendTo( "#divPers");
 			});
 		});
 	});
@@ -108,6 +114,12 @@ $(document).ready(function() {
 			}
 			console.log(pers);
 			$('#divPers').html(pers);
+		}).fail(function(){
+			if (($('#alertNetwork').length)) {
+				$('#alertNetwork').remove();
+			}
+			$("#divPers").empty();
+			$('<div id="alertNetwork" class="alert alert-danger" role="alert">Erreur réseau, impossible de se connecter au serveur. Veuillez réessayer plus tard</div>').appendTo( "#divPers");
 		});
 		event.preventDefault();
 	});
@@ -140,6 +152,12 @@ $(document).ready(function() {
 			}
 			console.log(responseText);
 			$('#divPers').html(pers);
+		}).fail(function(){
+			if (($('#alertNetwork').length)) {
+				$('#alertNetwork').remove();
+			}
+			$("#divPers").empty();
+			$('<div id="alertNetwork" class="alert alert-danger" role="alert">Erreur réseau, impossible de se connecter au serveur. Veuillez réessayer plus tard</div>').appendTo( "#divPers");
 		});
 		event.preventDefault();
 	});
