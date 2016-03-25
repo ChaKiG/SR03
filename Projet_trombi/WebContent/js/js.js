@@ -84,12 +84,22 @@ $(document).ready(function() {
 	$('#searchName').submit(function(event) {
 		var nomVal = $('#nom').val();
 		var prenomVal = $('#prenom').val();
+		
+		if (($('#alertName').length)) {
+			$('#alertName').remove();
+		}
+		
+		if( !nomVal.trim() && !prenomVal.trim()) {
+			$('<div id="alertName" class="alert alert-danger" role="alert">Vous n\'avez pas saisi de nom ni de prénom.</div>').appendTo( "#errorName");
+			return false;
+		}
+		
 		$.get('PersonneServlet',{nom:nomVal,prenom:prenomVal},function(responseText) {
 
 			console.log(responseText);
 			var pers ="";
 			if (responseText.length <= 0) {
-				pers = '<p>Aucun Résultat</p>';
+				pers = '<div id="alertName" class="alert alert-info" role="alert">Aucun résultat</div>';
 			} else {
 				$.each( responseText, function( key, value) {
 					console.log(value);
@@ -109,8 +119,12 @@ $(document).ready(function() {
 		var structId = $('#structure').val();
 		var sousStructId = $('#sousStructure').val();
 		
+		if (($('#alertStructure').length)) {
+			$('#alertStructure').remove();
+		}
+		
 		if( structId == 0 && sousStructId == 0) {
-			alert("Vous n'avez pas choisi de structure");
+			$('<div id="alertStructure" class="alert alert-danger" role="alert">Vous n\'avez pas choisi de structure.</div>').appendTo( "#errorStructure");
 			return false;
 		}
 		
@@ -118,7 +132,7 @@ $(document).ready(function() {
 			
 			var pers ="";
 			if (responseText.length <= 0) {
-				pers = '<p>Aucun Résultat</p>';
+				pers = '<div id="alertName" class="alert alert-info" role="alert">Aucun résultat</div>';
 			} else {
 				$.each( responseText, function( key, value) {
 					pers += getHtml(value);
@@ -129,5 +143,4 @@ $(document).ready(function() {
 		});
 		event.preventDefault();
 	});
-	
 });

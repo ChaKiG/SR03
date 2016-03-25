@@ -6,7 +6,7 @@ body {
 header{
 	background-color: white;
 	border-bottom: 1px solid gray;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 .header{
@@ -15,10 +15,6 @@ header{
 
 .searchCont{
 	padding-left: 10px;
-}
-
-.divForm {
-	margin: 10px;
 }
 
 select option {
@@ -67,4 +63,16 @@ select option {
 
 .category{
 	font-weight: bold;
+}
+
+.footer{
+	display: table;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.title{
+	font-size: 16px;
+	font-weight: bold;	
 }

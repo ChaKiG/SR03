@@ -15,60 +15,80 @@
 <body>
 	<header>
 		<div class="header">
-			<div class="col-sm-2">
-				<img src="https://www.utc.fr/cru-1455812804/typo3conf/ext/site/Resources/Public/Frontend/vendor/html/images/utc-site-logo.png" height="75px">
+			<div class="col-sm-2 col-xs-5">
+				<img src="https://www.utc.fr/cru-1455812804/typo3conf/ext/site/Resources/Public/Frontend/vendor/html/images/utc-site-logo.png" height="45px">
 			</div>
-			<div class="col-sm-6">
-				<h1>Trombinoscope</h1>
-			</div>
+	 			<div class="col-sm-10 col-xs-7 title">
+					<p style="margin:0px;">Trombinoscope</p>
+				</div>
 			<div class="clearfix"></div>
 		</div>
 	</header>
 		
 	<section class="global container-fluid">
 	<div class="row">
-		<div class="col-md-2 searchCont">
+		<div class="col-md-6 col-md-offset-3 searchCont">
 			<div class="panel panel-default">
- 				<div class="panel-heading">Recherche par Nom</div>
-				<div class="panel-body">
-					<form id="searchName" role="form" class="divForm" action="">
-					<label for="nom">Nom :</label>
-					<input type="text" class="form-control" id="nom" name="nom" placeholder="Nom"/><br />
-					<label for="prenom">Prénom :</label>
-					<input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom"/><br />
-					<input type="submit" class="btn btn-default" value="Rechercher"/>
-					</form>
+ 				<div class="panel-heading">
+ 					<ul class="nav nav-tabs nav-justified">
+ 						<li class="active">
+ 							<a id="searchNameButton" href="#searchName" data-toggle="tab">Recherche par nom</a>
+ 						</li>
+ 						<li>
+ 							<a id="searchNameStructure" href="#searchStructure" data-toggle="tab">Recherche par structure</a>
+ 						</li>
+ 					</ul>
 				</div>
-			</div>
-			<div class="panel panel-default">
- 				<div class="panel-heading">Recherche par Structure</div>
 				<div class="panel-body">
-					<form id="searchStructure" role="form" class="divForm" action="">
-					<label for="structure">Structure :</label>
-					<select class="form-control" id="structure">
-						<option value="0" selected>--</option>
-						<%
-							Structure[] structures = DataHandler.getStructures();
-							for (Structure s : structures) {
-							%>
-									<option value="<%= s.getStructureId() %>"><%= s.getStructureLibelle() %></option>
-							<%
-							}
-							%>
-					</select>
-					<label for="sousStructure">Sous-Structure :</label>
-					<select class="form-control" id="sousStructure">
-						<option value="0">--</option>
-					</select>
-					<input type="submit" class="btn btn-default" value="Rechercher"/>
-					</form>		
+					<div class="tab-content">
+						<div class="tab-pane fade in active" id="searchName">
+							<form id="searchName" role="form" action="">
+								<label for="nom">Nom :</label>
+								<input type="text" class="form-control" id="nom" name="nom" placeholder="Nom"/>
+								<label for="prenom">Prénom :</label>
+								<input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom"/><br />
+								<div id="errorName"></div>
+								<input type="submit" class="btn btn-default" value="Rechercher"/>
+								<input type="reset" class="btn btn-default" value="Annuler"/>
+							</form>
+						</div>
+						<div class="tab-pane fade" id="searchStructure">
+							<form id="searchStructure" role="form" action="">
+								<label for="structure">Structure :</label>
+								<select class="form-control" id="structure">
+									<option value="0" selected>--</option>
+									<%
+										Structure[] structures = DataHandler.getStructures();
+										for (Structure s : structures) {
+										%>
+												<option value="<%= s.getStructureId() %>"><%= s.getStructureLibelle() %></option>
+										<%
+										}
+										%>
+								</select>
+								<label for="sousStructure">Sous-Structure :</label>
+								<select class="form-control" id="sousStructure">
+									<option value="0">--</option>
+								</select><br />
+								<div id="errorStructure"></div>
+								<input type="submit" class="btn btn-default" value="Rechercher"/>
+								<input type="reset" class="btn btn-default" value="Annuler"/>
+							</form>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	<div id="divPers" class="col-md-10">
+	<div id="divPers" class="col-md-12">
 	</div>
 	
 	</div>
+	
+	<footer>
+		<div class="footer">
+			© SR03 - Fabrice De Régibus & Thomas Pelletier
+		</div>
+	</footer>
 	</section>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
