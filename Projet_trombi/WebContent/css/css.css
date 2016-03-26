@@ -1,21 +1,61 @@
 body {
+	padding-top: 100px;
+	padding-bottom: 30px;
 	background: #F3F0FF;
 	width:100%;
 }
 
-header{
+
+.navbar {
 	background-color: white;
 	border-bottom: 1px solid gray;
-	margin-bottom: 10px;
+}
+.navbar p {
+	display: inline;
+	padding: 0 20px 0 20px;
+	font-size: 16px;
+	font-weight: bold;
+}
+.navbar img {
+	display: inline;
+	height: 100%;
+}
+.to-top {
+	height: 15px;
+	min-height: 15px;
+	display: inline;
+}
+.to-top .well {
+	min-height: 16px;
+	padding: 5px;
+}
+.navbar-plain {
+	padding: 10px 0 10px 0;
+	height: 80px;
+}
+.navbar-plain p {
+	line-height: 60px;
+}
+.navbar-minified {
+	padding: 5px 0 5px 0;
+	min-height: 40px;
+	height: 40px;
+}
+.navbar-minified p {
+	line-height:20px;
 }
 
-.header{
-	padding: 10px 10px 10px 10px;
-}
 
 .searchCont{
 	padding-left: 10px;
 }
+.nav-tabs.nav-justified > li > a {
+	    border: 1px solid #ddd;
+}
+.btn-primary {
+	background-color: #a18aff;
+}
+
 
 select option {
 	word-wrap: break-word;
@@ -72,11 +112,6 @@ select option {
 	margin-right: auto;
 }
 
-.title{
-	font-size: 16px;
-	font-weight: bold;	
-}
-
 .panel-default > .panel-heading {
 	border-color: transparent;
 }
@@ -84,4 +119,14 @@ select option {
 .panel-heading{
 	padding: 10px 15px 0px 10px;
 	border-bottom: 0px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  height:20px;
+  width: 100%;
+  background-color: white;
+  border-top: 1px solid black;
+  text-align: center;
 }

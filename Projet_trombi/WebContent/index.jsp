@@ -9,21 +9,24 @@
 	<title>Trombi UTC</title>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="css/css.css" rel="stylesheet" type="text/css" />
-	<script src="https://code.jquery.com/jquery-1.12.2.min.js" integrity="sha256-lZFHibXzMHo3GGeehn1hudTAP3Sc0uKXBXAzHX1sjtk=" crossorigin="anonymous"></script>
+	<%-- <script src="https://code.jquery.com/jquery-1.12.2.min.js" integrity="sha256-lZFHibXzMHo3GGeehn1hudTAP3Sc0uKXBXAzHX1sjtk=" crossorigin="anonymous"></script>--%>
+	<script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
 	
 </head>
 <body>
-	<header>
-		<div class="header">
-			<div class="col-sm-2 col-xs-5">
-				<img src="https://www.utc.fr/cru-1455812804/typo3conf/ext/site/Resources/Public/Frontend/vendor/html/images/utc-site-logo.png" height="45px">
-			</div>
-	 			<div class="col-sm-10 col-xs-7 title">
-					<p style="margin:0px;">Trombinoscope</p>
-				</div>
-			<div class="clearfix"></div>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<img class="header-img" src="https://www.utc.fr/cru-1455812804/typo3conf/ext/site/Resources/Public/Frontend/vendor/html/images/utc-site-logo.png" />
+		<p style="margin:0px;">Trombinoscope</p>
+		<div class="to-top hidden">	
+			<a href="#" class="well well-sm back-to-top">
+				<span class="glyphicon glyphicon-chevron-up"></span>
+				<span class="glyphicon glyphicon-chevron-up"></span>
+				Retour en haut
+				<span class="glyphicon glyphicon-chevron-up"></span>
+				<span class="glyphicon glyphicon-chevron-up"></span>
+			</a>
 		</div>
-	</header>
+	</nav>
 		
 	<section class="global container-fluid">
 	<div class="row">
@@ -48,8 +51,8 @@
 								<label for="prenom">Prénom :</label>
 								<input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom"/><br />
 								<div id="errorName"></div>
-								<input type="submit" class="btn btn-default" value="Rechercher"/>
 								<input type="reset" class="btn btn-default" value="Annuler"/>
+								<input type="submit" class="btn btn-primary" value="Rechercher"/>
 							</form>
 						</div>
 						<div class="tab-pane fade" id="searchStructure">
@@ -71,8 +74,8 @@
 									<option value="0">--</option>
 								</select><br />
 								<div id="errorStructure"></div>
-								<input type="submit" class="btn btn-default" value="Rechercher"/>
 								<input type="reset" class="btn btn-default" value="Annuler"/>
+								<input type="submit" class="btn btn-primary" value="Rechercher"/>
 							</form>
 						</div>
 					</div>
@@ -82,14 +85,13 @@
 	<div id="divPers" class="col-md-12">
 	</div>
 	
-	</div>
 	
+	</div>
+	</section>	
 	<footer>
-		<div class="footer">
-			© SR03 - Fabrice De Régibus & Thomas Pelletier
-		</div>
+		<%-- ©=&copy;     &=&amp;--%>
+		&copy; SR03 - Fabrice De Régibus &amp; Thomas Pelletier
 	</footer>
-	</section>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/js.js"></script>

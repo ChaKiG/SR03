@@ -1,10 +1,32 @@
+function collapseNavbar() {
+	if ($(".navbar").offset().top > 80) {
+		$(".navbar-fixed-top").removeClass("navbar-plain");
+		$(".navbar-fixed-top").addClass("navbar-minified");
+		$(".to-top").removeClass("hidden");
+	} else {
+		$(".navbar-fixed-top").removeClass("navbar-minified");
+		$(".navbar-fixed-top").addClass("navbar-plain");
+		$(".to-top").addClass("hidden");
+	}
+}
+$(window).scroll(collapseNavbar);
+$(document).ready(collapseNavbar);
+
+
+
+function handleImgError(image) {
+	image.onerror = "";
+    image.src = "noPhoto.png";
+    return true;	
+}
+
 function getHtml(personne) {
 	var text ="";
 	
 	text += '<div class="col-sm-4 divPers">' +
 				'<div class="row">' +
 					'<div class="col-xs-6 boxPers">' +
-						'<img alt="Photo non disponible" src="' + personne.photo + '" width="96px" height="120px"/>' +
+						'<img alt="Photo non disponible" src="' + personne.photo + '" onerror="handleImgError(this);" width="96px" height="120px"/>' +
 					'</div>' +
 					'<div class="col-xs-6"><p>' +
 						personne.nom + '<br />' +
@@ -25,7 +47,7 @@ function getHtml(personne) {
 						'<div class="modal-body">' +
 							'<div class="row">' +
 								'<div class="col-md-3">' +
-									'<img alt="Photo non disponible" src="' + personne.photo + '" class="persPhoto" />' +
+									'<img alt="Photo non disponible" src="' + personne.photo + '" class="persPhoto" onerror="handleImgError(this);" />' +
 								'</div>' +
 								'<div class="col-md-9">';
 	text += 						'<p class="category">Informations</p>' +
@@ -101,18 +123,14 @@ $(document).ready(function() {
 		}
 		
 		$.get('PersonneServlet',{nom:nomVal,prenom:prenomVal},function(responseText) {
-
-			console.log(responseText);
 			var pers ="";
 			if (responseText.length <= 0) {
 				pers = '<div id="alertName" class="alert alert-info" role="alert">Aucun résultat</div>';
 			} else {
 				$.each( responseText, function( key, value) {
-					console.log(value);
 					pers += getHtml(value);
 				});
 			}
-			console.log(pers);
 			$('#divPers').html(pers);
 		}).fail(function(){
 			if (($('#alertNetwork').length)) {
@@ -150,7 +168,6 @@ $(document).ready(function() {
 					pers += getHtml(value);
 				});
 			}
-			console.log(responseText);
 			$('#divPers').html(pers);
 		}).fail(function(){
 			if (($('#alertNetwork').length)) {
