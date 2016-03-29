@@ -19,11 +19,9 @@
 		<p style="margin:0px;">Trombinoscope</p>
 		<div class="to-top hidden">	
 			<a href="#" class="well well-sm back-to-top">
-				<span class="glyphicon glyphicon-chevron-up"></span>
-				<span class="glyphicon glyphicon-chevron-up"></span>
+				<span class="glyphicon glyphicon-chevron-up"></span><span class="glyphicon glyphicon-chevron-up"></span>
 				Retour en haut
-				<span class="glyphicon glyphicon-chevron-up"></span>
-				<span class="glyphicon glyphicon-chevron-up"></span>
+				<span class="glyphicon glyphicon-chevron-up"></span><span class="glyphicon glyphicon-chevron-up"></span>
 			</a>
 		</div>
 	</nav>

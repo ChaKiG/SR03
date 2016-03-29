@@ -1,6 +1,5 @@
 body {
-	padding-top: 100px;
-	padding-bottom: 30px;
+	padding: 100px 0 100px 0;
 	background: #F3F0FF;
 	width:100%;
 }
@@ -29,6 +28,16 @@ body {
 	min-height: 16px;
 	padding: 5px;
 }
+
+@media screen and (max-width: 640px) {
+	.to-top {
+		position: fixed;
+		bottom: 30px;
+		left: 5px;
+	}
+}
+
+
 .navbar-plain {
 	padding: 10px 0 10px 0;
 	height: 80px;
