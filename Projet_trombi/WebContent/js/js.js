@@ -91,6 +91,7 @@ function getHtml(personne) {
 
 
 $(document).ready(function() {
+	
 	$('#structure').change( function() {
 		var IdStructure = $('#structure').val();
 		$.get('SousStructureServlet',{structure:IdStructure},function(responseText) {
