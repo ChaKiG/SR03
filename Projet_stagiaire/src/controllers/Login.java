@@ -21,9 +21,9 @@ import java.util.UUID;
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static final String JDBC_DRIVER="com.mysql.jdbc.Driver";  
-	static final String DB_URL="jdbc:mysql://127.0.0.1:3306/projet_stagiaire";
-	static final String USER = "projet_stagiaire";
-	static final String PASS = "projet_stagiaire";
+	static final String DB_URL="jdbc:mysql://tuxa.sme.utc/sr03p013";
+	static final String USER = "sr03p013";
+	static final String PASS = "9kHfnmSW";
 	
 	public Login() { super(); }
 
