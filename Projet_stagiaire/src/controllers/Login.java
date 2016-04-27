@@ -4,13 +4,17 @@ import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.UUID;
 
 
 @WebServlet("/Login")
@@ -25,26 +29,27 @@ public class Login extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/plain");
-		response.getWriter().print("Failed with GET");
+		response.getWriter().print("Failed");
 	}
 	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String mail = request.getParameter("mail");
 		String mdp = request.getParameter("mdp");
+		HttpSession session = request.getSession();
+		PrintWriter writer = response.getWriter();
+		response.setContentType("text/plain");
+		ResultSet rs = null;
+		PreparedStatement stmt = null;
+		Connection conn = null;
+		
 		
 		if (mail == null || mdp == null) {
 			doGet(request, response);
 			return;
 		}
-		
-		ResultSet rs = null;
-		PreparedStatement stmt = null;
-		Connection conn = null;	
 				
-		PrintWriter writer = response.getWriter();
-		response.setContentType("text/plain");
-		try{
+		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 			stmt = conn.prepareStatement("SELECT * FROM utilisateur WHERE mail = ? AND mot_de_passe = ?");
@@ -53,10 +58,15 @@ public class Login extends HttpServlet {
 			rs = stmt.executeQuery();
 			
 			if (rs.next()) {
-				//rs.getBoolean("active");
+				String id = UUID.randomUUID().toString();
+				session.setAttribute( "user", mail );
+				session.setAttribute( "id", id );
+				Cookie cookieId = new Cookie("id", id);
+			    cookieId.setHttpOnly(true);
+				response.addCookie( cookieId );
 				writer.print("Ok");
 			} else {
-				writer.print("Failed with POST");
+				writer.print("Failed");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
