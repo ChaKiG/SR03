@@ -19,7 +19,7 @@ if ( c.isOk() ) {
 	<h1>Vous êtes bien connecté !</h1>
 <%	if ( c.type_utilisateur() >= 2) {				%>
 	<h2>Administrateur</h2>
-	<a href="">Creer un compte</a><br />
+	<a href="user/create">Creer un compte</a><br />
 	<a href="">Modifier un compte</a><br />
 	<hr />
 	

@@ -1,64 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app 
-  xmlns="http://java.sun.com/xml/ns/javaee"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-  version="3.0">
-
-
-	<servlet>
-    	<servlet-name>index</servlet-name>
-    	<jsp-file>/index.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-   		<servlet-name>index</servlet-name>
-   		<url-pattern>/index</url-pattern>
-	</servlet-mapping>
-	
-	
-	
-	<servlet>
-    	<servlet-name>connect</servlet-name>
-    	<servlet-class>controllers.Connect</servlet-class>    
-	</servlet>
-	<servlet-mapping>
-   		<servlet-name>connect</servlet-name>
-   		<url-pattern>/connect</url-pattern>
-	</servlet-mapping>
-	
-	
-	
-	<servlet>
-    	<servlet-name>disconnect</servlet-name>
-    	<servlet-class>controllers.Disconnect</servlet-class>    
-	</servlet>
-	<servlet-mapping>
-   		<servlet-name>disconnect</servlet-name>
-   		<url-pattern>/disconnect</url-pattern>
-	</servlet-mapping>
-	
-	
-	
-	<servlet>
-    	<servlet-name>user</servlet-name>
-    	<jsp-file>/user.jsp</jsp-file>  
-	</servlet>
-	<servlet-mapping>
-   		<servlet-name>user</servlet-name>
-   		<url-pattern>/user</url-pattern>
-	</servlet-mapping>
-
-
-
-	<servlet>
-    	<servlet-name>createQuestionnaire</servlet-name>
-    	<jsp-file>/createQuestionnaire.jsp</jsp-file>  
-	</servlet>
-	<servlet-mapping>
-   		<servlet-name>createQuestionnaire</servlet-name>
-   		<url-pattern>/createquestionnaire</url-pattern>
-	</servlet-mapping>
-
-
-
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <servlet>
+    <servlet-name>index</servlet-name>
+    <jsp-file>/index.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>index</servlet-name>
+    <url-pattern>/index</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>connect</servlet-name>
+    <servlet-class>controllers.Connect</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>connect</servlet-name>
+    <url-pattern>/connect</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>disconnect</servlet-name>
+    <servlet-class>controllers.Disconnect</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>disconnect</servlet-name>
+    <url-pattern>/disconnect</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>user</servlet-name>
+    <jsp-file>/user.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>user</servlet-name>
+    <url-pattern>/user</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>userCreate</servlet-name>
+    <jsp-file>/userCreate.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>userCreate</servlet-name>
+    <url-pattern>/user/create</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>createQuestionnaire</servlet-name>
+    <jsp-file>/createQuestionnaire.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>createQuestionnaire</servlet-name>
+    <url-pattern>/createquestionnaire</url-pattern>
+  </servlet-mapping>
 </web-app>
