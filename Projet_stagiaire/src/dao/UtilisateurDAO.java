@@ -13,9 +13,7 @@ public class UtilisateurDAO {
 	private static PreparedStatement createUser = null;
 	private static PreparedStatement modifyUser = null;
 	private static PreparedStatement deleteUser = null;
-	
-	
-	
+		
 	
 	private static void renewConnection() {
 		try {
@@ -56,9 +54,6 @@ public class UtilisateurDAO {
 		} 
 		return u;
 	}
-	
-	
-	
 	
 
 }

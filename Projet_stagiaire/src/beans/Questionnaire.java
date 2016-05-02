@@ -2,10 +2,10 @@ package beans;
 
 public class Questionnaire {
 
-	Integer id;
-	Integer utilisateur_id;
-	String nom;
-	Integer sujet_id;
+	public Integer id;
+	public Integer utilisateur_id;
+	public String nom;
+	public Integer sujet_id;
 	
 	public Questionnaire() {}
 	public Questionnaire(int id, int utilisateur_id, String nom, int sujet_id) {

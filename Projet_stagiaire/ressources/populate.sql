@@ -34,3 +34,9 @@ INSERT INTO utilisateur(
 	"societe",
 	null
 );
+
+
+INSERT INTO sujet(nom) VALUES ("sujet1");
+INSERT INTO sujet(nom) VALUES ("sujet2");
+INSERT INTO sujet(nom) VALUES ("sujet3");
+INSERT INTO sujet(nom) VALUES ("sujet4");

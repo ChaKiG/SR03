@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>  
 <%@ page import="controllers.ConnectionControl" %> 
+<%@ page import="dao.SujetDAO" %>  
+<%@ page import="beans.Sujet" %> 
 <% ConnectionControl c = new ConnectionControl(request); 
 	if (!c.isOk() || c.type_utilisateur() < 1) {
 		response.sendRedirect("index");
@@ -19,10 +22,14 @@
 		<input type="text" id="nom" name="nom" placeholder="Nom" /><br />
 		<label for="sujet">Sujet :</label><br />
 		<select id="sujet" name="sujet">
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
+<%
+	List<Sujet> l = SujetDAO.getSujets();
+	for (Sujet s: l) {
+%>
+		<option value="<%= s.id %>"><%= s.nom %></option>
+<%
+	}
+%>
 		</select><br />
 		<input type="submit" value="Envoyer" />
 	</form>
