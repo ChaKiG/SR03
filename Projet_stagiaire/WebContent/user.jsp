@@ -1,19 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<% String mail = (String)request.getSession().getAttribute("mail"); %>
-<% String id = (String)request.getSession().getAttribute("id"); %>
-<% Integer type_utilisateur = (Integer)request.getSession().getAttribute("type_utilisateur"); %>
-<% String cookieId = ""; %>
-<% 
-Cookie[] cookies = request.getCookies();
-if (cookies != null) {
-	for (int i = 0, n = cookies.length; i < n; i++) {
-		if (cookies[i].getName().equals("id")) {
-			cookieId = cookies[i].getValue();
-			break;
-		}
+<%@ page import="controllers.ConnectionControl" %> 
+<% ConnectionControl c = new ConnectionControl(request); 
+	if (!c.isOk()) {
+		response.sendRedirect("index");
 	}
-}
 %>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -22,18 +14,18 @@ if (cookies != null) {
 </head>
 <body>
 <%
-if ( type_utilisateur != null && mail != null && id != null && id.equals(cookieId) ) {
+if ( c.isOk() ) {
 %>	
 	<h1>Vous êtes bien connecté !</h1>
-<%	if ( type_utilisateur >= 2) {				%>
+<%	if ( c.type_utilisateur() >= 2) {				%>
 	<h2>Administrateur</h2>
 	<a href="">Creer un compte</a><br />
 	<a href="">Modifier un compte</a><br />
 	<hr />
 	
-<%	} if ( type_utilisateur >= 1){			%>
+<%	} if ( c.type_utilisateur() >= 1){			%>
  	<h2>Professeur</h2>
-	<a href="">Créer un questionnaire</a><br />
+	<a href="createquestionnaire">Créer un questionnaire</a><br />
 	<a href="">Modifier questionnaire</a><br />
 	<hr />
 	

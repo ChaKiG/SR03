@@ -2,7 +2,6 @@ package controllers;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,17 +18,16 @@ public class Connect extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	/* LOCAL DB */
-	static final String JDBC_DRIVER="com.mysql.jdbc.Driver";   
+/*	static final String JDBC_DRIVER="com.mysql.jdbc.Driver";   
 	static final String DB_URL="jdbc:mysql://127.0.0.1:3306/projet_stagiaire"; 
 	static final String USER = "projet_stagiaire"; 
 	static final String PASS = "projet_stagiaire"; 
-	
+*/	
 	/* UTC DB */
-/*	static final String JDBC_DRIVER="com.mysql.jdbc.Driver";  
+	static final String JDBC_DRIVER="com.mysql.jdbc.Driver";  
 	static final String DB_URL="jdbc:mysql://tuxa.sme.utc/sr03p013";
 	static final String USER = "sr03p013";
 	static final String PASS = "9kHfnmSW";
-*/
 
 	public Connect() { super(); }
 

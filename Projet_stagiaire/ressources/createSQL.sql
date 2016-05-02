@@ -4,8 +4,8 @@ USE sr03p013;
 DROP TABLE IF EXISTS reponse;
 DROP TABLE IF EXISTS question;
 DROP TABLE IF EXISTS questionnaire;
+DROP TABLE IF EXISTS sujet;
 DROP TABLE IF EXISTS utilisateur;
-
 
 CREATE TABLE utilisateur (
 	id INT PRIMARY KEY AUTO_INCREMENT,
@@ -18,13 +18,18 @@ CREATE TABLE utilisateur (
 	creation DATETIME
 );
 
+CREATE TABLE sujet (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nom VARCHAR(64)
+);
 
 CREATE TABLE questionnaire (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	utilisateur_id INT,
+	sujet_id INT,
 	nom VARCHAR(64),
-	sujet VARCHAR(64),
-	FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id)
+	FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id),
+	FOREIGN KEY (sujet_id) REFERENCES sujet(id)
 );
 
 
