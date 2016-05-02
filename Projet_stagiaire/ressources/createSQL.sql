@@ -1,8 +1,11 @@
-DROP DATABASE IF EXISTS projet_stagiaire;
-CREATE DATABASE projet_stagiaire;
-/*CREATE USER 'projet_stagiaire'@'localhost' IDENTIFIED BY 'projet_stagiaire';
-GRANT ALL PRIVILEGES ON projet_stagiaire.* TO 'projet_stagiaire'@'localhost';*/
-USE projet_stagiaire;
+CREATE DATABASE IF NOT EXISTS sr03p013;
+USE sr03p013;
+
+DROP TABLE IF EXISTS reponse;
+DROP TABLE IF EXISTS question;
+DROP TABLE IF EXISTS questionnaire;
+DROP TABLE IF EXISTS utilisateur;
+
 
 CREATE TABLE utilisateur (
 	id INT PRIMARY KEY AUTO_INCREMENT,
@@ -17,16 +20,18 @@ CREATE TABLE utilisateur (
 
 
 CREATE TABLE questionnaire (
-	id INT PRIMARY KEY,
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	utilisateur_id INT,
 	nom VARCHAR(64),
-	sujet VARCHAR(64)
+	sujet VARCHAR(64),
+	FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id)
 );
 
 
 CREATE TABLE question (
-	id INT PRIMARY KEY,
+	id INT PRIMARY KEY AUTO_INCREMENT,
 	questionnaire_id INT,
-	ordre INT UNIQUE,
+	ordre INT,
 	texte VARCHAR(128),
 	FOREIGN KEY (questionnaire_id) REFERENCES questionnaire(id)
 );
@@ -35,7 +40,9 @@ CREATE TABLE question (
 CREATE TABLE reponse (
 	id INT PRIMARY KEY,
 	question_id INT,
+	utilisateur_id INT,
 	ordre INT UNIQUE,
 	texte VARCHAR(128),
-	FOREIGN KEY (question_id) REFERENCES question(id)
+	FOREIGN KEY (question_id) REFERENCES question(id),
+	FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id)
 );
