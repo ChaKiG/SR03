@@ -1,7 +1,7 @@
-DROP DATABASE projet_stagiaire;
+DROP DATABASE IF EXISTS projet_stagiaire;
 CREATE DATABASE projet_stagiaire;
-/*CREATE USER 'projet_stagiaire'@'localhost' IDENTIFIED BY 'projet_stagiaire';*/
-GRANT ALL PRIVILEGES ON projet_stagiaire.* TO 'projet_stagiaire'@'localhost';
+/*CREATE USER 'projet_stagiaire'@'localhost' IDENTIFIED BY 'projet_stagiaire';
+GRANT ALL PRIVILEGES ON projet_stagiaire.* TO 'projet_stagiaire'@'localhost';*/
 USE projet_stagiaire;
 
 CREATE TABLE utilisateur (

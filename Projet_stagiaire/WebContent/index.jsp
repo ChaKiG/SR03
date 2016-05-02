@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h1>Veuillez vous connecter :</h1>
-	<form onsubmit="return login();">
+	<form onsubmit="return connect();">
 		<label for="mail">Mail :</label><br />
 		<input type="text" id="mail" name="mail" placeholder="Adresse mail" /><br />
 		<label for="mdp">Mot de Passe :</label><br />
