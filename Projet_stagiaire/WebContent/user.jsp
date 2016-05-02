@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="controllers.ConnectionControl" %> 
-<% ConnectionControl c = new ConnectionControl(request); %>
+<% ConnectionControl c = new ConnectionControl(request); 
+	if (!c.isOk()) {
+		response.sendRedirect("index");
+	}
+%>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -20,7 +25,7 @@ if ( c.isOk() ) {
 	
 <%	} if ( c.type_utilisateur() >= 1){			%>
  	<h2>Professeur</h2>
-	<a href="">Créer un questionnaire</a><br />
+	<a href="createquestionnaire">Créer un questionnaire</a><br />
 	<a href="">Modifier questionnaire</a><br />
 	<hr />
 	
