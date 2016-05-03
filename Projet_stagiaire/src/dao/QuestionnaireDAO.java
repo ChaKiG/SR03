@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
+import beans.Question;
 import beans.Questionnaire;
 
 public class QuestionnaireDAO {
@@ -21,8 +23,10 @@ public class QuestionnaireDAO {
 					getDbConnection.closeConnection();
 				c = getDbConnection.getConnection();
 				getQuestionnaires = c.prepareStatement("SELECT * FROM questionnaire");
-				createQuestionnaire = c.prepareStatement("SELECT * from questionnaire");
-				deleteQuestionnaire = c.prepareStatement("SELECT * from questionnaire");
+				createQuestionnaire = c.prepareStatement("INSERT INTO questionnaire("
+														+ "id, utilisateur_id, nom, sujet_id)"
+														+ "VALUES(?,?,?,?)");
+				deleteQuestionnaire = c.prepareStatement("DELETE FROM questionnaire WHERE id = ?");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -49,5 +53,46 @@ public class QuestionnaireDAO {
 		return l;
 	}
 	
+	
+	
+	public static boolean createQuestionnaire(Questionnaire q) {
+		try {
+			renewConnection();
+			if (q.id != null && q.id > 0)
+				createQuestionnaire.setInt(1, q.id);
+			else
+				createQuestionnaire.setNull(1, java.sql.Types.INTEGER);
+			createQuestionnaire.setInt(2, q.utilisateur_id);
+			createQuestionnaire.setString(3, q.nom);
+			createQuestionnaire.setInt(4, q.sujet_id);
+			if (createQuestionnaire.executeUpdate() >= 1)
+				return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return false;
+	}
+	
+	
+	
+	
+	public static boolean deleteQuestionnaire(Questionnaire q) {
+		try {
+			renewConnection();
+			if (q.id != null && q.id > 0) {
+				List<Question> l = QuestionDAO.getQuestions(q);
+				for (Question qu : l) {
+					QuestionDAO.deleteQuestion(qu);
+				}
+				deleteQuestionnaire.setInt(1, q.id);
+				if (deleteQuestionnaire.executeUpdate() >= 1) {
+					return true;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 	
 }
