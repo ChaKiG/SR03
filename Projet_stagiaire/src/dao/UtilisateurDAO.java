@@ -9,10 +9,13 @@ import beans.Utilisateur;
 
 public class UtilisateurDAO {
 	private static Connection c = null;
-	private static PreparedStatement checkUser = null;
+
+	private static PreparedStatement getUserById = null;
+	private static PreparedStatement getUserByMail = null;
 	private static PreparedStatement createUser = null;
 	private static PreparedStatement modifyUser = null;
 	private static PreparedStatement deleteUser = null;
+
 		
 	
 	private static void renewConnection() {
@@ -21,7 +24,8 @@ public class UtilisateurDAO {
 				if (c != null)
 					getDbConnection.closeConnection();
 				c = getDbConnection.getConnection();
-				checkUser = c.prepareStatement("SELECT * FROM utilisateur WHERE mail = ?");
+				getUserById = c.prepareStatement("SELECT * FROM utilisateur WHERE id = ?");
+				getUserByMail = c.prepareStatement("SELECT * FROM utilisateur WHERE mail = ?");
 				createUser = c.prepareStatement("SELECT * from utilisateur");
 				modifyUser = c.prepareStatement("SELECT * from utilisateur");
 				deleteUser = c.prepareStatement("SELECT * from utilisateur");
@@ -36,8 +40,8 @@ public class UtilisateurDAO {
 		Utilisateur u = null;
 		try {
 			renewConnection();
-			checkUser.setString(1, mail);
-			ResultSet rs = checkUser.executeQuery();			
+			getUserByMail.setString(1, mail);
+			ResultSet rs = getUserByMail.executeQuery();			
 			if ( rs.next() ) {
 				u = new Utilisateur();
 				u.id = rs.getInt("id");
@@ -54,6 +58,27 @@ public class UtilisateurDAO {
 		} 
 		return u;
 	}
-	
+	public static Utilisateur getUtilisateur(int id) {
+		Utilisateur u = null;
+		try {
+			renewConnection();
+			getUserById.setInt(1, id);
+			ResultSet rs = getUserById.executeQuery();			
+			if ( rs.next() ) {
+				u = new Utilisateur();
+				u.id = rs.getInt("id");
+				u.mail = rs.getString("mail");
+				u.mot_de_passe = rs.getString("mot_de_passe");
+				u.type_utilisateur = rs.getInt("type_utilisateur");
+				u.active = rs.getBoolean("active");
+				u.telephone = rs.getString("telephone");
+				u.societe = rs.getString("societe");
+				u.creation = rs.getDate("creation");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return u;
+	}
 
 }

@@ -8,11 +8,14 @@ import java.util.List;
 
 import beans.Question;
 import beans.Questionnaire;
+import beans.Sujet;
+import beans.Utilisateur;
 
 public class QuestionnaireDAO {
 
 	private static Connection c = null;
 	private static PreparedStatement getQuestionnaires = null;
+	private static PreparedStatement getQuestionnaire = null;
 	private static PreparedStatement createQuestionnaire = null;
 	private static PreparedStatement deleteQuestionnaire = null;
 	
@@ -23,6 +26,7 @@ public class QuestionnaireDAO {
 					getDbConnection.closeConnection();
 				c = getDbConnection.getConnection();
 				getQuestionnaires = c.prepareStatement("SELECT * FROM questionnaire");
+				getQuestionnaire = c.prepareStatement("SELECT * FROM questionnaire WHERE id = ?");
 				createQuestionnaire = c.prepareStatement("INSERT INTO questionnaire("
 														+ "id, utilisateur_id, nom, sujet_id)"
 														+ "VALUES(?,?,?,?)");
@@ -42,9 +46,9 @@ public class QuestionnaireDAO {
 			while ( rs.next() ) {
 				Questionnaire q = new Questionnaire();
 				q.id = rs.getInt("id");
-				q.utilisateur_id = rs.getInt("utilisateur_id");
 				q.nom = rs.getString("nom");
-				q.sujet_id = rs.getInt("sujet_id");
+				q.utilisateur = UtilisateurDAO.getUtilisateur(rs.getInt("utilisateur_id"));
+				q.sujet = SujetDAO.getSujet(rs.getInt("sujet_id"));
 				l.add(q);
 			}
 		} catch (Exception e) {
@@ -52,6 +56,27 @@ public class QuestionnaireDAO {
 		} 
 		return l;
 	}
+	
+	
+	public static Questionnaire getQuestionnaire(int id) {
+		Questionnaire q = null;
+		try {
+			renewConnection();
+			getQuestionnaire.setInt(1,  id);
+			ResultSet rs = getQuestionnaire.executeQuery();			
+			if ( rs.next() ) {
+				q = new Questionnaire();
+				q.id = rs.getInt("id");
+				q.nom = rs.getString("nom");
+				q.utilisateur = UtilisateurDAO.getUtilisateur(rs.getInt("utilisateur_id"));
+				q.sujet = SujetDAO.getSujet(rs.getInt("sujet_id"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return q;
+	}
+	
 	
 	
 	
@@ -62,9 +87,9 @@ public class QuestionnaireDAO {
 				createQuestionnaire.setInt(1, q.id);
 			else
 				createQuestionnaire.setNull(1, java.sql.Types.INTEGER);
-			createQuestionnaire.setInt(2, q.utilisateur_id);
+			createQuestionnaire.setInt(2, q.utilisateur.id);
 			createQuestionnaire.setString(3, q.nom);
-			createQuestionnaire.setInt(4, q.sujet_id);
+			createQuestionnaire.setInt(4, q.sujet.id);
 			if (createQuestionnaire.executeUpdate() >= 1)
 				return true;
 		} catch (Exception e) {

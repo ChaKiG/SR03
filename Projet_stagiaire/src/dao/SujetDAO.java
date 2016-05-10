@@ -11,6 +11,7 @@ public class SujetDAO {
 
 	private static Connection c = null;
 	private static PreparedStatement getSujets = null;
+	private static PreparedStatement getSujetId = null;
 	private static PreparedStatement createSujet = null;
 	private static PreparedStatement deleteSujet = null;
 	
@@ -21,6 +22,7 @@ public class SujetDAO {
 					getDbConnection.closeConnection();
 				c = getDbConnection.getConnection();
 				getSujets = c.prepareStatement("SELECT * FROM sujet");
+				getSujetId = c.prepareStatement("SELECT * FROM sujet WHERE id = ?");
 				createSujet = c.prepareStatement("SELECT * from sujet");
 				deleteSujet = c.prepareStatement("SELECT * from sujet");
 			}
@@ -46,6 +48,24 @@ public class SujetDAO {
 			e.printStackTrace();
 		} 
 		return l;
+	}
+	
+	
+	public static Sujet getSujet(int id) {
+		Sujet s = null;
+		try {
+			renewConnection();
+			getSujetId.setInt(1, id);
+			ResultSet rs = getSujetId.executeQuery();			
+			if ( rs.next() ) {
+				s = new Sujet();
+				s.id = rs.getInt("id");
+				s.nom = rs.getString("nom");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return s;
 	}
 	
 }

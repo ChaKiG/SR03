@@ -1,6 +1,8 @@
 CREATE DATABASE IF NOT EXISTS sr03p013;
 USE sr03p013;
 
+DROP TABLE IF EXISTS reponse_util;
+DROP TABLE IF EXISTS parcours;
 DROP TABLE IF EXISTS reponse;
 DROP TABLE IF EXISTS question;
 DROP TABLE IF EXISTS questionnaire;
@@ -43,11 +45,31 @@ CREATE TABLE question (
 
 
 CREATE TABLE reponse (
-	id INT PRIMARY KEY,
+	id INT PRIMARY KEY AUTO_INCREMENT,
 	question_id INT,
-	utilisateur_id INT,
 	ordre INT UNIQUE,
 	texte VARCHAR(128),
-	FOREIGN KEY (question_id) REFERENCES question(id),
-	FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id)
+	FOREIGN KEY (question_id) REFERENCES question(id)
+);
+
+
+
+CREATE TABLE parcours (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	questionnaire_id INT,
+	utilisateur_id INT,
+	score INT,
+	duree TIME,
+	FOREIGN KEY (questionnaire_id) REFERENCES question(id),
+	FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id)	
+);
+
+CREATE TABLE reponse_util (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	parcours_id INT,
+	reponse_id INT,
+	utilisateur_id INT,
+	FOREIGN KEY (parcours_id) REFERENCES parcours(id),
+	FOREIGN KEY (reponse_id) REFERENCES reponse(id),
+	FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id)	
 );

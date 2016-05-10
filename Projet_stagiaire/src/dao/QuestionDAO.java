@@ -13,6 +13,7 @@ public class QuestionDAO {
 
 	private static Connection c = null;
 	private static PreparedStatement getQuestions = null;
+	private static PreparedStatement getQuestion = null;
 	private static PreparedStatement createQuestion = null;
 	private static PreparedStatement modifyQuestion = null;
 	private static PreparedStatement deleteQuestion = null;
@@ -24,6 +25,7 @@ public class QuestionDAO {
 					getDbConnection.closeConnection();
 				c = getDbConnection.getConnection();
 				getQuestions = c.prepareStatement("SELECT * FROM question WHERE questionnaire_id = ?");
+				getQuestion = c.prepareStatement("SELECT * FROM question WHERE id = ?");
 				createQuestion = c.prepareStatement("INSERT INTO question( "
 														+ "id, questionnaire_id, ordre, texte) "
 														+ "VALUES(?,?,?,?) ");
@@ -47,7 +49,7 @@ public class QuestionDAO {
 			while ( rs.next() ) {
 				Question qu = new Question();
 				qu.id = rs.getInt("id");
-				qu.questionnaire_id = rs.getInt("questionnaire_id");
+				qu.questionnaire = QuestionnaireDAO.getQuestionnaire(rs.getInt("questionnaire_id"));
 				qu.ordre = rs.getInt("ordre");
 				qu.texte = rs.getString("texte");
 				l.add(qu);
@@ -59,6 +61,28 @@ public class QuestionDAO {
 	}
 	
 	
+	public static Question getQuestion(int id) {
+		Question q = null;
+		try {
+			renewConnection();
+			getQuestion.setInt(1, id);
+			ResultSet rs = getQuestion.executeQuery();			
+			if ( rs.next() ) {
+				q = new Question();
+				q.id = rs.getInt("id");
+				q.questionnaire = QuestionnaireDAO.getQuestionnaire(rs.getInt("questionnaire_id"));
+				q.ordre = rs.getInt("ordre");
+				q.texte = rs.getString("texte");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return q;
+	}
+	
+	
+	
+	
 	
 	public static boolean createQuestion(Question q) {
 		try {
@@ -67,7 +91,7 @@ public class QuestionDAO {
 				createQuestion.setInt(1, q.id);
 			else
 				createQuestion.setNull(1, java.sql.Types.INTEGER);
-			createQuestion.setInt(2, q.questionnaire_id);
+			createQuestion.setInt(2, q.questionnaire.id);
 			createQuestion.setInt(3, q.ordre);
 			createQuestion.setString(4, q.texte);
 			if (createQuestion.executeUpdate() >= 1)
@@ -85,7 +109,7 @@ public class QuestionDAO {
 			renewConnection();
 			if (q.id != null && q.id > 0){
 				modifyQuestion.setInt(1, q.id);
-				modifyQuestion.setInt(2, q.questionnaire_id);
+				modifyQuestion.setInt(2, q.questionnaire.id);
 				modifyQuestion.setInt(3, q.ordre);
 				modifyQuestion.setString(4, q.texte);
 				if (modifyQuestion.executeUpdate() >= 1)

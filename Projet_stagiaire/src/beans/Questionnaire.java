@@ -3,16 +3,16 @@ package beans;
 public class Questionnaire {
 
 	public Integer id;
-	public Integer utilisateur_id;
+	public Utilisateur utilisateur;
 	public String nom;
-	public Integer sujet_id;
+	public Sujet sujet;
 	
 	public Questionnaire() {}
-	public Questionnaire(int id, int utilisateur_id, String nom, int sujet_id) {
+	public Questionnaire(int id, Utilisateur utilisateur, String nom, Sujet sujet) {
 		this.id = id;
-		this.utilisateur_id = utilisateur_id;
+		this.utilisateur = utilisateur;
 		this.nom = nom;
-		this.sujet_id = sujet_id;
+		this.sujet = sujet;
 	}
 	
 	
