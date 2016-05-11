@@ -39,7 +39,7 @@ public class Connect extends HttpServlet {
 		try {
 			Utilisateur u = UtilisateurDAO.getUtilisateur(mail);
 			if ( u.mot_de_passe.equals(mdp) && u.mail.equals(mail) ) {
-				if ( u.active == true ) {
+				if ( u.active == 1 ) {
 					String id = UUID.randomUUID().toString();
 					Cookie cookieId = new Cookie("id", id);
 				    cookieId.setHttpOnly(true);

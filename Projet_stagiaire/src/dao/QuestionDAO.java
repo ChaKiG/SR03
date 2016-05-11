@@ -18,6 +18,7 @@ public class QuestionDAO {
 	private static PreparedStatement modifyQuestion = null;
 	private static PreparedStatement deleteQuestion = null;
 	
+	
 	private static void renewConnection() {
 		try {
 			if (c == null || !c.isValid(2)) {
@@ -49,7 +50,7 @@ public class QuestionDAO {
 			while ( rs.next() ) {
 				Question qu = new Question();
 				qu.id = rs.getInt("id");
-				qu.questionnaire = QuestionnaireDAO.getQuestionnaire(rs.getInt("questionnaire_id"));
+				qu.questionnaire = q;
 				qu.ordre = rs.getInt("ordre");
 				qu.texte = rs.getString("texte");
 				l.add(qu);

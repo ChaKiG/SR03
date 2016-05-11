@@ -23,12 +23,28 @@
    		<url-pattern>/user</url-pattern>
 	</servlet-mapping>
 	<servlet>
+    	<servlet-name>createUser</servlet-name>
+    	<jsp-file>/createUser.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+   		<servlet-name>createUser</servlet-name>
+   		<url-pattern>/createUser</url-pattern>
+	</servlet-mapping>
+	<servlet>
     	<servlet-name>questionnaires</servlet-name>
     	<jsp-file>/questionnaires.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
    		<servlet-name>questionnaires</servlet-name>
    		<url-pattern>/questionnaires</url-pattern>
+	</servlet-mapping>
+	<servlet>
+    	<servlet-name>question</servlet-name>
+    	<jsp-file>/question.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+   		<servlet-name>question</servlet-name>
+   		<url-pattern>/question</url-pattern>
 	</servlet-mapping>
 
 	

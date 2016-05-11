@@ -11,7 +11,7 @@
 <html lang="fr">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Page d'accueil</title>
+	<title>Questionnaires</title>
 </head>
 <body>
 	<h1>Questionnaires disponibles :</h1>
@@ -34,7 +34,7 @@
 			<th><%= q.nom %></th>
 			<th><%= q.sujet.nom %></th>
 			<th><%= q.utilisateur.mail %></th>
-			<th><a href="">Effectuer</a></th>
+			<th><a href="question?q=<%= q.id %>">Effectuer</a></th>
 <% if (c.type_utilisateur() >= 1) { %>
 			<th><a href="">Modifier</a></th>
 			<th><a href="">Supprimer</a></th>

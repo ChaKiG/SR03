@@ -5,11 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
 import beans.Question;
 import beans.Questionnaire;
-import beans.Sujet;
-import beans.Utilisateur;
 
 public class QuestionnaireDAO {
 

@@ -12,8 +12,6 @@ public class SujetDAO {
 	private static Connection c = null;
 	private static PreparedStatement getSujets = null;
 	private static PreparedStatement getSujetId = null;
-	private static PreparedStatement createSujet = null;
-	private static PreparedStatement deleteSujet = null;
 	
 	private static void renewConnection() {
 		try {
@@ -23,8 +21,6 @@ public class SujetDAO {
 				c = getDbConnection.getConnection();
 				getSujets = c.prepareStatement("SELECT * FROM sujet");
 				getSujetId = c.prepareStatement("SELECT * FROM sujet WHERE id = ?");
-				createSujet = c.prepareStatement("SELECT * from sujet");
-				deleteSujet = c.prepareStatement("SELECT * from sujet");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

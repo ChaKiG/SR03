@@ -14,7 +14,7 @@ CREATE TABLE utilisateur (
 	mail VARCHAR(64) UNIQUE,
 	mot_de_passe VARCHAR(64),
 	type_utilisateur INT,
-	active BOOLEAN,
+	active INT,
 	telephone VARCHAR(10),
 	societe VARCHAR(64),
 	creation DATETIME
