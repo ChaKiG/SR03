@@ -1,3 +1,5 @@
+use sr03p013;
+
 INSERT INTO utilisateur(
 	id,
 	mail,

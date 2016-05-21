@@ -45,19 +45,19 @@
 		<select id="type_utilisateur" name="type_utilisateur">
 			<option value="1">Administrateur</option>
 			<option value="0">Stagiaire</option>
-		</select>
+		</select><br />
 		<label for="mdp">Actif :</label><br />
 		<select id="active" name="active">
 			<option value="1">Oui</option>
 			<option value="0">Non</option>
-		</select>
-		<label for="phone">Téléphone :</label><br />
-		<input type="tel" id="phone" name="phone" placeholder="0201010101" /><br />
+		</select><br />
+		<label for="telephone">Téléphone :</label><br />
+		<input type="tel" id="telephone" name="telephone" placeholder="0201010101" /><br />
 		<label for="societe">Société :</label><br />
 		<input type="text" id="societe" name="societe" placeholder="societe" /><br />		
 		<input type="submit" value="Envoyer" />
 	</form>
-<% if (ok) { %>
+<% if (ok == true) { %>
 	<p>Utilisateur bien enregistré ! redirection dans 5 secondes</p>
 <% } else if (u != null) {%>
 	<p>Erreur, veuillez vérifier les informations</p>

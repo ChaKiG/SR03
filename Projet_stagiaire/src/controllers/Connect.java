@@ -40,13 +40,14 @@ public class Connect extends HttpServlet {
 			Utilisateur u = UtilisateurDAO.getUtilisateur(mail);
 			if ( u.mot_de_passe.equals(mdp) && u.mail.equals(mail) ) {
 				if ( u.active == 1 ) {
-					String id = UUID.randomUUID().toString();
-					Cookie cookieId = new Cookie("id", id);
-				    cookieId.setHttpOnly(true);
-					response.addCookie( cookieId );
+					String cookieId = UUID.randomUUID().toString();
+					Cookie cookie = new Cookie("id", cookieId);
+				    cookie.setHttpOnly(true);
+					response.addCookie( cookie );
+					session.setAttribute( "id", u.id );
 					session.setAttribute( "mail", u.mail );
 					session.setAttribute( "type_utilisateur", u.type_utilisateur );
-					session.setAttribute( "id", id );
+					session.setAttribute( "cookieId", cookieId );
 					writer.print( "Ok" );
 				} else {
 					writer.print( "Inactive" );

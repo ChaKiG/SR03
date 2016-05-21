@@ -83,6 +83,25 @@ public class UtilisateurDAO {
 	}
 
 	public static boolean createUser(Utilisateur u) {
+		System.out.println(u.mail);
+		System.out.println(u.mot_de_passe);
+		System.out.println(u.societe);
+		System.out.println(u.telephone);
+		System.out.println(u.type_utilisateur);
+		System.out.println(u.active);
+		System.out.println(u.creation.toString());
+		if ( u == null ||
+				u.mail == null ||
+				u.mail.equals("") ||
+				u.mot_de_passe == null ||
+				u.mot_de_passe.equals("") ||
+				u.societe == null ||
+				u.societe.equals("") ||
+				u.telephone == null ||
+				u.telephone.equals("") ||
+				u.type_utilisateur < 0 ||
+				u.active < 0)
+			return false;
 		try {
 			renewConnection();
 			if (u.id != null && u.id > 0)

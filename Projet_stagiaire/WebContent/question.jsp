@@ -7,7 +7,9 @@
 <%@ page import="dao.QuestionnaireDAO" %>
 <%@ page import="dao.QuestionDAO" %> 
 <%@ page import="dao.ReponseDAO" %>
-<% Questionnaire qu = QuestionnaireDAO.getQuestionnaire(Integer.valueOf(request.getParameter("q")));
+<% 
+	int questionnaire = Integer.valueOf(request.getParameter("q"));
+	Questionnaire qu = QuestionnaireDAO.getQuestionnaire(questionnaire);
 	List<Question> l = QuestionDAO.getQuestions(qu);
 	ConnectionControl c = new ConnectionControl(request); 
 	if ( !c.isOk() ) { 
@@ -24,15 +26,14 @@
 	<title>Question</title>
 </head>
 <body>
-	<h1>Question :</h1>
+	<h1>Questions :</h1>
+	<form id="form" name="<%= questionnaire %>">
 <%	for (Question q : l) {  %>	
-	<h3><%= q.texte %></h3>
-	<form method="POST" >
+		<p><%= q.texte %></p>
 <%		List<Reponse> lr = ReponseDAO.getReponses(q);
 		for (Reponse r : lr) {	%>
-		<input type="radio" name="<%= q.id %>" value="<%= r.id %>" /> <%= r.texte %><br>
+		<input type="radio" name="<%= q.id %>" value="<%= r.id %>" onchange="parcours();"/> <%= r.texte %><br>
 <% 		} %>
-		<input type="submit" value="Ok" />
 	</form>
 <% } %>
 	<script src="js/js.js"></script>

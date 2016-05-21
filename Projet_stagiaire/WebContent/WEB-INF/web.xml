@@ -57,13 +57,21 @@
    		<servlet-name>connect</servlet-name>
    		<url-pattern>/connect</url-pattern>
 	</servlet-mapping>
-		<servlet>
+	<servlet>
     	<servlet-name>disconnect</servlet-name>
     	<servlet-class>controllers.Disconnect</servlet-class>    
 	</servlet>
 	<servlet-mapping>
    		<servlet-name>disconnect</servlet-name>
    		<url-pattern>/disconnect</url-pattern>
+	</servlet-mapping>
+	<servlet>
+    	<servlet-name>parcours</servlet-name>
+    	<servlet-class>controllers.Parcours</servlet-class>    
+	</servlet>
+	<servlet-mapping>
+   		<servlet-name>parcours</servlet-name>
+   		<url-pattern>/parcours</url-pattern>
 	</servlet-mapping>
 	
 

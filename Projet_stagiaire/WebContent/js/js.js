@@ -40,3 +40,31 @@ function disconnect() {
 	req.send(null);
 	return false;
 }
+
+
+
+function parcours() {
+	"use strict";
+	var questionnaire = document.getElementById("form").name,
+		fields = document.getElementById("form").elements,
+		req = new XMLHttpRequest(),
+		str = "";
+	
+	for (var i = 0; i < fields.length; i++) {
+	    if (fields[i].type === "radio" && fields[i].checked === true) {
+	    	if (str !== "")
+	    		str += "&"
+	    	str += fields[i].name + "=" + fields[i].value;
+	    }
+	}
+	
+	req.addEventListener('readystatechange', function() {
+        if (req.readyState === XMLHttpRequest.DONE && req.status === 200) {
+    		// afficher ok;
+        }
+	});	
+	req.open("POST", "/Projet_stagiaire/parcours", true);
+	req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	req.send("q="+ questionnaire + "&" + str);
+	return false;
+}
