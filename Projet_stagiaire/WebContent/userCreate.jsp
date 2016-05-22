@@ -21,8 +21,8 @@ if ( c.isOk() ) {
 		Mail:<input type="text" id="mailUser"></input></br>
 		Mot de passe:<input type="text" id="mdpUser"></input></br>
 		Type:<select type="typeUser">
-			<option value="user">Utilisateur</option>
-			<option value="admin">Administrateur</option>
+			<option value="0">Utilisateur</option>
+			<option value="1">Administrateur</option>
 		</select></br>
 		Actif:<input type="radio" id="activeUser" value="true" checked="checked">Oui
 		<input type="radio" id="activeUser" value="false">Non</br>

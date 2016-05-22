@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.UtilisateurDAO;
+
 /**
  * Servlet implementation class userCreate
  */
@@ -34,9 +36,16 @@ public class userCreate extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// Récupération des paramètres
+		String mail = request.getParameter("mailUser");
+		String mot_de_passe = request.getParameter("mailUser");
+		int type = Integer.parseInt( request.getParameter("mailUser"));
+		Boolean actif = Boolean.valueOf( request.getParameter("mailUser"));
+		String telephone = request.getParameter("mailUser");
+		String societe = request.getParameter("mailUser");
 		
-		request.getParameter(arg0);
+		// Création de l'utilisateur via UtilisateurDAO
+		UtilisateurDAO.createUtilisateur(mail, mot_de_passe, type, actif, telephone, societe);
 		
 	}
 

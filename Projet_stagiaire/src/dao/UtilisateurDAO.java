@@ -3,6 +3,8 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Date;
+import java.util.Date;
 
 import beans.Utilisateur;
 
@@ -24,7 +26,7 @@ public class UtilisateurDAO {
 					getDbConnection.closeConnection();
 				c = getDbConnection.getConnection();
 				checkUser = c.prepareStatement("SELECT * FROM utilisateur WHERE mail = ?");
-				createUser = c.prepareStatement("SELECT * from utilisateur");
+				createUser = c.prepareStatement("INSERT INTO utilisateur (mail, mot_de_passe, type_utilisateur, active, telephone, societe, creation) VALUES (?,?,?,?,?,?,?)");
 				modifyUser = c.prepareStatement("SELECT * from utilisateur");
 				deleteUser = c.prepareStatement("SELECT * from utilisateur");
 			}
@@ -51,6 +53,27 @@ public class UtilisateurDAO {
 				u.societe = rs.getString("societe");
 				u.creation = rs.getDate("creation");
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return u;
+	}
+	
+	public static Utilisateur createUtilisateur(String mail, String mot_de_passe, int type_utilisateur, boolean active, String telephone, String societe) {
+		Utilisateur u = null;
+		try {
+			//(id, mail, mot_de_passe, type_utilisateur, active, telephone, societe, creation)
+			renewConnection();
+			createUser.setString(1, mail);
+			createUser.setString(2, mot_de_passe);
+			createUser.setInt(3, type_utilisateur);
+			createUser.setBoolean(4, active);
+			createUser.setString(5, telephone);
+			createUser.setString(6, societe);
+			java.util.Date dateUtil = new java.util.Date();
+			java.sql.Date sqlDate = new java.sql.Date(dateUtil.getTime());
+			createUser.setDate(7, sqlDate);
+			createUser.executeQuery();			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
