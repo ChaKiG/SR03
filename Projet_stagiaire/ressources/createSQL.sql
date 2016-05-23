@@ -47,7 +47,7 @@ CREATE TABLE question (
 CREATE TABLE reponse (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	question_id INT NOT NULL,
-	ordre INT UNIQUE NOT NULL,
+	ordre INT NOT NULL,
 	texte VARCHAR(128) NOT NULL,
 	FOREIGN KEY (question_id) REFERENCES question(id)
 );
