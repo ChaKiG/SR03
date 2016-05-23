@@ -78,6 +78,14 @@
    		<servlet-name>suppressionQuestion</servlet-name>
    		<url-pattern>/suppressionQuestion</url-pattern>
 	</servlet-mapping>
+	<servlet>
+    	<servlet-name>modificationQuestion</servlet-name>
+    	<jsp-file>/modificationQuestion.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+   		<servlet-name>modificationQuestion</servlet-name>
+   		<url-pattern>/modificationQuestion</url-pattern>
+	</servlet-mapping>
 
 	
 	
