@@ -93,6 +93,16 @@
    		<servlet-name>createQuestionnaire</servlet-name>
    		<url-pattern>/createquestionnaire</url-pattern>
 	</servlet-mapping>	
+	
+	
+	<servlet>
+    	<servlet-name>modifyUser</servlet-name>
+    	<jsp-file>/modifyUser.jsp</jsp-file>  
+	</servlet>
+	<servlet-mapping>
+   		<servlet-name>modifyUser</servlet-name>
+   		<url-pattern>/modifyUser</url-pattern>
+	</servlet-mapping>
 
 
 </web-app>

@@ -29,9 +29,11 @@
 <html lang="fr">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/css.css">
 	<title>Page d'accueil</title>
 </head>
 <body>
+<%@ include file="navbar.html" %>
 	<h1>Création d'un questionnaire :</h1>
 	<form method="POST">
 		<label for="nom">Nom du questionnaire :</label><br />

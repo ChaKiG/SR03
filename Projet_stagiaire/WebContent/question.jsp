@@ -46,9 +46,11 @@
 <html lang="fr">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/css.css">
 	<title>Question</title>
 </head>
 <body>
+<%@ include file="navbar.html" %>
 	<h1>Questions :</h1>
 	<form id="form" name="<%= questionnaire %>">
 <%	for (Question q : l) {  %>	

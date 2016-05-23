@@ -13,7 +13,7 @@ public class UtilisateurDAO {
 	private static PreparedStatement getUserById = null;
 	private static PreparedStatement getUserByMail = null;
 	private static PreparedStatement createUser = null;
-	//private static PreparedStatement modifyUser = null;
+	private static PreparedStatement modifyUser = null;
 	//private static PreparedStatement deleteUser = null;
 
 		
@@ -27,7 +27,12 @@ public class UtilisateurDAO {
 				getUserById = c.prepareStatement("SELECT * FROM utilisateur WHERE id = ?");
 				getUserByMail = c.prepareStatement("SELECT * FROM utilisateur WHERE mail = ?");
 				createUser = c.prepareStatement("INSERT INTO utilisateur(id, mail, mot_de_passe, type_utilisateur, active, telephone, societe, creation) VALUES(?,?,?,?,?,?,?,?)");
-				//modifyUser = c.prepareStatement("SELECT * from utilisateur");
+				modifyUser = c.prepareStatement("UPDATE utilisateur SET "
+						+ "mail = ?, "
+						+ "mot_de_passe = ?, "
+						+ "telephone = ?, "
+						+ "societe = ? "
+						+ "WHERE id = ?");
 				//deleteUser = c.prepareStatement("SELECT * from utilisateur");
 			}
 		} catch (Exception e) {
@@ -121,5 +126,25 @@ public class UtilisateurDAO {
 		} 
 		return false;
 	}
+
+	
+	
+	
+	public static boolean modifyUser(Utilisateur u) {
+		try {
+			renewConnection();
+			modifyUser.setString(1, u.mail);
+			modifyUser.setString(2, u.mot_de_passe);
+			modifyUser.setString(3, u.telephone);
+			modifyUser.setString(4, u.societe);
+			modifyUser.setInt(5, u.id);
+			if (modifyUser.executeUpdate() >= 1)
+				return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return false;
+	}
+
 	
 }
