@@ -85,8 +85,8 @@ public class ReponseDAO {
 		Reponse r = null;
 		try {
 			renewConnection();
-			getReponse.setInt(1, question_id);
-			ResultSet rs = getReponse.executeQuery();			
+			getCorrectReponse.setInt(1, question_id);
+			ResultSet rs = getCorrectReponse.executeQuery();			
 			if ( rs.next() ) {
 				r = new Reponse();
 				r.id = rs.getInt("id");

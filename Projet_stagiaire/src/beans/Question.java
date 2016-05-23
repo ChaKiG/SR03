@@ -5,15 +5,13 @@ public class Question {
 	public Questionnaire questionnaire ;
 	public Integer ordre;
 	public String texte;
-	public Integer isCorrect;
 	
 	public Question() {}
-	public Question(int id, Questionnaire questionnaire, int ordre, String texte, int isCorrect) {
+	public Question(int id, Questionnaire questionnaire, int ordre, String texte) {
 		this.id = id;
 		this.questionnaire = questionnaire ;
 		this.ordre = ordre;
 		this.texte = texte;
-		this.isCorrect = isCorrect;
 	}
 
 }

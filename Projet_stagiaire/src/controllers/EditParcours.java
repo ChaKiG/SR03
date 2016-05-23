@@ -44,9 +44,14 @@ public class EditParcours extends HttpServlet {
 		} else {
 			int questionnaire_id = Integer.valueOf(request.getParameter("q"));
 			int utilisateur_id = c.id();
+			
 			Parcours p = ParcoursDAO.getParcours(questionnaire_id, utilisateur_id);
+			ReponseUtilDAO.deleteReponseUtil(p.id);
+			
 			long startedTime = (long) request.getSession().getAttribute(String.valueOf(questionnaire_id));
-			p.duree.setTime(p.duree.getTime() + System.currentTimeMillis() - startedTime);
+			long duree = p.duree.getTime() + System.currentTimeMillis() - startedTime;
+			p.duree.setTime(duree);
+			p.score = 0;
 			
 			Enumeration<String> rep = request.getParameterNames();
 			while (rep.hasMoreElements()) {
@@ -62,7 +67,7 @@ public class EditParcours extends HttpServlet {
 			}
 			if (ParcoursDAO.updateParcours(p)) {
 				response.setContentType("text/plain");
-				response.getWriter().write("Ok");
+				response.getWriter().write(String.valueOf(duree) + "&" + p.score);
 			}
 		}
 	}

@@ -46,12 +46,13 @@ function disconnect() {
 function parcours() {
 	"use strict";
 	var questionnaire = document.getElementById("form").name,
-		fields = document.getElementById("form").elements,
+		fields = document.getElementsByTagName("input"),
 		req = new XMLHttpRequest(),
 		str = "";
 	
 	for (var i = 0; i < fields.length; i++) {
 	    if (fields[i].type === "radio" && fields[i].checked === true) {
+	    	console.log(fields[i].name + "=" + fields[i].value);
 	    	if (str !== "")
 	    		str += "&"
 	    	str += fields[i].name + "=" + fields[i].value;
@@ -60,10 +61,13 @@ function parcours() {
 	
 	req.addEventListener('readystatechange', function() {
         if (req.readyState === XMLHttpRequest.DONE && req.status === 200) {
-    		// afficher ok;
+        	
+        	var v = req.responseText.split("&");
+        	document.getElementById("parcoursTime").innerHTML = "Temps actuel : " + v[0] + " (en ms)";
+        	document.getElementById("parcoursScore").innerHTML = "Score actuel : " + v[1];
         }
 	});	
-	req.open("POST", "/Projet_stagiaire/parcours", true);
+	req.open("POST", "/Projet_stagiaire/editParcours", true);
 	req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	req.send("q="+ questionnaire + "&" + str);
 	return false;

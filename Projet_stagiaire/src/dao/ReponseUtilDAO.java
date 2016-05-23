@@ -6,16 +6,16 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import beans.Question;
-import beans.Questionnaire;
+import beans.Parcours;
 import beans.ReponseUtil;
 
 public class ReponseUtilDAO {
 
 	private static Connection c = null;
 	private static PreparedStatement getReponseUtil = null;
+	private static PreparedStatement getReponsesUtil = null;
 	private static PreparedStatement createReponseUtil = null;
-	private static PreparedStatement deleteReponseUtil = null;
+	private static PreparedStatement deleteReponsesUtil = null;
 	
 	
 	private static void renewConnection() {
@@ -24,11 +24,12 @@ public class ReponseUtilDAO {
 				if (c != null)
 					getDbConnection.closeConnection();
 				c = getDbConnection.getConnection();
-				getReponseUtil = c.prepareStatement("SELECT * FROM reponseUtil WHERE question_id = ?");
-				createReponseUtil = c.prepareStatement("INSERT INTO reponseUtil( "
-														+ "id, parcours, reponse) "
+				getReponsesUtil = c.prepareStatement("SELECT * FROM reponse_util WHERE parcours_id = ?");
+				getReponseUtil = c.prepareStatement("SELECT * FROM reponse_util WHERE id = ?");
+				createReponseUtil = c.prepareStatement("INSERT INTO reponse_util( "
+														+ "id, parcours_id, reponse_id) "
 														+ "VALUES(?,?,?) ");
-				deleteReponseUtil = c.prepareStatement("DELETE FROM reponseUtil WHERE id = ?");
+				deleteReponsesUtil = c.prepareStatement("DELETE FROM reponse_util WHERE parcours_id = ?");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -36,22 +37,33 @@ public class ReponseUtilDAO {
 	}
 
 		
-	public static List<ReponseUtil> getReponsesUtil(Questionnaire q) {
+	public static List<ReponseUtil> getReponsesUtil(Parcours p) {
 		List<ReponseUtil> l = new ArrayList<ReponseUtil>();
-		List<Question> lq = QuestionDAO.getQuestions(q);
-		for (Question question : lq) {
-			ReponseUtil r = getReponseUtil(question);
-			if (r != null)
+		try {
+			renewConnection();
+			getReponsesUtil.setInt(1, p.id);
+			ResultSet rs = getReponsesUtil.executeQuery();
+			while (rs.next()) {
+				ReponseUtil r = new ReponseUtil();
+				r.id = rs.getInt("id");
+				r.parcours = ParcoursDAO.getParcours(rs.getInt("parcours_id"));
+				r.reponse = ReponseDAO.getReponse(rs.getInt("reponse_id"));
 				l.add(r);
+			}
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
 		}
 		return l;
 	}
 	
-	public static ReponseUtil getReponseUtil(Question q) {
+	
+	public static ReponseUtil getReponseUtil(int reponseUtil_id) {
 		ReponseUtil r = null;
 		try {
 			renewConnection();
-			getReponseUtil.setInt(1, q.id);
+			getReponseUtil.setInt(1, reponseUtil_id);
 			ResultSet rs = getReponseUtil.executeQuery();
 			if (rs.next()) {
 				r = new ReponseUtil();
@@ -59,7 +71,6 @@ public class ReponseUtilDAO {
 				r.parcours = ParcoursDAO.getParcours(rs.getInt("parcours"));
 				r.reponse = ReponseDAO.getReponse(rs.getInt("reponse"));
 			}
-			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -105,13 +116,11 @@ public class ReponseUtilDAO {
 	
 	
 	
-	public static boolean deleteReponseUtil(ReponseUtil r) {
-		if (r == null || r.id <=0)
-			return false;
+	public static boolean deleteReponseUtil(int parcours_id) {
 		try {
 			renewConnection();
-			deleteReponseUtil.setInt(1, r.id);
-			if (createReponseUtil.executeUpdate() >= 1)
+			deleteReponsesUtil.setInt(1, parcours_id);
+			if (deleteReponsesUtil.executeUpdate() >= 1)
 				return true;
 		} catch (Exception e) {
 			e.printStackTrace();
