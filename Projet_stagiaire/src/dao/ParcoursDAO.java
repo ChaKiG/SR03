@@ -111,7 +111,6 @@ public class ParcoursDAO {
 			e.printStackTrace();
 		} 
 		return false;
-<<<<<<< HEAD
 	}
 	
 	
@@ -127,8 +126,4 @@ public class ParcoursDAO {
 		} 
 		return false;
 	}
-=======
-	}	
->>>>>>> master
-
 }
