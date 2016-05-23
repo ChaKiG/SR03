@@ -1,6 +1,5 @@
 package beans;
 
-import java.time.Duration;
 import java.util.Date;
 
 public class Parcours {

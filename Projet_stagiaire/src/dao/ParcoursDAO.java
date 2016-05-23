@@ -102,38 +102,18 @@ public class ParcoursDAO {
 	
 	
 	
-	public static boolean modifyQuestion(Question q) {
+	public static boolean updateParcours(Parcours p) {
 		try {
 			renewConnection();
-			if (q.id != null && q.id > 0){
-				modifyQuestion.setInt(1, q.id);
-				modifyQuestion.setInt(2, q.questionnaire.id);
-				modifyQuestion.setInt(3, q.ordre);
-				modifyQuestion.setString(4, q.texte);
-				if (modifyQuestion.executeUpdate() >= 1)
-					return true;
-			}
+			updateParcours.setInt(1, p.score);
+			updateParcours.setDate(2, new java.sql.Date(p.duree.getTime()));
+			updateParcours.setInt(3, p.id);
+			if (updateParcours.executeUpdate() >= 1)
+				return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
 		return false;
-	}
-	
-	
-	
-	public static boolean deleteQuestion(Question q) {
-		try {
-			renewConnection();
-			if (q.id != null && q.id > 0) {
-				deleteQuestion.setInt(1, q.id);
-				if (deleteQuestion.executeUpdate() >= 1)
-					return true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-	
+	}	
 
 }

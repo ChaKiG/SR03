@@ -30,7 +30,7 @@ public class QuestionDAO {
 				createQuestion = c.prepareStatement("INSERT INTO question( "
 														+ "id, questionnaire_id, ordre, texte) "
 														+ "VALUES(?,?,?,?) ");
-				deleteQuestion = c.prepareStatement("UPDATE question SET "
+				modifyQuestion = c.prepareStatement("UPDATE question SET "
 														+ "questionnaire_id = ?, ordre = ?, texte = ? "
 														+ "WHERE id = ? ");
 				deleteQuestion = c.prepareStatement("DELETE FROM question WHERE id = ?");
@@ -109,10 +109,10 @@ public class QuestionDAO {
 		try {
 			renewConnection();
 			if (q.id != null && q.id > 0){
-				modifyQuestion.setInt(1, q.id);
-				modifyQuestion.setInt(2, q.questionnaire.id);
-				modifyQuestion.setInt(3, q.ordre);
-				modifyQuestion.setString(4, q.texte);
+				modifyQuestion.setInt(1, q.questionnaire.id);
+				modifyQuestion.setInt(2, q.ordre);
+				modifyQuestion.setString(3, q.texte);
+				modifyQuestion.setInt(4, q.id);
 				if (modifyQuestion.executeUpdate() >= 1)
 					return true;
 			}
