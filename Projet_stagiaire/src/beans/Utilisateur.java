@@ -7,14 +7,14 @@ public class Utilisateur {
 	public String mail;
 	public String mot_de_passe;
 	public Integer type_utilisateur;
-	public boolean active;
+	public Integer active;
 	public String telephone;
 	public String societe;
 	public Date creation;
 	
 	public Utilisateur() {}
 	public Utilisateur(int id, String mail, String mot_de_passe, 
-			int type_utilisateur, boolean active, String telephone,
+			int type_utilisateur, int active, String telephone,
 			String societe, Date creation) {
 		this.id = id;
 		this.mail = mail;

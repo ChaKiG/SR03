@@ -17,21 +17,19 @@
 if ( c.isOk() ) {
 %>	
 	<h1>Vous êtes bien connecté !</h1>
-<%	if ( c.type_utilisateur() >= 2) {				%>
+		
+<%	if ( c.type_utilisateur() >= 1){			%>
 	<h2>Administrateur</h2>
-	<a href="user/create">Creer un compte</a><br />
+	<a href="createUser">Creer un compte</a><br />
 	<a href="">Modifier un compte</a><br />
 	<hr />
-	
-<%	} if ( c.type_utilisateur() >= 1){			%>
- 	<h2>Professeur</h2>
 	<a href="createquestionnaire">Créer un questionnaire</a><br />
-	<a href="">Modifier questionnaire</a><br />
+	<a href="questionnaires">Modifier questionnaire</a><br />
 	<hr />
 	
-<%	}							%>
+<%	}					%>
 	<h2>Etudiant</h2>
-	<a href="">Effectuer un questionnaire</a><br />
+	<a href="questionnaires">Effectuer un questionnaire</a><br />
 	<a href="">Modifier votre compte</a><br />
 	<hr />
 	<a href="#" onclick="disconnect();">Se déconnecter</a><br />
