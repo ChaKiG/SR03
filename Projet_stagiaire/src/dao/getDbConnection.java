@@ -5,23 +5,24 @@ import java.sql.DriverManager;
 
 
 public class getDbConnection {
-
+	static Connection connection = null;
+	
 	/* LOCAL DB */
 	/*static final String JDBC_DRIVER="com.mysql.jdbc.Driver";   
 	static final String DB_URL="jdbc:mysql://127.0.0.1:3306/sr03p013"; 
 	static final String USER = "projet_stagiaire"; 
-	static final String PASS = "projet_stagiaire"; 
-	static Connection connection = null;*/
+	static final String PASS = "projet_stagiaire";
+	*/
+	
 	
 	/* UTC DB */
 	static final String JDBC_DRIVER="com.mysql.jdbc.Driver";  
 	static final String DB_URL="jdbc:mysql://tuxa.sme.utc/sr03p013";
 	static final String USER = "sr03p013";
 	static final String PASS = "9kHfnmSW";
-	static Connection connection = null;
 	
 	
-
+	
 	public static Connection getConnection() {
 		if (connection != null) {
 			try {

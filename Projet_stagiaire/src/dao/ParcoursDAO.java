@@ -12,6 +12,7 @@ public class ParcoursDAO {
 	private static PreparedStatement getParcours2 = null;
 	private static PreparedStatement createParcours = null;
 	private static PreparedStatement updateParcours = null;
+	private static PreparedStatement deleteParcours = null;
 	
 	private static void renewConnection() {
 		try {
@@ -27,6 +28,7 @@ public class ParcoursDAO {
 				updateParcours = c.prepareStatement("UPDATE parcours SET "
 													+ "score = ?, duree = ? "
 													+ "WHERE id = ? ");
+				deleteParcours = c.prepareStatement("DELETE FROM parcours WHERE questionnaire_id = ? AND utilisateur_id = ?");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -109,6 +111,19 @@ public class ParcoursDAO {
 			e.printStackTrace();
 		} 
 		return false;
-	}	
-
+	}
+	
+	
+	public static boolean deleteParcours(int questionnaire_id, int utilisateur_id) {
+		try {
+			renewConnection();
+			deleteParcours.setInt(1, questionnaire_id);
+			deleteParcours.setInt(2, utilisateur_id);
+			if (deleteParcours.executeUpdate() >= 1)
+				return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return false;
+	}
 }
