@@ -39,12 +39,12 @@ public class EditParcours extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		ConnectionControl c = new ConnectionControl(request); 
-		if ( !c.isOk() ) { 
+		String q = request.getParameter("q");
+		if ( !c.isOk() || q == null) { 
 			response.getWriter().print("Error");
 		} else {
-			int questionnaire_id = Integer.valueOf(request.getParameter("q"));
+			int questionnaire_id = Integer.valueOf(q);
 			int utilisateur_id = c.id();
-			
 			Parcours p = ParcoursDAO.getParcours(questionnaire_id, utilisateur_id);
 			ReponseUtilDAO.deleteReponseUtil(p.id);
 			
@@ -71,5 +71,4 @@ public class EditParcours extends HttpServlet {
 			}
 		}
 	}
-
 }
