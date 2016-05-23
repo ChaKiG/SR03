@@ -19,6 +19,7 @@
 	<title>Questionnaires</title>
 </head>
 <body>
+<%@ include file="navbar.html" %>
 	<h1>Questions disponibles :</h1>
 	 <table>
 	 	<tr>

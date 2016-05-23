@@ -85,6 +85,7 @@
 	<title>Page d'accueil</title>
 </head>
 <body>
+<%@ include file="navbar.html" %>
 	<h1>Ajout d'une question :</h1>
 	<form method="POST">
 		<label for="nom">Nom de la question :</label><br />
