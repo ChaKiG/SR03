@@ -14,10 +14,11 @@ public class QuestionDAO {
 	private static Connection c = null;
 	private static PreparedStatement getQuestions = null;
 	private static PreparedStatement getQuestion = null;
+	private static PreparedStatement getQuestionTexte = null;
 	private static PreparedStatement createQuestion = null;
 	private static PreparedStatement modifyQuestion = null;
 	private static PreparedStatement deleteQuestion = null;
-	
+
 	
 	private static void renewConnection() {
 		try {
@@ -27,6 +28,7 @@ public class QuestionDAO {
 				c = getDbConnection.getConnection();
 				getQuestions = c.prepareStatement("SELECT * FROM question WHERE questionnaire_id = ?");
 				getQuestion = c.prepareStatement("SELECT * FROM question WHERE id = ?");
+				getQuestionTexte = c.prepareStatement("SELECT * FROM question WHERE texte = ?");
 				createQuestion = c.prepareStatement("INSERT INTO question( "
 														+ "id, questionnaire_id, ordre, texte) "
 														+ "VALUES(?,?,?,?) ");
@@ -82,7 +84,24 @@ public class QuestionDAO {
 	}
 	
 	
-	
+	public static Question getQuestion(String texte) {
+		Question q = null;
+		try {
+			renewConnection();
+			getQuestion.setString(1, texte);
+			ResultSet rs = getQuestion.executeQuery();			
+			if ( rs.next() ) {
+				q = new Question();
+				q.id = rs.getInt("id");
+				q.questionnaire = QuestionnaireDAO.getQuestionnaire(rs.getInt("questionnaire_id"));
+				q.ordre = rs.getInt("ordre");
+				q.texte = rs.getString("texte");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return q;
+	}
 	
 	
 	public static boolean createQuestion(Question q) {
