@@ -33,7 +33,7 @@
 		<tr>
 			<th><%= qu.texte %></th>
 			<th><%= qu.ordre %></th>
-			<th><a href="modificationQuestion?q=<%= qu.id %>">Modifier</a></th>
+			<th><a href="modificationQuestion?q=<%= questionnaire %>&qu=<%= qu.id %>">Modifier</a></th>
 			<th><a href="suppressionQuestion?q=<%= questionnaire %>&qu=<%= qu.id %>">Supprimer</a></th>
 		</tr>
 <%

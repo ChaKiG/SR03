@@ -15,6 +15,7 @@ public class ReponseDAO {
 	private static PreparedStatement getReponse = null;
 	private static PreparedStatement getCorrectReponse = null;
 	private static PreparedStatement addReponse = null;
+	private static PreparedStatement modifyReponse = null;
 	private static PreparedStatement deleteReponse = null;
 	
 	private static void renewConnection() {
@@ -28,6 +29,9 @@ public class ReponseDAO {
 				getCorrectReponse = c.prepareStatement("SELECT * FROM reponse WHERE question_id = ? AND is_correct = 1 ");
 				addReponse = c.prepareStatement("INSERT INTO reponse(id, question_id, ordre, texte, is_correct)"
 												+ "VALUES( ?, ?, ?, ?, ?)");
+				modifyReponse = c.prepareStatement("UPDATE reponse SET "
+						+ "question_id = ?, ordre = ?, texte = ?, is_correct = ? "
+						+ "WHERE id = ? ");
 				deleteReponse = c.prepareStatement("DELETE FROM reponse WHERE id = ?");
 			}
 		} catch (Exception e) {
@@ -124,7 +128,24 @@ public class ReponseDAO {
 		return false;
 	}
 	
-	
+
+	public static boolean modifyReponse(Reponse r) {
+		try {
+			renewConnection();
+			if (r.id != null && r.id > 0){
+				modifyReponse.setInt(1, r.question.id);
+				modifyReponse.setInt(2, r.ordre);
+				modifyReponse.setString(3, r.texte);
+				modifyReponse.setInt(4, r.isCorrect);
+				modifyReponse.setInt(5, r.id);
+				if (modifyReponse.executeUpdate() >= 1)
+					return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return false;
+	}
 	
 	
 	public static boolean deleteReponse(Reponse r) {
