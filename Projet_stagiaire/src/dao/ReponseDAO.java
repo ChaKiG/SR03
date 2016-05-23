@@ -26,8 +26,8 @@ public class ReponseDAO {
 				getReponses = c.prepareStatement("SELECT * FROM reponse WHERE question_id = ?");
 				getReponse = c.prepareStatement("SELECT * FROM reponse WHERE id = ?");
 				getCorrectReponse = c.prepareStatement("SELECT * FROM reponse WHERE question_id = ? AND is_correct = 1 ");
-				addReponse = c.prepareStatement("INSERT INTO reponse(id, question_id, ordre, texte)"
-												+ "VALUES( ?, ?, ?, ?)");
+				addReponse = c.prepareStatement("INSERT INTO reponse(id, question_id, ordre, texte, is_correct)"
+												+ "VALUES( ?, ?, ?, ?, ?)");
 				deleteReponse = c.prepareStatement("DELETE FROM reponse WHERE id = ?");
 			}
 		} catch (Exception e) {

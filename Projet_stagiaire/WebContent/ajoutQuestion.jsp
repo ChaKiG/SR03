@@ -18,11 +18,8 @@
 	Questionnaire q = QuestionnaireDAO.getQuestionnaire( questionnaire);
 	List<Question> l = QuestionDAO.getQuestions( q);
 	int nbq = l.size();
-	System.out.println( "Nb question : " + nbq);
-	System.out.println( "Questionnaire : " + q.nom);
-	System.out.println( "Nom question : " + request.getParameter("nom"));
-	System.out.println( "Ordre question : " + request.getParameter("ordre"));
 	Question qu = null;
+	int id = -1;
 	boolean ok = false;
 	if (request.getParameter("nom") != null && request.getParameter("ordre") != null) {
 		qu = new Question(
@@ -31,10 +28,13 @@
 				Integer.valueOf(request.getParameter("ordre")),
 				request.getParameter("nom")
 				);
-		ok = QuestionDAO.createQuestion(qu);
-		qu = QuestionDAO.getQuestion(request.getParameter("nom"));
-		if (request.getParameter("cr1") != null && request.getParameter("nomr1") != null) {
-			int correct = (Boolean.valueOf(request.getParameter("cr1"))) ? 1 : 0;
+		id = QuestionDAO.createQuestion(qu);
+		qu = QuestionDAO.getQuestion( id);
+		if (request.getParameter("nomr1") != null) {
+			int correct = 0;
+			if (request.getParameter("cr1") != null) {
+				correct = 1;	
+			}
 			Reponse r1 = new Reponse(
 					-1,
 					qu,
@@ -44,8 +44,14 @@
 					);
 			ReponseDAO.createReponse(r1);
 		}
-		if (request.getParameter("cr2") != null && request.getParameter("nomr2") != null) {
-			int correct = (Boolean.valueOf(request.getParameter("cr2"))) ? 1 : 0;
+		
+		if (request.getParameter("nomr2") != null) {
+			System.out.println( request.getParameter("cr2"));
+			int correct = 0;
+			if (request.getParameter("cr2") != null) {
+				correct = 1;	
+			}
+			
 			Reponse r2 = new Reponse(
 					-1,
 					qu,
@@ -55,8 +61,11 @@
 					);
 			ReponseDAO.createReponse(r2);
 		}
-		if (request.getParameter("cr3") != null && request.getParameter("nomr3") != null) {
-			int correct = (Boolean.valueOf(request.getParameter("cr3"))) ? 1 : 0;
+		if (request.getParameter("nomr3") != null) {
+			int correct = 0;
+			if (request.getParameter("cr3") != null) {
+				correct = 1;	
+			}
 			Reponse r3 = new Reponse(
 					-1,
 					qu,
@@ -94,16 +103,19 @@
 		<label for="r1">Réponse 1 :</label><br />
 		<input type="text" id="nomr1" name="nomr1" placeholder="réponse 1" /><br />
 		<label for="correctr1"><input type="checkbox" id="cr1" name="cr1">Correct?</label><br />
+		
 		<label for="r2">Réponse 2 :</label><br />
 		<input type="text" id="nomr2" name="nomr2" placeholder="réponse 2" /><br />
 		<label for="correctr2"><input type="checkbox" id="cr2" name="cr2">Correct?</label><br />
+		
 		<label for="r3">Réponse 3 :</label><br />
 		<input type="text" id="nomr3" name="nomr3" placeholder="réponse 3" /><br />
 		<label for="correctr3"><input type="checkbox" id="cr3" name="cr3">Correct?</label><br /><br />
+		
 		<input type="hidden" name="q" value="<%= questionnaire %>">
 		<input type="submit" value="Envoyer" />
 	</form>
-	<% if (ok == true) { %>
+	<% if (id != -1) { %>
 		<!-- TODO Rajouter la bonne redirection --> 
 		<p>Question bien enregistré ! Vous pouvez consulter l'ensemble des questions <a href="modification?q=<%= q.id %>">ici</a></p>
 	<% } else if (qu != null) {%>

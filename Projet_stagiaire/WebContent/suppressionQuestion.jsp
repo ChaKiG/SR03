@@ -10,7 +10,7 @@
 		response.sendRedirect("index");
 	}
 	
-	Question q = QuestionDAO.getQuestion( questionnaire);
+	Question q = QuestionDAO.getQuestion( question);
 	QuestionDAO.deleteQuestion( q);
 	response.sendRedirect("modification?q=" + questionnaire);
 %>
