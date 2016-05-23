@@ -4,6 +4,7 @@
 <%@ page import="controllers.ConnectionControl" %> 
 <%@ page import="dao.UtilisateurDAO" %>  
 <%@ page import="beans.Utilisateur" %> 
+<%@ page import="others.SendMail" %> 
 <% ConnectionControl c = new ConnectionControl(request); 
 	if (!c.isOk() || c.type_utilisateur() < 1) {
 		response.sendRedirect("index");
@@ -22,6 +23,10 @@
 				new Date(System.currentTimeMillis())
 				);
 		ok = UtilisateurDAO.createUser(u);
+		if (ok == true) {
+			SendMail s = new SendMail();
+			s.send(u.mail, u.mot_de_passe);
+		}
 	}
 %>
 
