@@ -97,6 +97,7 @@
 	<title>Page d'accueil</title>
 </head>
 <body>
+	<%@ include file="navbar.html" %>
 	<h1>Modification d'une question :</h1>
 	<form method="POST">
 		<input type="hidden" name="<%= "quid" %>" value="<%=qu.id %>">
