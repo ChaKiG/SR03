@@ -136,5 +136,13 @@
    		<url-pattern>/modifyUser</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+    	<servlet-name>modifyUserAdmin</servlet-name>
+    	<jsp-file>/modifyUserAdmin.jsp</jsp-file>  
+	</servlet>
+	<servlet-mapping>
+   		<servlet-name>modifyUserAdmin</servlet-name>
+   		<url-pattern>/modifyUserAdmin</url-pattern>
+	</servlet-mapping>
 
 </web-app>
