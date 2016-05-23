@@ -23,7 +23,7 @@ if ( c.isOk() ) {
 <%	if ( c.type_utilisateur() >= 1){			%>
 	<h2>Administrateur</h2>
 	<a href="createUser">Creer un compte</a><br />
-	<a href="modifyUser">Modifier un compte</a><br />
+	<a href="modifyUserAdmin">Modifier un compte</a><br />
 	<hr />
 	<a href="createquestionnaire">Créer un questionnaire</a><br />
 	<a href="questionnaires">Modifier questionnaire</a><br />
@@ -32,7 +32,7 @@ if ( c.isOk() ) {
 <%	}					%>
 	<h2>Etudiant</h2>
 	<a href="questionnaires">Effectuer un questionnaire</a><br />
-	<a href="">Modifier votre compte</a><br />
+	<a href="modifyUser">Modifier votre compte</a><br />
 	<hr />
 	<a href="#" onclick="disconnect();">Se déconnecter</a><br />
 <%

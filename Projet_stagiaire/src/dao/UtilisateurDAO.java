@@ -3,6 +3,8 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.sql.Date;
 import beans.Utilisateur;
 
@@ -10,11 +12,12 @@ import beans.Utilisateur;
 public class UtilisateurDAO {
 	private static Connection c = null;
 
+	private static PreparedStatement getAllUsers = null;
 	private static PreparedStatement getUserById = null;
 	private static PreparedStatement getUserByMail = null;
 	private static PreparedStatement createUser = null;
 	private static PreparedStatement modifyUser = null;
-	//private static PreparedStatement deleteUser = null;
+	private static PreparedStatement deleteUser = null;
 
 		
 	
@@ -24,6 +27,7 @@ public class UtilisateurDAO {
 				if (c != null)
 					getDbConnection.closeConnection();
 				c = getDbConnection.getConnection();
+				getAllUsers = c.prepareStatement("SELECT * FROM utilisateur");
 				getUserById = c.prepareStatement("SELECT * FROM utilisateur WHERE id = ?");
 				getUserByMail = c.prepareStatement("SELECT * FROM utilisateur WHERE mail = ?");
 				createUser = c.prepareStatement("INSERT INTO utilisateur(id, mail, mot_de_passe, type_utilisateur, active, telephone, societe, creation) VALUES(?,?,?,?,?,?,?,?)");
@@ -31,14 +35,40 @@ public class UtilisateurDAO {
 						+ "mail = ?, "
 						+ "mot_de_passe = ?, "
 						+ "telephone = ?, "
-						+ "societe = ? "
+						+ "societe = ?, "
+						+ "active = ?, "
+						+ "type_utilisateur = ? "
 						+ "WHERE id = ?");
-				//deleteUser = c.prepareStatement("SELECT * from utilisateur");
+				deleteUser = c.prepareStatement("DELETE from utilisateur WHERE id = ?");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+	public static List<Utilisateur> getAllUtilisateurs() {
+		List<Utilisateur> l = new ArrayList<Utilisateur>();
+		try {
+			renewConnection();
+			ResultSet rs = getAllUsers.executeQuery();			
+			while ( rs.next() ) {
+				Utilisateur u = new Utilisateur();
+				u.id = rs.getInt("id");
+				u.mail = rs.getString("mail");
+				u.mot_de_passe = rs.getString("mot_de_passe");
+				u.type_utilisateur = rs.getInt("type_utilisateur");
+				u.active = rs.getInt("active");
+				u.telephone = rs.getString("telephone");
+				u.societe = rs.getString("societe");
+				u.creation = rs.getDate("creation");
+				l.add(u);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return l;
+	}
+	
 	
 	
 	public static Utilisateur getUtilisateur(String mail) {
@@ -137,7 +167,9 @@ public class UtilisateurDAO {
 			modifyUser.setString(2, u.mot_de_passe);
 			modifyUser.setString(3, u.telephone);
 			modifyUser.setString(4, u.societe);
-			modifyUser.setInt(5, u.id);
+			modifyUser.setInt(5, u.active);
+			modifyUser.setInt(6, u.type_utilisateur);
+			modifyUser.setInt(7, u.id);
 			if (modifyUser.executeUpdate() >= 1)
 				return true;
 		} catch (Exception e) {
@@ -146,5 +178,20 @@ public class UtilisateurDAO {
 		return false;
 	}
 
+	public static boolean deleteUser(Utilisateur u) {
+		try {
+			renewConnection();
+			deleteUser.setInt(1, u.id);
+			if (deleteUser.executeUpdate() >= 1)
+				return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return false;
+	}
+	
+	
+	
+	
 	
 }
