@@ -46,6 +46,14 @@
    		<servlet-name>question</servlet-name>
    		<url-pattern>/question</url-pattern>
 	</servlet-mapping>
+	<servlet>
+    	<servlet-name>suppression</servlet-name>
+    	<jsp-file>/suppression.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+   		<servlet-name>suppression</servlet-name>
+   		<url-pattern>/suppression</url-pattern>
+	</servlet-mapping>
 
 	
 	
@@ -66,12 +74,12 @@
    		<url-pattern>/disconnect</url-pattern>
 	</servlet-mapping>
 	<servlet>
-    	<servlet-name>parcours</servlet-name>
-    	<servlet-class>controllers.Parcours</servlet-class>    
+    	<servlet-name>editParcours</servlet-name>
+    	<servlet-class>controllers.EditParcours</servlet-class>    
 	</servlet>
 	<servlet-mapping>
-   		<servlet-name>parcours</servlet-name>
-   		<url-pattern>/parcours</url-pattern>
+   		<servlet-name>editParcours</servlet-name>
+   		<url-pattern>/editParcours</url-pattern>
 	</servlet-mapping>
 	
 

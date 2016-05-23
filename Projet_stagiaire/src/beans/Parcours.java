@@ -1,7 +1,6 @@
 package beans;
 
-import java.time.Duration;
-import java.util.Date;
+import java.sql.Time;
 
 public class Parcours {
 
@@ -9,10 +8,10 @@ public class Parcours {
 	public Questionnaire questionnaire ;
 	public Utilisateur utilisateur;
 	public Integer score;
-	public Date duree;
+	public Time duree;
 	
 	public Parcours() {}
-	public Parcours(int id, Questionnaire questionnaire, Utilisateur utilisateur, int score, Date duree ) {
+	public Parcours(int id, Questionnaire questionnaire, Utilisateur utilisateur, int score, Time duree ) {
 		this.id = id;
 		this.questionnaire = questionnaire;
 		this.utilisateur = utilisateur;

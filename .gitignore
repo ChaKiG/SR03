@@ -1,16 +1,14 @@
 *.class
 
 #eclipse workspace files
-/.metadata
-/.recommenders
-/RemoteSystemsTempFiles
-/Servers
-
-/.metadata/*
-/.recommenders/*
-/RemoteSystemsTempFiles/*
-/Servers/*
-
+.metadata/
+.recommenders/
+RemoteSystemsTempFiles/
+Servers/
+.project/
+.classpath/
+bin/
+build/
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

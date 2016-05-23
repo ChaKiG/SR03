@@ -47,8 +47,9 @@ CREATE TABLE question (
 CREATE TABLE reponse (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	question_id INT NOT NULL,
-	ordre INT UNIQUE NOT NULL,
+	ordre INT NOT NULL,
 	texte VARCHAR(128) NOT NULL,
+	is_correct INT NOT NULL,
 	FOREIGN KEY (question_id) REFERENCES question(id)
 );
 
@@ -68,8 +69,6 @@ CREATE TABLE reponse_util (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	parcours_id INT NOT NULL,
 	reponse_id INT NOT NULL,
-	utilisateur_id INT NOT NULL,
 	FOREIGN KEY (parcours_id) REFERENCES parcours(id),
-	FOREIGN KEY (reponse_id) REFERENCES reponse(id),
-	FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id)	
+	FOREIGN KEY (reponse_id) REFERENCES reponse(id)
 );

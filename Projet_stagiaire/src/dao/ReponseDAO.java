@@ -12,6 +12,8 @@ import beans.Reponse;
 public class ReponseDAO {
 	private static Connection c = null;
 	private static PreparedStatement getReponses = null;
+	private static PreparedStatement getReponse = null;
+	private static PreparedStatement getCorrectReponse = null;
 	private static PreparedStatement addReponse = null;
 	private static PreparedStatement deleteReponse = null;
 	
@@ -22,6 +24,8 @@ public class ReponseDAO {
 					getDbConnection.closeConnection();
 				c = getDbConnection.getConnection();
 				getReponses = c.prepareStatement("SELECT * FROM reponse WHERE question_id = ?");
+				getReponse = c.prepareStatement("SELECT * FROM reponse WHERE id = ?");
+				getCorrectReponse = c.prepareStatement("SELECT * FROM reponse WHERE question_id = ? AND is_correct = 1 ");
 				addReponse = c.prepareStatement("INSERT INTO reponse(id, question_id, ordre, texte)"
 												+ "VALUES( ?, ?, ?, ?)");
 				deleteReponse = c.prepareStatement("DELETE FROM reponse WHERE id = ?");
@@ -45,6 +49,7 @@ public class ReponseDAO {
 					r.question = QuestionDAO.getQuestion(rs.getInt("question_id"));
 					r.ordre = rs.getInt("ordre");
 					r.texte = rs.getString("texte");
+					r.isCorrect = rs.getInt("is_correct");
 					l.add(r);
 				}
 			}
@@ -53,6 +58,50 @@ public class ReponseDAO {
 		} 
 		return l;
 	}
+	
+	public static Reponse getReponse(int reponse_id) {
+		Reponse r = null;
+		try {
+			renewConnection();
+			getReponse.setInt(1, reponse_id);
+			ResultSet rs = getReponse.executeQuery();			
+			if ( rs.next() ) {
+				r = new Reponse();
+				r.id = rs.getInt("id");
+				r.question = QuestionDAO.getQuestion(rs.getInt("question_id"));
+				r.ordre = rs.getInt("ordre");
+				r.texte = rs.getString("texte");
+				r.isCorrect = rs.getInt("is_correct");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return r;
+	}
+	
+	
+	
+	public static Reponse getCorrectReponse(int question_id) {
+		Reponse r = null;
+		try {
+			renewConnection();
+			getCorrectReponse.setInt(1, question_id);
+			ResultSet rs = getCorrectReponse.executeQuery();			
+			if ( rs.next() ) {
+				r = new Reponse();
+				r.id = rs.getInt("id");
+				r.question = QuestionDAO.getQuestion(rs.getInt("question_id"));
+				r.ordre = rs.getInt("ordre");
+				r.texte = rs.getString("texte");
+				r.isCorrect = rs.getInt("is_correct");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return r;
+	}
+	
+	
 	
 	
 	
@@ -66,6 +115,7 @@ public class ReponseDAO {
 			addReponse.setInt(2, r.question.id);
 			addReponse.setInt(3, r.ordre);
 			addReponse.setString(4, r.texte);
+			addReponse.setInt(5, r.isCorrect);
 			if (addReponse.executeUpdate() >= 1)
 				return true;
 		} catch (Exception e) {

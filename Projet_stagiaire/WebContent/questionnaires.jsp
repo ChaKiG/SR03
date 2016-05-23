@@ -37,7 +37,7 @@
 			<th><a href="question?q=<%= q.id %>">Effectuer</a></th>
 <% if (c.type_utilisateur() >= 1) { %>
 			<th><a href="">Modifier</a></th>
-			<th><a href="">Supprimer</a></th>
+			<th><a href="suppression?q=<%= q.id %>">Supprimer</a></th>
 <% } %>
 		</tr>
 <%

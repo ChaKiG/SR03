@@ -7,8 +7,8 @@ public class Question {
 	public String texte;
 	
 	public Question() {}
-	public Question(int id, Questionnaire questionnaire, int ordre, String texte ) {
-		this.id =id;
+	public Question(int id, Questionnaire questionnaire, int ordre, String texte) {
+		this.id = id;
 		this.questionnaire = questionnaire ;
 		this.ordre = ordre;
 		this.texte = texte;

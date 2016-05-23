@@ -15,9 +15,12 @@ import java.util.List;
 import java.util.UUID;
 
 import beans.Parcours;
+import beans.ReponseUtil;
 import beans.Utilisateur;
 import dao.ParcoursDAO;
 import dao.QuestionnaireDAO;
+import dao.ReponseDAO;
+import dao.ReponseUtilDAO;
 import dao.UtilisateurDAO;
 
 
@@ -43,13 +46,12 @@ public class EditParcours extends HttpServlet {
 			int utilisateur_id = c.id();
 			
 			Parcours p = ParcoursDAO.getParcours(questionnaire_id, utilisateur_id);
-			if (p == null) {
-				p = new Parcours();
-				p.utilisateur = UtilisateurDAO.getUtilisateur(utilisateur_id);
-				p.questionnaire = QuestionnaireDAO.getQuestionnaire(questionnaire_id);
-				p.score = 0;
-				ParcoursDAO.createParcours(p);
-			}
+			ReponseUtilDAO.deleteReponseUtil(p.id);
+			
+			long startedTime = (long) request.getSession().getAttribute(String.valueOf(questionnaire_id));
+			long duree = p.duree.getTime() + System.currentTimeMillis() - startedTime;
+			p.duree.setTime(duree);
+			p.score = 0;
 			
 			Enumeration<String> rep = request.getParameterNames();
 			while (rep.hasMoreElements()) {
@@ -57,15 +59,15 @@ public class EditParcours extends HttpServlet {
 				if ( !parameter.equals("q")) {
 					int question_id = Integer.valueOf(parameter);
 					int reponse_id = Integer.valueOf(request.getParameter(parameter));
-					ReponseUtilDAO.createReponse(p, utilisateur_id, reponse_id);
-					if (reponse_id == QuestionDAO.getCorrectResponseId(question_id)) {
+					ReponseUtilDAO.createReponseUtil(p.id, reponse_id);
+					if (ReponseDAO.getCorrectReponse(question_id).id == reponse_id) {
 						p.score++;
 					}
 				}	
 			}
 			if (ParcoursDAO.updateParcours(p)) {
 				response.setContentType("text/plain");
-				response.getWriter().write("Ok");
+				response.getWriter().write(String.valueOf(duree) + "&" + p.score);
 			}
 		}
 	}

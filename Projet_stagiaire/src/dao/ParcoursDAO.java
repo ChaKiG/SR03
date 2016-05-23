@@ -3,12 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-
 import beans.Parcours;
-import beans.Question;
-import beans.Questionnaire;
 
 public class ParcoursDAO {
 
@@ -51,7 +46,7 @@ public class ParcoursDAO {
 				p.questionnaire = QuestionnaireDAO.getQuestionnaire(rs.getInt("questionnaire_id"));
 				p.utilisateur = UtilisateurDAO.getUtilisateur(rs.getInt("utilisateur_id"));
 				p.score = rs.getInt("score");
-				p.duree = rs.getDate("duree");
+				p.duree = rs.getTime("duree");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,7 +58,7 @@ public class ParcoursDAO {
 		try {
 			renewConnection();
 			getParcours2.setInt(1, questionnaire_id);
-			getParcours2.setInt(1, utilisateur_id);
+			getParcours2.setInt(2, utilisateur_id);
 			ResultSet rs = getParcours2.executeQuery();			
 			if ( rs.next() ) {
 				p = new Parcours();
@@ -71,7 +66,7 @@ public class ParcoursDAO {
 				p.questionnaire = QuestionnaireDAO.getQuestionnaire(rs.getInt("questionnaire_id"));
 				p.utilisateur = UtilisateurDAO.getUtilisateur(rs.getInt("utilisateur_id"));
 				p.score = rs.getInt("score");
-				p.duree = rs.getDate("duree");
+				p.duree = rs.getTime("duree");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -91,7 +86,7 @@ public class ParcoursDAO {
 			createParcours.setInt(2, p.questionnaire.id);
 			createParcours.setInt(3, p.utilisateur.id);
 			createParcours.setInt(4, p.score);
-			createParcours.setDate(5, new java.sql.Date(p.duree.getTime()));
+			createParcours.setTime(5, p.duree);
 			if (createParcours.executeUpdate() >= 1)
 				return true;
 		} catch (Exception e) {
@@ -102,38 +97,18 @@ public class ParcoursDAO {
 	
 	
 	
-	public static boolean modifyQuestion(Question q) {
+	public static boolean updateParcours(Parcours p) {
 		try {
 			renewConnection();
-			if (q.id != null && q.id > 0){
-				modifyQuestion.setInt(1, q.id);
-				modifyQuestion.setInt(2, q.questionnaire.id);
-				modifyQuestion.setInt(3, q.ordre);
-				modifyQuestion.setString(4, q.texte);
-				if (modifyQuestion.executeUpdate() >= 1)
-					return true;
-			}
+			updateParcours.setInt(1, p.score);
+			updateParcours.setTime(2, p.duree);
+			updateParcours.setInt(3, p.id);
+			if (updateParcours.executeUpdate() >= 1)
+				return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
 		return false;
-	}
-	
-	
-	
-	public static boolean deleteQuestion(Question q) {
-		try {
-			renewConnection();
-			if (q.id != null && q.id > 0) {
-				deleteQuestion.setInt(1, q.id);
-				if (deleteQuestion.executeUpdate() >= 1)
-					return true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-	
+	}	
 
 }
