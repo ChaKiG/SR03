@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.jdbc.Statement;
+
 import beans.Question;
 import beans.Questionnaire;
 
@@ -17,7 +19,7 @@ public class QuestionDAO {
 	private static PreparedStatement createQuestion = null;
 	private static PreparedStatement modifyQuestion = null;
 	private static PreparedStatement deleteQuestion = null;
-	
+
 	
 	private static void renewConnection() {
 		try {
@@ -29,7 +31,7 @@ public class QuestionDAO {
 				getQuestion = c.prepareStatement("SELECT * FROM question WHERE id = ?");
 				createQuestion = c.prepareStatement("INSERT INTO question( "
 														+ "id, questionnaire_id, ordre, texte) "
-														+ "VALUES(?,?,?,?) ");
+														+ "VALUES(?,?,?,?) ", Statement.RETURN_GENERATED_KEYS);
 				modifyQuestion = c.prepareStatement("UPDATE question SET "
 														+ "questionnaire_id = ?, ordre = ?, texte = ? "
 														+ "WHERE id = ? ");
@@ -82,10 +84,7 @@ public class QuestionDAO {
 	}
 	
 	
-	
-	
-	
-	public static boolean createQuestion(Question q) {
+	public static int createQuestion(Question q) {
 		try {
 			renewConnection();
 			if (q.id != null && q.id > 0)
@@ -95,12 +94,15 @@ public class QuestionDAO {
 			createQuestion.setInt(2, q.questionnaire.id);
 			createQuestion.setInt(3, q.ordre);
 			createQuestion.setString(4, q.texte);
-			if (createQuestion.executeUpdate() >= 1)
-				return true;
+			if (createQuestion.executeUpdate() >= 1) {
+				ResultSet r = createQuestion.getGeneratedKeys();
+				r.next();
+				return r.getInt(1);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-		return false;
+		return -1;
 	}
 	
 	
