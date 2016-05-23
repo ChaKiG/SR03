@@ -80,6 +80,13 @@
 			);
 			ReponseDAO.modifyReponse( mr3);
 		}
+		
+		questionnaire = Integer.valueOf(request.getParameter("q"));
+		q = QuestionnaireDAO.getQuestionnaire( questionnaire);
+		qu = QuestionDAO.getQuestion( Integer.valueOf(request.getParameter("qu")));
+		l = QuestionDAO.getQuestions( q);
+		nbq = l.size();
+		res = ReponseDAO.getReponses( qu);
 	}
 %>
 
