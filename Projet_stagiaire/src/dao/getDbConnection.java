@@ -8,10 +8,11 @@ public class getDbConnection {
 	static Connection connection = null;
 	
 	/* LOCAL DB */
-	static final String JDBC_DRIVER="com.mysql.jdbc.Driver";   
+	/*static final String JDBC_DRIVER="com.mysql.jdbc.Driver";   
 	static final String DB_URL="jdbc:mysql://127.0.0.1:3306/sr03p013"; 
 	static final String USER = "projet_stagiaire"; 
 	static final String PASS = "projet_stagiaire"; 
+<<<<<<< HEAD
 	
 	/* UTC DB */
 	/*static final String JDBC_DRIVER="com.mysql.jdbc.Driver";  
@@ -19,6 +20,17 @@ public class getDbConnection {
 	static final String USER = "sr03p013";
 	static final String PASS = "9kHfnmSW";
 	*/
+=======
+	static Connection connection = null;*/
+	
+	/* UTC DB */
+	static final String JDBC_DRIVER="com.mysql.jdbc.Driver";  
+	static final String DB_URL="jdbc:mysql://tuxa.sme.utc/sr03p013";
+	static final String USER = "sr03p013";
+	static final String PASS = "9kHfnmSW";
+	static Connection connection = null;
+	
+>>>>>>> master
 	
 
 	public static Connection getConnection() {

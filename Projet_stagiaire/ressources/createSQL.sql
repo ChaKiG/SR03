@@ -50,7 +50,11 @@ CREATE TABLE reponse (
 	ordre INT NOT NULL,
 	texte VARCHAR(128) NOT NULL,
 	is_correct INT NOT NULL,
+<<<<<<< HEAD
 	FOREIGN KEY (question_id) REFERENCES question(id) ON DELETE CASCADE
+=======
+	FOREIGN KEY (question_id) REFERENCES question(id)
+>>>>>>> master
 );
 
 
@@ -69,6 +73,11 @@ CREATE TABLE reponse_util (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	parcours_id INT NOT NULL,
 	reponse_id INT NOT NULL,
+<<<<<<< HEAD
 	FOREIGN KEY (parcours_id) REFERENCES parcours(id) ON DELETE CASCADE,
 	FOREIGN KEY (reponse_id) REFERENCES reponse(id) ON DELETE CASCADE
+=======
+	FOREIGN KEY (parcours_id) REFERENCES parcours(id),
+	FOREIGN KEY (reponse_id) REFERENCES reponse(id)
+>>>>>>> master
 );
