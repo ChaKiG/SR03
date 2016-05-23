@@ -41,15 +41,9 @@ public class EditParcours extends HttpServlet {
 		} else {
 			int questionnaire_id = Integer.valueOf(request.getParameter("q"));
 			int utilisateur_id = c.id();
-			
 			Parcours p = ParcoursDAO.getParcours(questionnaire_id, utilisateur_id);
-			if (p == null) {
-				p = new Parcours();
-				p.utilisateur = UtilisateurDAO.getUtilisateur(utilisateur_id);
-				p.questionnaire = QuestionnaireDAO.getQuestionnaire(questionnaire_id);
-				p.score = 0;
-				ParcoursDAO.createParcours(p);
-			}
+			long startedTime = (long) request.getSession().getAttribute(String.valueOf(questionnaire_id));
+			p.duree.setTime(p.duree.getTime() + System.currentTimeMillis() - startedTime);
 			
 			Enumeration<String> rep = request.getParameterNames();
 			while (rep.hasMoreElements()) {
