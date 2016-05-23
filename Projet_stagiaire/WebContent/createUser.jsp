@@ -40,6 +40,7 @@
 	<title>Page d'accueil</title>
 </head>
 <body>
+<%@ include file="navbar.html" %>
 	<h1>Création d'un utilisateur :</h1>
 	<form method="POST">
 		<label for="mail">Mail du nouvel utilisateur :</label><br />

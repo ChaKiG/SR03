@@ -2,6 +2,7 @@ package others;
 
 import java.util.Properties;
 import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -15,16 +16,19 @@ public class SendMail {
 	Properties props;
 	
     public SendMail() {
-        props = new Properties();
-        props.put("mail.smtp.host", smtpHost);
-        props.put("mail.smtp.auth", "true");	
+    	props = new Properties();
+    	props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", smtpHost);
+		props.put("mail.smtp.port", "465");
     }
     
     public void send(String identifiant, String mdp) {
-        Session session = Session.getDefaultInstance(props);
+        Session session = Session.getInstance(props);
         Transport tr = null;
         try {
-	        MimeMessage message = new MimeMessage(session);   
+	        MimeMessage message = new MimeMessage(session);
+	        tr = session.getTransport("smtps");
 	        message.setFrom(new InternetAddress(from));
 	        message.addRecipient(Message.RecipientType.TO, new InternetAddress(identifiant));
 	        message.setSubject("Creation de compte !");
@@ -35,17 +39,12 @@ public class SendMail {
 	        		+ " mdp : " + mdp + "\r\n"
 	        		+ "\r\n"
 	        		+ "Cordialement");
-	        tr = session.getTransport("smtp");
 	        tr.connect(smtpHost, username, password);
 	        message.saveChanges();
-	        tr.sendMessage(message,message.getAllRecipients());
+	        tr.sendMessage(message, message.getAllRecipients());
+	        tr.close();
         } catch (Exception e) {
         	e.printStackTrace();
-        } finally {
-        	try {
-        		if (tr != null)
-        			tr.close();
-        	} catch (Exception e) {}
         }
     }
 }
