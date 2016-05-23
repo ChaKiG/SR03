@@ -78,53 +78,53 @@ INSERT INTO question(id, questionnaire_id, ordre, texte)
 			VALUES(12, 1, 12, "question 12 !!");
 			
 			
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(1, 1, "Reponse 1 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(1, 2, "Reponse 2 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(1, 3, "Reponse 3 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(2, 1, "Reponse 1 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(2, 2, "Reponse 2 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(3, 1, "Reponse 1 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(3, 2, "Reponse 2 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(4, 1, "Reponse 1 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(4, 2, "Reponse 2 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(5, 1, "Reponse 1 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(5, 2, "Reponse 2 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(6, 1, "Reponse 1 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(6, 2, "Reponse 2 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(7, 1, "Reponse 1 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(7, 2, "Reponse 2 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(8, 1, "Reponse 1 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(8, 2, "Reponse 2 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(9, 1, "Reponse 1 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(9, 2, "Reponse 2 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(10, 1, "Reponse 1 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(10, 2, "Reponse 2 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(11, 1, "Reponse 1 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(11, 2, "Reponse 2 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(12, 1, "Reponse 1 !!!");
-INSERT INTO reponse(question_id, ordre, texte)
-			VALUES(12, 2, "Reponse 2 !!!");
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(1, 1, "Reponse 1 !!!", 1);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(1, 2, "Reponse 2 !!!", 0);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(1, 3, "Reponse 3 !!!", 0);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(2, 1, "Reponse 1 !!!", 0);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(2, 2, "Reponse 2 !!!", 1);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(3, 1, "Reponse 1 !!!", 0);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(3, 2, "Reponse 2 !!!", 1);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(4, 1, "Reponse 1 !!!", 1);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(4, 2, "Reponse 2 !!!", 0);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(5, 1, "Reponse 1 !!!", 0);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(5, 2, "Reponse 2 !!!", 1);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(6, 1, "Reponse 1 !!!", 0);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(6, 2, "Reponse 2 !!!", 1);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(7, 1, "Reponse 1 !!!", 0);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(7, 2, "Reponse 2 !!!", 1);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(8, 1, "Reponse 1 !!!", 1);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(8, 2, "Reponse 2 !!!", 0);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(9, 1, "Reponse 1 !!!", 1);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(9, 2, "Reponse 2 !!!", 0);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(10, 1, "Reponse 1 !!!", 1);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(10, 2, "Reponse 2 !!!", 0);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(11, 1, "Reponse 1 !!!", 0);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(11, 2, "Reponse 2 !!!", 1);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(12, 1, "Reponse 1 !!!", 0);
+INSERT INTO reponse(question_id, ordre, texte, is_correct)
+			VALUES(12, 2, "Reponse 2 !!!", 1);

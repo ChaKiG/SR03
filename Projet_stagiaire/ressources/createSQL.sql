@@ -49,6 +49,7 @@ CREATE TABLE reponse (
 	question_id INT NOT NULL,
 	ordre INT NOT NULL,
 	texte VARCHAR(128) NOT NULL,
+	is_correct INT NOT NULL,
 	FOREIGN KEY (question_id) REFERENCES question(id)
 );
 
