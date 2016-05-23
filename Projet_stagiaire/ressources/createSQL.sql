@@ -61,7 +61,7 @@ CREATE TABLE parcours (
 	utilisateur_id INT NOT NULL,
 	score INT NOT NULL,
 	duree TIME NOT NULL,
-	FOREIGN KEY (questionnaire_id) REFERENCES question(id) ON DELETE CASCADE,
+	FOREIGN KEY (questionnaire_id) REFERENCES questionnaire(id) ON DELETE CASCADE,
 	FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id)	ON DELETE CASCADE
 );
 

@@ -22,6 +22,7 @@
 	<title>Questionnaires</title>
 </head>
 <body>
+<%@ include file="navbar.html" %>
 <%	if (del != null && !del.isEmpty()) {	%>
 	<h3><%= del %></h3>
 <% } %>	

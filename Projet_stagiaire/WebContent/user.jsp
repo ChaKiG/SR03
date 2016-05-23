@@ -10,9 +10,11 @@
 <html lang="fr">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/css.css">
 	<title>Page d'utilisateur</title>
 </head>
 <body>
+<%@ include file="navbar.html" %>
 <%
 if ( c.isOk() ) {
 %>	
@@ -21,7 +23,7 @@ if ( c.isOk() ) {
 <%	if ( c.type_utilisateur() >= 1){			%>
 	<h2>Administrateur</h2>
 	<a href="createUser">Creer un compte</a><br />
-	<a href="">Modifier un compte</a><br />
+	<a href="modifyUser">Modifier un compte</a><br />
 	<hr />
 	<a href="createquestionnaire">Créer un questionnaire</a><br />
 	<a href="questionnaires">Modifier questionnaire</a><br />
