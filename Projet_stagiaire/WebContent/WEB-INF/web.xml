@@ -46,6 +46,14 @@
    		<servlet-name>question</servlet-name>
    		<url-pattern>/question</url-pattern>
 	</servlet-mapping>
+	<servlet>
+    	<servlet-name>suppression</servlet-name>
+    	<jsp-file>/suppression.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+   		<servlet-name>suppression</servlet-name>
+   		<url-pattern>/suppression</url-pattern>
+	</servlet-mapping>
 
 	
 	
