@@ -35,7 +35,6 @@
 		 	<th>Effectuer</th>
 		 	<th>Réinitialiser</th>
 <% if (c.type_utilisateur() >= 1) { %>
-			<th>  </th>
 		 	<th>Modifier</th>
 		 	<th>Supprimer</th>
 <% } %>

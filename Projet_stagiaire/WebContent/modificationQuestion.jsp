@@ -33,7 +33,7 @@
 				Integer.valueOf( request.getParameter("ordre")),
 				request.getParameter("nom")
 				);
-		ok = QuestionDAO.modifyQuestion( mqu);
+		ok = QuestionDAO.modifyOrdre( mqu, Integer.valueOf( request.getParameter( "aordre")));
 		
 		// Modification des réponses
 		if ( request.getParameter("nomr1") != null) {
@@ -101,6 +101,7 @@
 	<form method="POST">
 		<input type="hidden" name="<%= "quid" %>" value="<%=qu.id %>">
 		<input type="hidden" name="<%= "qid" %>" value="<%=q.id %>">
+		<input type="hidden" name="<%= "aordre" %>" value="<%=qu.ordre %>">
 		<label for="nom">Nom de la question :</label><br />
 		<input type="text" id="nom" name="nom" placeholder="Nom" value="<%= qu.texte %>"/><br />
 		<label for="ordre">Ordre :</label><br />

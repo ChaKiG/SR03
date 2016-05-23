@@ -16,9 +16,11 @@ public class QuestionDAO {
 	private static Connection c = null;
 	private static PreparedStatement getQuestions = null;
 	private static PreparedStatement getQuestion = null;
+	private static PreparedStatement getQuestionOrdre = null;
 	private static PreparedStatement createQuestion = null;
 	private static PreparedStatement modifyQuestion = null;
 	private static PreparedStatement deleteQuestion = null;
+	
 
 	
 	private static void renewConnection() {
@@ -27,8 +29,9 @@ public class QuestionDAO {
 				if (c != null)
 					getDbConnection.closeConnection();
 				c = getDbConnection.getConnection();
-				getQuestions = c.prepareStatement("SELECT * FROM question WHERE questionnaire_id = ?");
+				getQuestions = c.prepareStatement("SELECT * FROM question WHERE questionnaire_id = ? ORDER BY ordre ASC");
 				getQuestion = c.prepareStatement("SELECT * FROM question WHERE id = ?");
+				getQuestionOrdre = c.prepareStatement("SELECT * FROM question WHERE ordre = ? AND questionnaire_id = ?");
 				createQuestion = c.prepareStatement("INSERT INTO question( "
 														+ "id, questionnaire_id, ordre, texte) "
 														+ "VALUES(?,?,?,?) ", Statement.RETURN_GENERATED_KEYS);
@@ -84,9 +87,34 @@ public class QuestionDAO {
 	}
 	
 	
+	public static Question getQuestionOrdre(int ordre, int questionnaire) {
+		Question q = null;
+		try {
+			renewConnection();
+			getQuestionOrdre.setInt(1, ordre);
+			getQuestionOrdre.setInt(2, questionnaire);
+			ResultSet rs = getQuestionOrdre.executeQuery();			
+			if ( rs.next() ) {
+				q = new Question();
+				q.id = rs.getInt("id");
+				q.questionnaire = QuestionnaireDAO.getQuestionnaire(rs.getInt("questionnaire_id"));
+				q.ordre = rs.getInt("ordre");
+				q.texte = rs.getString("texte");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return q;
+	}
+	
 	public static int createQuestion(Question q) {
 		try {
 			renewConnection();
+			Question qo = getQuestionOrdre( q.ordre, q.questionnaire.id);
+			if (qo != null) {
+				qo.ordre = getQuestions(q.questionnaire).size() + 1;
+				modifyQuestion(qo);
+			}
 			if (q.id != null && q.id > 0)
 				createQuestion.setInt(1, q.id);
 			else
@@ -138,6 +166,16 @@ public class QuestionDAO {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public static boolean modifyOrdre( Question q, int aordre) {
+		Question qo = getQuestionOrdre( q.ordre, q.questionnaire.id);
+		if (qo != null) {
+			qo.ordre = aordre;
+			modifyQuestion(qo);
+		}
+		modifyQuestion( q);
+		return true;
 	}
 	
 
