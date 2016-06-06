@@ -3,7 +3,6 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-
 public class getDbConnection {
 	static Connection connection = null;
 	
@@ -44,8 +43,5 @@ public class getDbConnection {
 				connection = null;
 			}
 		}
-	}
-
-	
-	
+	}	
 }
