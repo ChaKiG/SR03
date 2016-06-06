@@ -1,0 +1,131 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="C:\Users\thomas\Documents\Cours\SR03\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ProjetSOAP\WEB-INF\attachments"/>
+  <ns1:parameter name="dotNetSoapEncFix" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:service name="AnnonceSOAP" provider="java:RPC" style="wrapped" use="literal">
+  <ns2:operation name="modifyAnnonce" qname="ns1:modifyAnnonce" returnQName="ns1:modifyAnnonceReturn" returnType="xsd:boolean" soapAction="" xmlns:ns1="http://endpoints" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns3:parameter qname="ns1:a" type="ns2:Annonce" xmlns:ns2="http://beans" xmlns:ns3="http://xml.apache.org/axis/wsdd/"/>
+  </ns2:operation>
+  <ns1:operation name="getAnnonces" qname="ns3:getAnnonces" returnQName="ns3:getAnnoncesReturn" returnType="ns4:Annonce" soapAction="" xmlns:ns3="http://endpoints" xmlns:ns4="http://beans"/>
+  <ns1:operation name="getAnnonce" qname="ns5:getAnnonce" returnQName="ns5:getAnnonceReturn" returnType="ns6:Annonce" soapAction="" xmlns:ns5="http://endpoints" xmlns:ns6="http://beans">
+   <ns1:parameter qname="ns5:id" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getAnnoncesCat" qname="ns7:getAnnoncesCat" returnQName="ns7:getAnnoncesCatReturn" returnType="ns8:Annonce" soapAction="" xmlns:ns7="http://endpoints" xmlns:ns8="http://beans">
+   <ns1:parameter qname="ns7:cat_id" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="createAnnonce" qname="ns9:createAnnonce" returnQName="ns9:createAnnonceReturn" returnType="xsd:int" soapAction="" xmlns:ns9="http://endpoints" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns9:a" type="ns10:Annonce" xmlns:ns10="http://beans"/>
+  </ns1:operation>
+  <ns1:operation name="deleteAnnonce" qname="ns11:deleteAnnonce" returnQName="ns11:deleteAnnonceReturn" returnType="xsd:boolean" soapAction="" xmlns:ns11="http://endpoints" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns11:a" type="ns12:Annonce" xmlns:ns12="http://beans"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getAnnoncesCat deleteAnnonce getAnnonces modifyAnnonce getAnnonce createAnnonce"/>
+  <ns1:parameter name="wsdlPortType" value="AnnonceSOAP"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="schemaQualified" value="http://beans,http://endpoints"/>
+  <ns1:parameter name="wsdlServicePort" value="AnnonceSOAP"/>
+  <ns1:parameter name="className" value="endpoints.AnnonceSOAP"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://endpoints"/>
+  <ns1:parameter name="wsdlServiceElement" value="AnnonceSOAPService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns13:Annonce" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:beans.Annonce" xmlns:ns13="http://beans"/>
+ </ns1:service>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:service name="CategorieSOAP" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="getCategories" qname="ns14:getCategories" returnQName="ns14:getCategoriesReturn" returnType="ns15:Categorie" soapAction="" xmlns:ns14="http://endpoints" xmlns:ns15="http://beans"/>
+  <ns1:operation name="getCategorie" qname="ns16:getCategorie" returnQName="ns16:getCategorieReturn" returnType="ns17:Categorie" soapAction="" xmlns:ns16="http://endpoints" xmlns:ns17="http://beans">
+   <ns1:parameter qname="ns16:id" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="addCategorie" qname="ns18:addCategorie" returnQName="ns18:addCategorieReturn" returnType="xsd:int" soapAction="" xmlns:ns18="http://endpoints" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns18:c" type="ns19:Categorie" xmlns:ns19="http://beans"/>
+  </ns1:operation>
+  <ns1:operation name="delCategorie" qname="ns20:delCategorie" returnQName="ns20:delCategorieReturn" returnType="xsd:boolean" soapAction="" xmlns:ns20="http://endpoints" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns20:cat_id" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:operation name="deleteAnnonce" qname="ns21:deleteAnnonce" returnQName="ns21:deleteAnnonceReturn" returnType="xsd:boolean" soapAction="" xmlns:ns21="http://endpoints" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns21:a" type="ns22:Annonce" xmlns:ns22="http://beans"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getCategorie getCategories deleteAnnonce addCategorie delCategorie"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="CategorieSOAP"/>
+  <ns1:parameter name="className" value="endpoints.CategorieSOAP"/>
+  <ns1:parameter name="wsdlServicePort" value="CategorieSOAP"/>
+  <ns1:parameter name="schemaQualified" value="http://beans,http://endpoints"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://endpoints"/>
+  <ns1:parameter name="wsdlServiceElement" value="CategorieSOAPService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns23:Annonce" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:beans.Annonce" xmlns:ns23="http://beans"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns24:Categorie" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:beans.Categorie" xmlns:ns24="http://beans"/>
+ </ns1:service>
+ <ns1:service name="Annonces" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="getAnnonces" qname="ns25:getAnnonces" returnQName="ns25:getAnnoncesReturn" returnType="ns26:Annonce" soapAction="" xmlns:ns25="http://endpoints" xmlns:ns26="http://beans"/>
+  <ns1:operation name="getAnnonce" qname="ns27:getAnnonce" returnQName="ns27:getAnnonceReturn" returnType="ns28:Annonce" soapAction="" xmlns:ns27="http://endpoints" xmlns:ns28="http://beans">
+   <ns1:parameter qname="ns27:id" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getAnnoncesCat" qname="ns29:getAnnoncesCat" returnQName="ns29:getAnnoncesCatReturn" returnType="ns30:Annonce" soapAction="" xmlns:ns29="http://endpoints" xmlns:ns30="http://beans">
+   <ns1:parameter qname="ns29:cat_id" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="createAnnonce" qname="ns31:createAnnonce" returnQName="ns31:createAnnonceReturn" returnType="xsd:int" soapAction="" xmlns:ns31="http://endpoints" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns31:a" type="ns32:Annonce" xmlns:ns32="http://beans"/>
+  </ns1:operation>
+  <ns1:operation name="modifyAnnonce" qname="ns33:modifyAnnonce" returnQName="ns33:modifyAnnonceReturn" returnType="xsd:boolean" soapAction="" xmlns:ns33="http://endpoints" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns33:a" type="ns34:Annonce" xmlns:ns34="http://beans"/>
+  </ns1:operation>
+  <ns1:operation name="deleteAnnonce" qname="ns35:deleteAnnonce" returnQName="ns35:deleteAnnonceReturn" returnType="xsd:boolean" soapAction="" xmlns:ns35="http://endpoints" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns35:a" type="ns36:Annonce" xmlns:ns36="http://beans"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getAnnoncesCat deleteAnnonce getAnnonces getAnnonce createAnnonce modifyAnnonce"/>
+  <ns1:parameter name="wsdlPortType" value="Annonces"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="schemaQualified" value="http://beans,http://endpoints"/>
+  <ns1:parameter name="wsdlServicePort" value="Annonces"/>
+  <ns1:parameter name="className" value="endpoints.Annonces"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://endpoints"/>
+  <ns1:parameter name="wsdlServiceElement" value="AnnoncesService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns37:Annonce" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:beans.Annonce" xmlns:ns37="http://beans"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>
