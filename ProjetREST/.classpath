@@ -13,5 +13,9 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javassist-3.8.0.GA.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jaxrs-api-3.0.5.Final.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/resteasy-jaxrs-3.0.5.Final.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/scannotation-1.0.3.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
