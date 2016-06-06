@@ -9,10 +9,8 @@ import java.util.Map.Entry;
 import beans.*;
 
 public class Gestion {
+	int action = -1;
 	int categorie = 0;
-	boolean isCreating = false;
-	boolean isModifying = false;
-	boolean isDeleting = false;
 	Annonce a = new Annonce();
 	
 	public Gestion() {}
@@ -24,26 +22,20 @@ public class Gestion {
 			String key = entry.getKey();
 			
 			switch (key) {
-			case "cat":
-				this.categorie = Integer.valueOf(val[0]);
-				break;
 			case "annonce":
 				this.a.setId(Integer.valueOf(val[0]));
 				break;
-			case "delete":
-				if (val[0].equals("1"))
-					this.isDeleting = true;
-				break;
-			case "modify":
-				if (val[0].equals("1"))
-					this.isModifying = true;
-				break;
-			case "add":
-				if (val[0].equals("1"))
-					this.isCreating = true;
+			case "action":
+				if (val[0].equals("add"))
+					this.action = 1;
+				if (val[0].equals("mod"))
+					this.action = 2;
+				if (val[0].equals("del"))
+					this.action = 3;
 				break;
 			case "categorie":
 				this.categorie = Integer.valueOf(val[0]);
+				this.a.setCategorie(this.categorie);
 				break;
 			case "nom":
 				this.a.setNom(val[0]);
@@ -97,6 +89,7 @@ public class Gestion {
 		}
 		return categories;
 	}
+	
 	
 	private int createAnnonce() {return -1;}
 	private int updateAnnonce() {return -1;}
