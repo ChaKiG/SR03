@@ -32,6 +32,8 @@ public class Gestion {
 				this.a.setId(Integer.valueOf(val[0]));
 				break;
 			case "action":
+				if (val[0].equals("search"))
+					this.action = 0;
 				if (val[0].equals("add"))
 					this.action = 1;
 				if (val[0].equals("mod"))
@@ -89,6 +91,8 @@ public class Gestion {
 	
 	
 	public void getSOAPAnnonces() {
+		System.out.println(a.getId());
+		System.out.println(categorie);
 		try {
 			if (a.getId() > 0) {
 				annonces = new ArrayList<Annonce>(Arrays.asList(annonceProxy.getAnnonce(a.getId())));

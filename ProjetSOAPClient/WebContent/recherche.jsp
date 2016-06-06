@@ -19,15 +19,16 @@
 <body>
 	<h1>Recherche par catégorie</h1>
 	<form method="GET">
-		<select>
+		<select name="categorie">
 		<%
 			for(Categorie ca : categories) {
 				%>
-				<option name="categorie" value="<%= ca.getId() %>"><%= ca.getNom() %></option>
+				<option value="<%= ca.getId() %>"><%= ca.getNom() %></option>
 				<%
 			}
 		%>
 		</select>
+		<input type="hidden" name="action" value="search" />
 		<input type="submit" value="Rechercher" />
 	</form>
 	<%
@@ -42,7 +43,7 @@
 					Adresse : <%= a.getAdresse().getNumero() + " " +  a.getAdresse().getRue()%></br>
 					Ville : <%= a.getAdresse().getVille() %></br>
 					Code Postal : <%= a.getAdresse().getCode_postal() %></br> 					
-					Téléphone : <%= a.getNom() %></br>
+					Téléphone : <%= a.getTelephone() %></br>
 				</p>
 				<%
 			}
