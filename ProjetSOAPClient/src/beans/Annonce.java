@@ -1,32 +1,20 @@
-/**
- * Annonce.java
- *
- * This file was auto-generated from WSDL
- * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
- */
-
 package beans;
 
 public class Annonce  implements java.io.Serializable {
-    private int id;
+    private int id = -1;
+    private int categorie = -1;
+    private java.lang.String nom = "";
+    private int telephone = -1;
+    private beans.Adresse adresse = new Adresse();
 
-    private int categorie;
-
-    private java.lang.String nom;
-
-    private int telephone;
-
-    private int adresse;
-
-    public Annonce() {
-    }
+    public Annonce() {}
 
     public Annonce(
            int id,
            int categorie,
            java.lang.String nom,
            int telephone,
-           int adresse) {
+           beans.Adresse adresse) {
            this.id = id;
            this.categorie = categorie;
            this.nom = nom;
@@ -120,7 +108,7 @@ public class Annonce  implements java.io.Serializable {
      * 
      * @return adresse
      */
-    public int getAdresse() {
+    public beans.Adresse getAdresse() {
         return adresse;
     }
 
@@ -130,7 +118,7 @@ public class Annonce  implements java.io.Serializable {
      * 
      * @param adresse
      */
-    public void setAdresse(int adresse) {
+    public void setAdresse(beans.Adresse adresse) {
         this.adresse = adresse;
     }
 
@@ -152,7 +140,9 @@ public class Annonce  implements java.io.Serializable {
              (this.nom!=null &&
               this.nom.equals(other.getNom()))) &&
             this.telephone == other.getTelephone() &&
-            this.adresse == other.getAdresse();
+            ((this.adresse==null && other.getAdresse()==null) || 
+             (this.adresse!=null &&
+              this.adresse.equals(other.getAdresse())));
         __equalsCalc = null;
         return _equals;
     }
@@ -170,7 +160,9 @@ public class Annonce  implements java.io.Serializable {
             _hashCode += getNom().hashCode();
         }
         _hashCode += getTelephone();
-        _hashCode += getAdresse();
+        if (getAdresse() != null) {
+            _hashCode += getAdresse().hashCode();
+        }
         __hashCodeCalc = false;
         return _hashCode;
     }
@@ -208,8 +200,8 @@ public class Annonce  implements java.io.Serializable {
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("adresse");
         elemField.setXmlName(new javax.xml.namespace.QName("http://beans", "adresse"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
-        elemField.setNillable(false);
+        elemField.setXmlType(new javax.xml.namespace.QName("http://beans", "Adresse"));
+        elemField.setNillable(true);
         typeDesc.addFieldDesc(elemField);
     }
 

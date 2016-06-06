@@ -3,68 +3,9 @@
 <%@ page import="beans.Categorie" %>
 <%@ page import="java.util.List" %>
 <%
-	int categorie = Integer.valueOf(request.getParameter("cat"));
-	int annonce = Integer.valueOf(request.getParameter("annonce"));
-	List<Annonce> l = AnnonceDAO.getAnnonces( q);
-	int nbq = l.size();
-	Question qu = null;
-	int id = -1;
-	boolean ok = false;
-	if (request.getParameter("nom") != null && request.getParameter("ordre") != null) {
-		qu = new Question(
-				-1,
-				q,
-				Integer.valueOf(request.getParameter("ordre")),
-				request.getParameter("nom")
-				);
-		id = QuestionDAO.createQuestion(qu);
-		qu = QuestionDAO.getQuestion( id);
-		if (request.getParameter("nomr1") != null) {
-			int correct = 0;
-			if (request.getParameter("cr1") != null) {
-				correct = 1;	
-			}
-			Reponse r1 = new Reponse(
-					-1,
-					qu,
-					1,
-					request.getParameter("nomr1"),
-					correct
-					);
-			ReponseDAO.createReponse(r1);
-		}
-		
-		if (request.getParameter("nomr2") != null) {
-			System.out.println( request.getParameter("cr2"));
-			int correct = 0;
-			if (request.getParameter("cr2") != null) {
-				correct = 1;	
-			}
-			
-			Reponse r2 = new Reponse(
-					-1,
-					qu,
-					2,
-					request.getParameter("nomr2"),
-					correct
-					);
-			ReponseDAO.createReponse(r2);
-		}
-		if (request.getParameter("nomr3") != null) {
-			int correct = 0;
-			if (request.getParameter("cr3") != null) {
-				correct = 1;	
-			}
-			Reponse r3 = new Reponse(
-					-1,
-					qu,
-					3,
-					request.getParameter("nomr3"),
-					correct
-					);
-			ReponseDAO.createReponse(r3);
-		}
-	}
+	Gestion g = new Gestion(request.getParameterMap());
+	
+	
 %>
 
 <!DOCTYPE html>
