@@ -4,7 +4,8 @@
 <%@ page import="java.util.List" %>
 <%
 	int categorie = Integer.valueOf(request.getParameter("cat"));
-	List<Annonce> l = QuestionDAO.getQuestions( q);
+	int annonce = Integer.valueOf(request.getParameter("annonce"));
+	List<Annonce> l = AnnonceDAO.getAnnonces( q);
 	int nbq = l.size();
 	Question qu = null;
 	int id = -1;
