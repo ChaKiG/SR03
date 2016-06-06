@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import beans.Annonce;
+import beans.*;
 
 public class Gestion {
 	int categorie = 0;
@@ -75,7 +75,7 @@ public class Gestion {
 		List<Annonce> annonces = null;
 		try {
 			if (a.getId() > 0) {
-			p.getAnnonces();
+				p.getAnnonces();
 			} else if (categorie > 0) {
 				annonces = new ArrayList<Annonce>(Arrays.asList(p.getAnnoncesCat(categorie)));
 			} else {
@@ -87,6 +87,16 @@ public class Gestion {
 		return annonces;
 	}
 	
+	public List<Categorie> getCategories() {
+		categoriesSOAP.CategorieSOAPProxy c = new categoriesSOAP.CategorieSOAPProxy("");
+		List<Categorie> categories = null;
+		try {
+			categories = new ArrayList<Categorie>( Arrays.asList( c.getCategories()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return categories;
+	}
 	
 	private int createAnnonce() {return -1;}
 	private int updateAnnonce() {return -1;}
