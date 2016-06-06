@@ -15,8 +15,9 @@
 	<title>Page d'accueil</title>
 </head>
 <body>
-	<h1>Action ?</h1>
-	<form>
+	<h1><%= g.getMessage() %></h1>
+	<h2>Action ?</h2>
+	<form method="POST">
 		<label for="action">Action : </label>
 		<select name="action">
 			<option value="add">Créer</option>
@@ -26,10 +27,12 @@
 		<hr>
 		<label for="categorie">Catégorie : </label>
 		<select name="categorie">
-<% List<Categorie> lCat = g.getCategories();
-	for (Categorie c : lCat) { %>
+<% 
+	List<Categorie> lCat = g.getCategories();
+	for (Categorie c : lCat) {
+%>
 		<option value="<%= c.getId() %>"><%= c.getNom() %></option>
-<%  } %>
+<% } %>
 		</select><br />
 		<label for="nom">Nom : </label>
 		<input type="text" name="nom" /><br />
@@ -46,10 +49,5 @@
 		
 		<input type="submit" value="envoyer" />
 	</form>
-
-
-
-
-
 </body>
 </html>

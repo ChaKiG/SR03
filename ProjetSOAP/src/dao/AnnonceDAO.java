@@ -27,7 +27,7 @@ public class AnnonceDAO {
 				c = getDbConnection.getConnection();
 				getAnnonce = c.prepareStatement("SELECT * FROM annonce WHERE id = ?");
 				getAnnonces = c.prepareStatement("SELECT * FROM annonce");
-				getAnnoncesCat = c.prepareStatement("SELECT * FROM annonce WHERE catgorie = ?");
+				getAnnoncesCat = c.prepareStatement("SELECT * FROM annonce WHERE categorie = ?");
 				createAnnonce = c.prepareStatement("INSERT INTO annonce( "
 												+ "id, categorie, adresse, nom, telephone) "
 												+ "VALUES(?,?,?,?,?)",
@@ -117,11 +117,16 @@ public class AnnonceDAO {
 				else
 					createAnnonce.setNull(1, java.sql.Types.INTEGER);
 				createAnnonce.setInt(2, a.categorie);
+				a.adresse.id = AdresseDAO.createAdresse(a.adresse);
 				createAnnonce.setInt(3, a.adresse.id);
 				createAnnonce.setString(4, a.nom);
 				createAnnonce.setInt(5, a.telephone);
-				if (createAnnonce.executeUpdate() >= 1)
-					return createAnnonce.getGeneratedKeys().getInt(1);
+				System.out.println(a.adresse.id);
+				if (createAnnonce.executeUpdate() >= 1) {
+					ResultSet r = createAnnonce.getGeneratedKeys();
+					r.next();
+					return r.getInt(1);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

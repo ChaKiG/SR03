@@ -26,10 +26,10 @@ public class AdresseDAO {
 				c = getDbConnection.getConnection();
 				getAdresse = c.prepareStatement("SELECT * FROM adresse WHERE id = ?");
 				createAdresse = c.prepareStatement("INSERT INTO adresse( "
-														+ "id, numero,rue,ville,cp) "
+														+ "id, numero,rue,ville,code_postal) "
 														+ "VALUES(?,?,?,?,?) ", Statement.RETURN_GENERATED_KEYS);
 				modifyAdresse = c.prepareStatement("UPDATE adresse SET "
-														+ "numero = ?, rue = ?, ville = ?, cp = ?"
+														+ "numero = ?, rue = ?, ville = ?, code_postal = ?"
 														+ "WHERE id = ? ");
 				deleteAdresse = c.prepareStatement("DELETE FROM adresse WHERE id = ?");
 			}

@@ -1,5 +1,6 @@
 package control;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +12,12 @@ import beans.*;
 public class Gestion {
 	int action = -1;
 	int categorie = 0;
+	String message = "";
 	Annonce a = new Annonce();
+	categoriesSOAP.CategorieSOAPProxy catProxy = new categoriesSOAP.CategorieSOAPProxy("http://localhost:8080/ProjetSOAP/services/CategorieSOAP");
+	annoncesSOAP.AnnonceSOAPProxy annonceProxy = new annoncesSOAP.AnnonceSOAPProxy("http://localhost:8080/ProjetSOAP/services/AnnonceSOAP");
+	List<Annonce> annonces = null;
+	
 	
 	public Gestion() {}
 	
@@ -60,30 +66,51 @@ public class Gestion {
 				break;
 			}
 		}
+		switch (action) {
+		case 0:
+			this.message = "Bienvenue";
+			getSOAPAnnonces();
+			break;
+		case 1:
+			createAnnonce();
+			break;
+		case 2:
+			updateAnnonce();
+			break;
+		case 3:
+			deleteAnnonce();
+			break;
+		}
 	}
 	
-	public List<Annonce> getAnnonces() {
-		annoncesSOAP.AnnonceSOAPProxy p = new annoncesSOAP.AnnonceSOAPProxy("");
-		List<Annonce> annonces = null;
+	public String getMessage() {
+		return message;
+	}
+	
+	
+	public void getSOAPAnnonces() {
 		try {
 			if (a.getId() > 0) {
-				p.getAnnonces();
+				annonces = new ArrayList<Annonce>(Arrays.asList(annonceProxy.getAnnonce(a.getId())));
 			} else if (categorie > 0) {
-				annonces = new ArrayList<Annonce>(Arrays.asList(p.getAnnoncesCat(categorie)));
+				annonces = new ArrayList<Annonce>(Arrays.asList(annonceProxy.getAnnoncesCat(categorie)));
 			} else {
-				annonces = new ArrayList<Annonce>(Arrays.asList(p.getAnnonces()));
+				annonces = new ArrayList<Annonce>(Arrays.asList(annonceProxy.getAnnonces()));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public List<Annonce> getAnnonces() {
 		return annonces;
 	}
 	
+	
 	public List<Categorie> getCategories() {
-		categoriesSOAP.CategorieSOAPProxy c = new categoriesSOAP.CategorieSOAPProxy("");
 		List<Categorie> categories = null;
 		try {
-			categories = new ArrayList<Categorie>( Arrays.asList( c.getCategories()));
+			categories = new ArrayList<Categorie>( Arrays.asList( catProxy.getCategories()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -91,9 +118,37 @@ public class Gestion {
 	}
 	
 	
-	private int createAnnonce() {return -1;}
-	private int updateAnnonce() {return -1;}
-	private int deleteAnnonce() {return -1;}
+	private void createAnnonce() {
+		try {
+			if (annonceProxy.createAnnonce(a) > 0)
+				this.message = "Création d'annonce réussie";
+			else 
+				this.message = "Echec !!!!";
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void updateAnnonce() {
+		try {
+			if (annonceProxy.modifyAnnonce(a) == true)
+				this.message = "Modification d'annonce réussie";
+			else 
+				this.message = "Echec !!!!";
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	private void deleteAnnonce() {
+		try {
+			if (annonceProxy.deleteAnnonce(a) == true)
+				this.message = "Suppression d'annonce réussie";
+			else 
+				this.message = "Echec !!!!";
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 }
