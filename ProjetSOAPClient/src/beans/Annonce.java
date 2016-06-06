@@ -9,17 +9,12 @@ package beans;
 
 public class Annonce  implements java.io.Serializable {
     private int id;
-
     private int categorie;
-
     private java.lang.String nom;
-
     private int telephone;
-
     private int adresse;
 
-    public Annonce() {
-    }
+    public Annonce() {}
 
     public Annonce(
            int id,
