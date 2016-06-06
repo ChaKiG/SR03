@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://endpoints" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://endpoints" xmlns:intf="http://endpoints" xmlns:tns1="http://beans" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://endpoints" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://beans"/>
+   <element name="getCategories">
+    <complexType/>
+   </element>
+   <element name="getCategoriesResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getCategoriesReturn" type="tns1:Categorie"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getCategorie">
+    <complexType>
+     <sequence>
+      <element name="id" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getCategorieResponse">
+    <complexType>
+     <sequence>
+      <element name="getCategorieReturn" type="tns1:Categorie"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addCategorie">
+    <complexType>
+     <sequence>
+      <element name="c" type="tns1:Categorie"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addCategorieResponse">
+    <complexType>
+     <sequence>
+      <element name="addCategorieReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="delCategorie">
+    <complexType>
+     <sequence>
+      <element name="cat_id" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="delCategorieResponse">
+    <complexType>
+     <sequence>
+      <element name="delCategorieReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteAnnonce">
+    <complexType>
+     <sequence>
+      <element name="a" type="tns1:Annonce"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteAnnonceResponse">
+    <complexType>
+     <sequence>
+      <element name="deleteAnnonceReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://beans" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="Categorie">
+    <sequence>
+     <element name="id" type="xsd:int"/>
+     <element name="nom" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Annonce">
+    <sequence>
+     <element name="id" type="xsd:int"/>
+     <element name="categorie" type="xsd:int"/>
+     <element name="nom" nillable="true" type="xsd:string"/>
+     <element name="telephone" type="xsd:int"/>
+     <element name="adresse" type="xsd:int"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getCategoriesResponse">
+
+      <wsdl:part element="impl:getCategoriesResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteAnnonceResponse">
+
+      <wsdl:part element="impl:deleteAnnonceResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addCategorieResponse">
+
+      <wsdl:part element="impl:addCategorieResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="delCategorieRequest">
+
+      <wsdl:part element="impl:delCategorie" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCategorieResponse">
+
+      <wsdl:part element="impl:getCategorieResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteAnnonceRequest">
+
+      <wsdl:part element="impl:deleteAnnonce" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCategorieRequest">
+
+      <wsdl:part element="impl:getCategorie" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="delCategorieResponse">
+
+      <wsdl:part element="impl:delCategorieResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCategoriesRequest">
+
+      <wsdl:part element="impl:getCategories" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addCategorieRequest">
+
+      <wsdl:part element="impl:addCategorie" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="CategorieSOAP">
+
+      <wsdl:operation name="getCategories">
+
+         <wsdl:input message="impl:getCategoriesRequest" name="getCategoriesRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getCategoriesResponse" name="getCategoriesResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getCategorie">
+
+         <wsdl:input message="impl:getCategorieRequest" name="getCategorieRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getCategorieResponse" name="getCategorieResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addCategorie">
+
+         <wsdl:input message="impl:addCategorieRequest" name="addCategorieRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addCategorieResponse" name="addCategorieResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="delCategorie">
+
+         <wsdl:input message="impl:delCategorieRequest" name="delCategorieRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:delCategorieResponse" name="delCategorieResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteAnnonce">
+
+         <wsdl:input message="impl:deleteAnnonceRequest" name="deleteAnnonceRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:deleteAnnonceResponse" name="deleteAnnonceResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="CategorieSOAPSoapBinding" type="impl:CategorieSOAP">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getCategories">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getCategoriesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getCategoriesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getCategorie">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getCategorieRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getCategorieResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addCategorie">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addCategorieRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addCategorieResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="delCategorie">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="delCategorieRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="delCategorieResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteAnnonce">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deleteAnnonceRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteAnnonceResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="CategorieSOAPService">
+
+      <wsdl:port binding="impl:CategorieSOAPSoapBinding" name="CategorieSOAP">
+
+         <wsdlsoap:address location="http://localhost:8080/ProjetSOAP/services/CategorieSOAP"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

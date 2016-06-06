@@ -1,0 +1,51 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from AnnonceSOAPService WSDL service -->
+
+  <service name="AnnonceSOAP" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://endpoints"/>
+      <parameter name="wsdlServiceElement" value="AnnonceSOAPService"/>
+      <parameter name="schemaQualified" value="http://beans,http://endpoints"/>
+      <parameter name="wsdlServicePort" value="AnnonceSOAP"/>
+      <parameter name="className" value="endpoints.AnnonceSOAPSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="AnnonceSOAP"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="modifyAnnonce" qname="operNS:modifyAnnonce" xmlns:operNS="http://endpoints" returnQName="retNS:modifyAnnonceReturn" xmlns:retNS="http://endpoints" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:a" xmlns:pns="http://endpoints" type="tns:Annonce" xmlns:tns="http://beans"/>
+      </operation>
+      <operation name="getAnnonces" qname="operNS:getAnnonces" xmlns:operNS="http://endpoints" returnQName="retNS:getAnnoncesReturn" xmlns:retNS="http://endpoints" returnType="rtns:Annonce" xmlns:rtns="http://beans" soapAction="" >
+      </operation>
+      <operation name="getAnnonce" qname="operNS:getAnnonce" xmlns:operNS="http://endpoints" returnQName="retNS:getAnnonceReturn" xmlns:retNS="http://endpoints" returnType="rtns:Annonce" xmlns:rtns="http://beans" soapAction="" >
+        <parameter qname="pns:id" xmlns:pns="http://endpoints" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getAnnoncesCat" qname="operNS:getAnnoncesCat" xmlns:operNS="http://endpoints" returnQName="retNS:getAnnoncesCatReturn" xmlns:retNS="http://endpoints" returnType="rtns:Annonce" xmlns:rtns="http://beans" soapAction="" >
+        <parameter qname="pns:cat_id" xmlns:pns="http://endpoints" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="createAnnonce" qname="operNS:createAnnonce" xmlns:operNS="http://endpoints" returnQName="retNS:createAnnonceReturn" xmlns:retNS="http://endpoints" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:a" xmlns:pns="http://endpoints" type="tns:Annonce" xmlns:tns="http://beans"/>
+      </operation>
+      <operation name="deleteAnnonce" qname="operNS:deleteAnnonce" xmlns:operNS="http://endpoints" returnQName="retNS:deleteAnnonceReturn" xmlns:retNS="http://endpoints" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:a" xmlns:pns="http://endpoints" type="tns:Annonce" xmlns:tns="http://beans"/>
+      </operation>
+      <parameter name="allowedMethods" value="getAnnoncesCat deleteAnnonce getAnnonces modifyAnnonce getAnnonce createAnnonce"/>
+
+      <typeMapping
+        xmlns:ns="http://beans"
+        qname="ns:Annonce"
+        type="java:beans.Annonce"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

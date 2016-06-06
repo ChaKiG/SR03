@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://endpoints" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://endpoints" xmlns:intf="http://endpoints" xmlns:tns1="http://beans" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://endpoints" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://beans"/>
+   <element name="modifyAnnonce">
+    <complexType>
+     <sequence>
+      <element name="a" type="tns1:Annonce"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="modifyAnnonceResponse">
+    <complexType>
+     <sequence>
+      <element name="modifyAnnonceReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAnnonces">
+    <complexType/>
+   </element>
+   <element name="getAnnoncesResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getAnnoncesReturn" type="tns1:Annonce"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAnnonce">
+    <complexType>
+     <sequence>
+      <element name="id" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAnnonceResponse">
+    <complexType>
+     <sequence>
+      <element name="getAnnonceReturn" type="tns1:Annonce"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAnnoncesCat">
+    <complexType>
+     <sequence>
+      <element name="cat_id" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAnnoncesCatResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getAnnoncesCatReturn" type="tns1:Annonce"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createAnnonce">
+    <complexType>
+     <sequence>
+      <element name="a" type="tns1:Annonce"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createAnnonceResponse">
+    <complexType>
+     <sequence>
+      <element name="createAnnonceReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteAnnonce">
+    <complexType>
+     <sequence>
+      <element name="a" type="tns1:Annonce"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteAnnonceResponse">
+    <complexType>
+     <sequence>
+      <element name="deleteAnnonceReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://beans" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="Annonce">
+    <sequence>
+     <element name="id" type="xsd:int"/>
+     <element name="categorie" type="xsd:int"/>
+     <element name="nom" nillable="true" type="xsd:string"/>
+     <element name="telephone" type="xsd:int"/>
+     <element name="adresse" type="xsd:int"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getAnnoncesResponse">
+
+      <wsdl:part element="impl:getAnnoncesResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAnnoncesCatResponse">
+
+      <wsdl:part element="impl:getAnnoncesCatResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createAnnonceResponse">
+
+      <wsdl:part element="impl:createAnnonceResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteAnnonceResponse">
+
+      <wsdl:part element="impl:deleteAnnonceResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="modifyAnnonceResponse">
+
+      <wsdl:part element="impl:modifyAnnonceResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAnnonceResponse">
+
+      <wsdl:part element="impl:getAnnonceResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteAnnonceRequest">
+
+      <wsdl:part element="impl:deleteAnnonce" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createAnnonceRequest">
+
+      <wsdl:part element="impl:createAnnonce" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAnnonceRequest">
+
+      <wsdl:part element="impl:getAnnonce" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAnnoncesCatRequest">
+
+      <wsdl:part element="impl:getAnnoncesCat" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="modifyAnnonceRequest">
+
+      <wsdl:part element="impl:modifyAnnonce" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAnnoncesRequest">
+
+      <wsdl:part element="impl:getAnnonces" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="AnnonceSOAP">
+
+      <wsdl:operation name="modifyAnnonce">
+
+         <wsdl:input message="impl:modifyAnnonceRequest" name="modifyAnnonceRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:modifyAnnonceResponse" name="modifyAnnonceResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAnnonces">
+
+         <wsdl:input message="impl:getAnnoncesRequest" name="getAnnoncesRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAnnoncesResponse" name="getAnnoncesResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAnnonce">
+
+         <wsdl:input message="impl:getAnnonceRequest" name="getAnnonceRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAnnonceResponse" name="getAnnonceResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAnnoncesCat">
+
+         <wsdl:input message="impl:getAnnoncesCatRequest" name="getAnnoncesCatRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAnnoncesCatResponse" name="getAnnoncesCatResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createAnnonce">
+
+         <wsdl:input message="impl:createAnnonceRequest" name="createAnnonceRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createAnnonceResponse" name="createAnnonceResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteAnnonce">
+
+         <wsdl:input message="impl:deleteAnnonceRequest" name="deleteAnnonceRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:deleteAnnonceResponse" name="deleteAnnonceResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="AnnonceSOAPSoapBinding" type="impl:AnnonceSOAP">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="modifyAnnonce">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="modifyAnnonceRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="modifyAnnonceResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAnnonces">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAnnoncesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAnnoncesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAnnonce">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAnnonceRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAnnonceResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAnnoncesCat">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAnnoncesCatRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAnnoncesCatResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createAnnonce">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createAnnonceRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createAnnonceResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteAnnonce">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deleteAnnonceRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteAnnonceResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="AnnonceSOAPService">
+
+      <wsdl:port binding="impl:AnnonceSOAPSoapBinding" name="AnnonceSOAP">
+
+         <wsdlsoap:address location="http://localhost:8080/ProjetSOAP/services/AnnonceSOAP"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
