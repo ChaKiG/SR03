@@ -55,7 +55,7 @@ public class AnnonceDAO {
 				Annonce a = new Annonce();
 				a.id = rs.getInt("id");
 				a.categorie = rs.getInt("categorie");
-				a.adresse = rs.getInt("adresse");
+				a.adresse = AdresseDAO.getAdresse( rs.getInt("adresse"));
 				a.telephone = rs.getInt("telephone");
 				a.nom = rs.getString("nom");
 				l.add(a);
@@ -76,7 +76,7 @@ public class AnnonceDAO {
 				a = new Annonce();
 				a.id = rs.getInt("id");
 				a.categorie = rs.getInt("categorie");
-				a.adresse = rs.getInt("adresse");
+				a.adresse = AdresseDAO.getAdresse( rs.getInt("adresse"));
 				a.telephone = rs.getInt("telephone");
 				a.nom = rs.getString("nom");
 			}
@@ -96,7 +96,7 @@ public class AnnonceDAO {
 				Annonce a = new Annonce();
 				a.id = rs.getInt("id");
 				a.categorie = rs.getInt("categorie");
-				a.adresse = rs.getInt("adresse");
+				a.adresse = AdresseDAO.getAdresse( rs.getInt("adresse"));
 				a.telephone = rs.getInt("telephone");
 				a.nom = rs.getString("nom");
 				l.add(a);
@@ -117,7 +117,7 @@ public class AnnonceDAO {
 				else
 					createAnnonce.setNull(1, java.sql.Types.INTEGER);
 				createAnnonce.setInt(2, a.categorie);
-				createAnnonce.setInt(3, a.adresse);
+				createAnnonce.setInt(3, a.adresse.id);
 				createAnnonce.setString(4, a.nom);
 				createAnnonce.setInt(5, a.telephone);
 				if (createAnnonce.executeUpdate() >= 1)
@@ -135,7 +135,7 @@ public class AnnonceDAO {
 			if (a!= null && a.id > 0) {
 				modifyAnnonce.setInt(5, a.id);
 				modifyAnnonce.setInt(1, a.categorie);
-				modifyAnnonce.setInt(2, a.adresse);
+				modifyAnnonce.setInt(2, a.adresse.id);
 				modifyAnnonce.setString(3, a.nom);
 				modifyAnnonce.setInt(4, a.telephone);
 				if (modifyAnnonce.executeUpdate() >= 1)

@@ -22,8 +22,8 @@ public class AdresseDAO {
 		try {
 			if (c == null || !c.isValid(2)) {
 				if (c != null)
-					DBConnection.closeConnection();
-				c = DBConnection.getConnection();
+					getDbConnection.closeConnection();
+				c = getDbConnection.getConnection();
 				getAdresse = c.prepareStatement("SELECT * FROM adresse WHERE id = ?");
 				createAdresse = c.prepareStatement("INSERT INTO adresse( "
 														+ "id, numero,rue,ville,cp) "
@@ -46,11 +46,11 @@ public class AdresseDAO {
 			ResultSet rs = getAdresse.executeQuery();			
 			if ( rs.next() ) {
 				a = new Adresse();
-				a.setId( rs.getInt("id"));
-				a.setNumero( rs.getInt("numero"));
-				a.setRue(rs.getString("rue"));
-				a.setVille(rs.getString("ville"));
-				a.setCp(rs.getInt("cp"));
+				a.id = rs.getInt("id");
+				a.numero = rs.getInt("numero");
+				a.rue = rs.getString("rue");
+				a.ville = rs.getString("ville");
+				a.code_postal = rs.getInt("code_postal");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -61,14 +61,14 @@ public class AdresseDAO {
 	public static int createAdresse(Adresse a) {
 		try {
 			renewConnection();
-			if (a.getId() > 0)
-				createAdresse.setInt(1, a.getId());
+			if (a.id > 0)
+				createAdresse.setInt(1, a.id);
 			else
 				createAdresse.setNull(1, java.sql.Types.INTEGER);
-			createAdresse.setInt(2, a.getNumero());
-			createAdresse.setString(3, a.getRue());
-			createAdresse.setString(4, a.getVille());
-			createAdresse.setInt(5, a.getCp());
+			createAdresse.setInt(2, a.numero);
+			createAdresse.setString(3, a.rue);
+			createAdresse.setString(4, a.ville);
+			createAdresse.setInt(5, a.code_postal);
 			if (createAdresse.executeUpdate() >= 1) {
 				ResultSet r = createAdresse.getGeneratedKeys();
 				r.next();
@@ -83,12 +83,12 @@ public class AdresseDAO {
 	public static boolean modifyAdresse(Adresse a) {
 		try {
 			renewConnection();
-			if (a.getId() > 0){
-				modifyAdresse.setInt(1, a.getNumero());
-				modifyAdresse.setString(2, a.getRue());
-				modifyAdresse.setString(3, a.getVille());
-				modifyAdresse.setInt(4, a.getCp());
-				modifyAdresse.setInt(5, a.getId());
+			if (a.id > 0){
+				modifyAdresse.setInt(1, a.numero);
+				modifyAdresse.setString(2, a.rue);
+				modifyAdresse.setString(3, a.ville);
+				modifyAdresse.setInt(4, a.code_postal);
+				modifyAdresse.setInt(5, a.id);
 				if (modifyAdresse.executeUpdate() >= 1)
 					return true;
 			}
@@ -101,8 +101,8 @@ public class AdresseDAO {
 	public static boolean deleteAdresse(Adresse a) {
 		try {
 			renewConnection();
-			if (a.getId() > 0) {
-				deleteAdresse.setInt(1, a.getId());
+			if (a.id > 0) {
+				deleteAdresse.setInt(1, a.id);
 				if (deleteAdresse.executeUpdate() >= 1)
 					return true;
 			}
