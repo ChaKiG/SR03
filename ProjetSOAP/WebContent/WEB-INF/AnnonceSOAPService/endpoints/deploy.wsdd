@@ -29,6 +29,7 @@
       </operation>
       <parameter name="allowedMethods" value="getAnnoncesCat deleteAnnonce getAnnonces modifyAnnonce getAnnonce createAnnonce"/>
 
+      <typeMapping xmlns:ns="http://beans" qname="ns:Adresse" type="java:beans.Adresse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
       <typeMapping xmlns:ns="http://beans" qname="ns:Annonce" type="java:beans.Annonce" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
   </service>
 </deployment>

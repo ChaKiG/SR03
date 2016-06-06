@@ -87,13 +87,22 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    </element>
   </schema>
   <schema elementFormDefault="qualified" targetNamespace="http://beans" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="Adresse">
+    <sequence>
+     <element name="id" type="xsd:int"/>
+     <element name="code_postal" type="xsd:int"/>
+     <element name="ville" nillable="true" type="xsd:string"/>
+     <element name="rue" nillable="true" type="xsd:string"/>
+     <element name="numero" type="xsd:int"/>
+    </sequence>
+   </complexType>
    <complexType name="Annonce">
     <sequence>
      <element name="id" type="xsd:int"/>
      <element name="categorie" type="xsd:int"/>
      <element name="nom" nillable="true" type="xsd:string"/>
      <element name="telephone" type="xsd:int"/>
-     <element name="adresse" type="xsd:int"/>
+     <element name="adresse" nillable="true" type="tns1:Adresse"/>
     </sequence>
    </complexType>
   </schema>
