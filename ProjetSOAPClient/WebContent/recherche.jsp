@@ -38,12 +38,12 @@
 			<%
 			for(Annonce a : annonces) {
 				%>
+				<h2>Annonce : <%= a.getNom() %></h2>
 				<p>
-					<h2>Annonce : <%= a.getNom() %></h2>
-					Adresse : <%= a.getAdresse().getNumero() + " " +  a.getAdresse().getRue()%></br>
-					Ville : <%= a.getAdresse().getVille() %></br>
-					Code Postal : <%= a.getAdresse().getCode_postal() %></br> 					
-					Téléphone : <%= a.getTelephone() %></br>
+					Adresse : <%= a.getAdresse().getNumero() + " " +  a.getAdresse().getRue()%>
+					Ville : <%= a.getAdresse().getVille() %>
+					Code Postal : <%= a.getAdresse().getCode_postal() %>				
+					Téléphone : <%= a.getTelephone() %>
 				</p>
 				<%
 			}

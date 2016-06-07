@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import beans.Annonce;
 
 public class AnnonceDAO {
@@ -34,11 +36,10 @@ public class AnnonceDAO {
 												Statement.RETURN_GENERATED_KEYS);
 				modifyAnnonce = c.prepareStatement("UPDATE annonce SET "
 												+ "categorie = ?, "
-												+ "adresse = ?, "
 												+ "nom = ?, "
 												+ "telephone = ? "
 												+ "WHERE id = ?");
-				deleteAnnonce = c.prepareStatement("DELETE fom annonce WHERE id = ?");
+				deleteAnnonce = c.prepareStatement("DELETE FROM annonce WHERE id = ?");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -137,12 +138,13 @@ public class AnnonceDAO {
 	public static boolean modifyAnnonce(Annonce a) {
 		try {
 			renewConnection();
-			if (a!= null && a.id > 0) {
-				modifyAnnonce.setInt(5, a.id);
+			System.out.println(new ObjectMapper().writeValueAsString(a));
+			boolean ok = AdresseDAO.modifyAdresse(a.adresse);
+			if (a!= null && a.id > 0 && ok) {
 				modifyAnnonce.setInt(1, a.categorie);
-				modifyAnnonce.setInt(2, a.adresse.id);
-				modifyAnnonce.setString(3, a.nom);
-				modifyAnnonce.setInt(4, a.telephone);
+				modifyAnnonce.setString(2, a.nom);
+				modifyAnnonce.setInt(3, a.telephone);
+				modifyAnnonce.setInt(4, a.id);
 				if (modifyAnnonce.executeUpdate() >= 1)
 					return true;
 			}

@@ -12,11 +12,16 @@ import beans.*;
 public class Gestion {
 	int action = -1;
 	int categorie = 0;
-	String message = "";
+	String message = "Bienvenue";
 	Annonce a = new Annonce();
 	categoriesSOAP.CategorieSOAPProxy catProxy = new categoriesSOAP.CategorieSOAPProxy("http://localhost:8080/ProjetSOAP/services/CategorieSOAP");
 	annoncesSOAP.AnnonceSOAPProxy annonceProxy = new annoncesSOAP.AnnonceSOAPProxy("http://localhost:8080/ProjetSOAP/services/AnnonceSOAP");
 	List<Annonce> annonces = null;
+	
+	public final static int SEARCH = 0;
+	public final static int ADD = 1;
+	public final static int UPDATE = 2;
+	public final static int DELETE = 3;
 	
 	
 	public Gestion() {}
@@ -69,18 +74,28 @@ public class Gestion {
 			}
 		}
 		switch (action) {
-		case 0:
-			this.message = "Bienvenue";
+		case SEARCH:
 			getSOAPAnnonces();
 			break;
-		case 1:
-			createAnnonce();
+		case ADD:
+			if (!a.getNom().isEmpty())
+				createAnnonce();
 			break;
-		case 2:
-			updateAnnonce();
+		case UPDATE:
+			System.out.println("update");
+			System.out.println(a.getNom());
+			System.out.println(a.getId());
+			if (a.getId() > 0 && !a.getNom().isEmpty()) {
+				updateAnnonce();
+				System.out.println("trying to update");
+			} else
+				getSOAPAnnonces();
 			break;
-		case 3:
-			deleteAnnonce();
+		case DELETE:
+			if (a.getId() > 0)
+				deleteAnnonce();
+			else
+				getSOAPAnnonces();
 			break;
 		}
 	}
@@ -91,8 +106,6 @@ public class Gestion {
 	
 	
 	public void getSOAPAnnonces() {
-		System.out.println(a.getId());
-		System.out.println(categorie);
 		try {
 			if (a.getId() > 0) {
 				annonces = new ArrayList<Annonce>(Arrays.asList(annonceProxy.getAnnonce(a.getId())));
@@ -110,6 +123,10 @@ public class Gestion {
 		return annonces;
 	}
 	
+	public int getAction(){
+		return action;
+	}
+	
 	
 	public List<Categorie> getCategories() {
 		List<Categorie> categories = null;
@@ -124,10 +141,12 @@ public class Gestion {
 	
 	private void createAnnonce() {
 		try {
-			if (annonceProxy.createAnnonce(a) > 0)
+			if (annonceProxy.createAnnonce(a) > 0) {
 				this.message = "Création d'annonce réussie";
-			else 
+				action = -1;
+			} else {
 				this.message = "Echec !!!!";
+			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -135,20 +154,26 @@ public class Gestion {
 
 	private void updateAnnonce() {
 		try {
-			if (annonceProxy.modifyAnnonce(a) == true)
+			if (annonceProxy.modifyAnnonce(a) == true) {
 				this.message = "Modification d'annonce réussie";
-			else 
+				action = -1;
+				System.out.println("sup ok");
+			} else {
 				this.message = "Echec !!!!";
+				System.out.println("sup failed");
+			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 	}
 	private void deleteAnnonce() {
 		try {
-			if (annonceProxy.deleteAnnonce(a) == true)
+			if (annonceProxy.deleteAnnonce(a) == true) {
 				this.message = "Suppression d'annonce réussie";
-			else 
+				action = -1;
+			} else {
 				this.message = "Echec !!!!";
+			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

@@ -14,7 +14,7 @@ public class CategorieSOAP {
 	
 	public Categorie[] getCategories() {
 		List<Categorie> l = CategorieDAO.getCategories();
-		System.out.println("SOAP Categorie service returning " + l.size() + " rows");
+		System.out.println("SOAP Categorie service returning " + l.size() + " ctegories");
 		return l.toArray(new Categorie[l.size()]);
 	}
 	

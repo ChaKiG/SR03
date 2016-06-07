@@ -29,7 +29,7 @@ public class AdresseDAO {
 														+ "id, numero,rue,ville,code_postal) "
 														+ "VALUES(?,?,?,?,?) ", Statement.RETURN_GENERATED_KEYS);
 				modifyAdresse = c.prepareStatement("UPDATE adresse SET "
-														+ "numero = ?, rue = ?, ville = ?, code_postal = ?"
+														+ "numero = ?, rue = ?, ville = ?, code_postal = ? "
 														+ "WHERE id = ? ");
 				deleteAdresse = c.prepareStatement("DELETE FROM adresse WHERE id = ?");
 			}
